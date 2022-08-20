@@ -14,6 +14,7 @@ enum class IMAGE_TYPE
 class CImageMgr
 {
 	SINGLETONE(CImageMgr)
+
 public:
 	void Init();
 	Image* GetImage(wstring path);

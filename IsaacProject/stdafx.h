@@ -11,17 +11,20 @@
 #include "resource.h"
 #include "function.h"
 
-//Module
-#include "AI.h"
-#include "State.h"
-#include "IdleState.h"
-
 //COMPONENT
 #include "Component.h"
 #include "Transform.h"
 #include "Collider2D.h"
 #include "BoxCollider2D.h"
 #include "Sprite.h"
+
+//Module
+#include "AI.h"
+#include "State.h"
+#include "IdleState.h"
+#include "TraceState.h"
+#include "DeadState.h"
+
 
 //Objecct
 #include "Object.h"
@@ -32,6 +35,8 @@
 #include "Tear.h"
 #include "Player.h"
 #include "Obstacle.h"
+#include "Enemy.h"
+#include "Fly.h"
 
 //Scene
 #include "Scene.h"

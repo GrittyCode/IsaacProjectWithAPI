@@ -72,6 +72,7 @@ void CObject::Release()
 
 BOOL CObject::AddComponent(CComponent* component)
 {
+
 	//컴포넌트가 존재하지 않는다면
 	if (m_MapComponent.find(component->GetComponentType()) == m_MapComponent.end())
 	{
@@ -113,6 +114,38 @@ CComponent* const CObject::GetComponent(COMPONENT_TYPE type)
 	}
 
 	return nullptr;
+}
+
+void CObject::ReverseDraw(int frame,ActAniInfo aniinfo, int offset_x, int offsetx_y, int Startoffset_x, int Startoffset_y)
+{
+	Vector2 WorldPos = GetTransform()->GetPosition();
+
+	CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetFilpSprite(),
+			Rect((INT)(WorldPos.x - m_ObjInfo.vecSize.x) + offset_x,
+			(INT)(WorldPos.y - m_ObjInfo.vecSize.y) + offsetx_y,
+			(INT)(m_ObjInfo.vecSize.x * Scale),
+			(INT)(m_ObjInfo.vecSize.y * Scale)),
+			(INT)(aniinfo.vecStartPos.x - (m_ObjInfo.vecSize.x * frame)) + Startoffset_x,
+			(INT)(aniinfo.vecStartPos.y) + Startoffset_y,
+			(INT)m_ObjInfo.vecSize.x,
+			(INT)m_ObjInfo.vecSize.y,
+			UnitPixel);
+}
+
+void CObject::Draw(int frame, ActAniInfo aniinfo,int offset_x,int offset_y, int Startoffset_x, int Startoffset_y)
+{
+	Vector2 WorldPos = GetTransform()->GetPosition();
+
+	CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
+		Rect((INT)(WorldPos.x - m_ObjInfo.vecSize.x) + offset_x,
+			(INT)(WorldPos.y - m_ObjInfo.vecSize.y) + offset_y,
+			(INT)(m_ObjInfo.vecSize.x * Scale),
+			(INT)(m_ObjInfo.vecSize.y * Scale)),
+			(INT)(aniinfo.vecStartPos.x + (m_ObjInfo.vecSize.x * frame)) + Startoffset_x,
+			(INT)(aniinfo.vecStartPos.y) + Startoffset_y,
+			(INT)m_ObjInfo.vecSize.x,
+			(INT)m_ObjInfo.vecSize.y,
+			UnitPixel);
 }
 
 

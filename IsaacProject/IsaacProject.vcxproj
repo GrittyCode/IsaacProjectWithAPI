@@ -148,6 +148,9 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BoxCollider2D.h" />
+    <ClInclude Include="DeadState.h" />
+    <ClInclude Include="TraceState.h" />
+    <ClInclude Include="Fly.h" />
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="FactoryMgr.h" />
     <ClInclude Include="State.h" />
@@ -190,6 +193,9 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
+    <ClCompile Include="DeadState.cpp" />
+    <ClCompile Include="TraceState.cpp" />
+    <ClCompile Include="Fly.cpp" />
     <ClCompile Include="EventMgr.cpp" />
     <ClCompile Include="FactoryMgr.cpp" />
     <ClCompile Include="State.cpp" />

@@ -13,6 +13,9 @@ public:
 	virtual void Exit() = 0;
 	virtual void Update() = 0;
 
+	//Set
+	void SetAI(AI* pai) { m_pAI = pai; }
+
 	AI_STATE GetType() { return m_type; }
 	AI* GetAI() { return m_pAI; }
 

@@ -92,6 +92,7 @@ void CGameMgr::Render()
 void CGameMgr::Release()
 {
 	CSceneMgr::GetInstance()->Release();
+	//CObjectMgr::GetInstance()->Release();
 
 	CSceneMgr::DestroyInst();
 	CObjectMgr::DestroyInst();

@@ -92,19 +92,19 @@ INT CObstacle::CheckCollisionState()
 
 void CObstacle::PushMover(CObject* obj)
 {
-	Vector2 vecDir =  m_Transform->GetPosition() - obj->GetTransform()->GetPosition();
-	if (abs(vecDir.x) > abs(vecDir.y))
-	{
-		if (vecDir.x < 0.0f)
-			obj->GetTransform()->SetPositionX(GetCollide()->GetAABB().right + (obj->GetCollide()->GetCollisionSize().x));
+		Vector2 vecDir =  m_Transform->GetPosition() - obj->GetTransform()->GetPosition();
+		if (abs(vecDir.x) > abs(vecDir.y))
+		{
+			if (vecDir.x < 0.0f)
+				obj->GetTransform()->SetPositionX(GetCollide()->GetAABB().right + (obj->GetCollide()->GetCollisionSize().x));
+			else
+				obj->GetTransform()->SetPositionX(GetCollide()->GetAABB().left - (obj->GetCollide()->GetCollisionSize().x));
+		}
 		else
-			obj->GetTransform()->SetPositionX(GetCollide()->GetAABB().left - (obj->GetCollide()->GetCollisionSize().x));
-	}
-	else
-	{
-		if (vecDir.y < 0.0f)
-			obj->GetTransform()->SetPositionY(GetCollide()->GetAABB().bottom + (obj->GetCollide()->GetCollisionSize().y));
-		else
-			obj->GetTransform()->SetPositionY(GetCollide()->GetAABB().top - (obj->GetCollide()->GetCollisionSize().y));
-	}
+		{
+			if (vecDir.y < 0.0f)
+				obj->GetTransform()->SetPositionY(GetCollide()->GetAABB().bottom + (obj->GetCollide()->GetCollisionSize().y));
+			else
+				obj->GetTransform()->SetPositionY(GetCollide()->GetAABB().top - (obj->GetCollide()->GetCollisionSize().y));
+		}
 }

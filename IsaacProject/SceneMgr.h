@@ -21,8 +21,12 @@ public:
 	*/
 
 	BOOL LoadScene(wstring scenePath);
+
+	//Get
 	wstring GetCurSceneName();
 	CScene* GetCurScene() { return m_currentScene; };
+
+
 private:
 	vector<SceneInfo> m_VecSceneInfo;
 	CScene* m_currentScene = nullptr;

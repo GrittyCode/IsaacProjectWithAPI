@@ -1,18 +1,14 @@
 #pragma once
 
-class CIdleState :
+class CTraceState :
     public CState
 {
 public:
-    CIdleState();
-    ~CIdleState();
+    CTraceState();
+    ~CTraceState();
 
     virtual void Enter() override;
     virtual void Exit() override;
     virtual void Update() override;
-
-private:
-    float m_fIdleDelay = 0;
-    float m_fStayDelay = 1.0f;
 };
 

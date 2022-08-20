@@ -23,9 +23,19 @@ void CObjectMgr::Init()
 			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
 			MoverInfo()));
 
+	AddObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(64, 64),
+		Vector2(200, 200),
+		Vector2(1, 1),
+		OBJECT_TYPE::ENEMY,
+		OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 70.0f, 0)));
 	//백그라운드 임시 생성	
+	AddObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
 	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
 
+	m_player = dynamic_cast<CPlayer*>(m_MapObjectList.find(OBJECT_TYPE::PLAYER)->second.back());
 }
 
 void CObjectMgr::Update()
@@ -48,11 +58,11 @@ void CObjectMgr::Update()
 			{
 				if (!obj->IsDead())
 				{
-					obj->Update();
-				}
+				obj->Update();
 			}
 		}
 	}
+}
 }
 
 void CObjectMgr::FixedUpdate()
@@ -72,8 +82,8 @@ void CObjectMgr::FixedUpdate()
 		if (m_Objiter != m_MapObjectList.end())
 		{
 			for (CObject* obj : (*m_Objiter).second)
-			{			
-					obj->FixedUpdate();
+			{
+				obj->FixedUpdate();
 			}
 		}
 	}
@@ -104,13 +114,13 @@ void CObjectMgr::Render(HDC hdc)
 				{
 					(*iter)->Render(hdc);
 					++iter;
-				}
+			}
 				else
 				{
 					iter = m_Objiter->second.erase(iter);
-				}
-			}
 		}
+	}
+}
 	}
 }
 
@@ -140,8 +150,8 @@ void CObjectMgr::Release()
 					(*list_iter)->Release();
 					delete* list_iter;
 					*list_iter = nullptr;
-				}
-			}
+	}
+}
 
 			m_Objiter->second.clear();
 		}

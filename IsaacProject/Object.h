@@ -28,6 +28,11 @@ public:
 	CComponent* const GetComponent(COMPONENT_TYPE type);
 	ObjectInfo* GetInfo()  { return &m_ObjInfo; }
 	CBoxCollider2D* GetCollide() const { return m_collide; }
+
+	//Render
+	void ReverseDraw(int frame, ActAniInfo aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
+	void Draw(int frame, ActAniInfo aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
+
 	wstring GetName() const { return m_strName; }
 protected:
 	CTransform* m_Transform = nullptr;
@@ -48,5 +53,6 @@ private:
 	void SetDead() { m_bAllive = FALSE; }
 
 	friend class CEventMgr;
+	ObjectInfo m_ObjInfo;
 };
 

@@ -31,7 +31,7 @@ void CPlayer::Init()
 	m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
 	m_PlayerInfo.iCurFrame = 0;
 	m_PlayerInfo.fFrameStay = 0;
-	m_PlayerInfo.fAttackSpeed = 2.5f;
+	m_PlayerInfo.fAttackSpeed = 3.0f;
 	m_PlayerInfo.fAttackDelay = 1.0f / m_PlayerInfo.fAttackSpeed;
 	m_PlayerInfo.fCurDelay = 0.0f;
 	m_PlayerInfo.bAttack = true;
@@ -73,12 +73,7 @@ void CPlayer::Render(HDC hdc)
 
 	if (m_PlayerInfo.ePlayerState == PLAYER_STATE::IDLE)
 	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
-			Rect((INT)(PlayerPos.x - m_ObjInfo.vecSize.x), 
-				 (INT)(PlayerPos.y - m_ObjInfo.vecSize.y), 
-				 (INT)(m_ObjInfo.vecSize.x * Scale), 
-				 (INT)(m_ObjInfo.vecSize.y * Scale)),
-			0, 32, (float)m_ObjInfo.vecSize.x, (float)m_ObjInfo.vecSize.y, UnitPixel);
+		Draw(0, m_MoverInfo.vecActAniState[(UINT)ANISTATE::DOWNMOVE], 0, 0, 0, 0);
 		AttackRender(hdc);
 	}
 	else if (m_PlayerInfo.ePlayerState == PLAYER_STATE::MOVE)
@@ -142,29 +137,11 @@ void CPlayer::MoveRender(HDC hdc)
 	//몸체
 	if (MoveAniInfo.bFilp == true)
 	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSFilpSprite(),
-			Rect((INT)(PlayerPos.x - m_ObjInfo.vecSize.x),
-				 (INT)(PlayerPos.y - m_ObjInfo.vecSize.y),
-				 (INT)(m_ObjInfo.vecSize.x * Scale),
-				 (INT)(m_ObjInfo.vecSize.y * Scale)),
-				 (INT)(MoveAniInfo.vecStartPos.x + (m_ObjInfo.vecSize.x * m_PlayerInfo.iCurFrame)),
-				 (INT)MoveAniInfo.vecStartPos.y,
-				 (INT)m_ObjInfo.vecSize.x,
-				 (INT)m_ObjInfo.vecSize.y,
-				 UnitPixel);
+		ReverseDraw(m_PlayerInfo.iCurFrame, MoveAniInfo,0,0,0,0);
 	}
 	else
 	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
-			Rect((INT)(PlayerPos.x - m_ObjInfo.vecSize.x), 
-				 (INT)(PlayerPos.y - m_ObjInfo.vecSize.y), 
-				 (INT)(m_ObjInfo.vecSize.x * Scale), 
-				 (INT)(m_ObjInfo.vecSize.y * Scale)),
-				 (INT)(MoveAniInfo.vecStartPos.x + (m_ObjInfo.vecSize.x * m_PlayerInfo.iCurFrame)), 
-				 (INT) MoveAniInfo.vecStartPos.y, 
-				 (INT) m_ObjInfo.vecSize.x,
-				 (INT) m_ObjInfo.vecSize.y,
-			     UnitPixel);
+		Draw(m_PlayerInfo.iCurFrame, MoveAniInfo,0,0,0,0);
 	}
 }
 
@@ -180,74 +157,38 @@ void CPlayer::AttackRender(HDC hdc)
 	{
 		if (AttackAniInfo.bFilp == true)
 		{
-			CImageMgr::GetInstance()->GetGraphics()->DrawImage
-			(m_sprite->GetSFilpSprite(),
-			 Rect(
-					(INT)(PlayerPos.x - m_ObjInfo.vecSize.x), 
-					(INT)(PlayerPos.y - m_ObjInfo.vecSize.y - 20), 
-					(INT)(m_ObjInfo.vecSize.x * Scale), 
-					(INT)(m_ObjInfo.vecSize.y * Scale)),
-					(INT)AttackAniInfo.vecStartPos.x - 32, 
-					(INT)AttackAniInfo.vecStartPos.y, 
-					(INT)m_ObjInfo.vecSize.x, 
-					(INT)m_ObjInfo.vecSize.y, UnitPixel
-			);
+			ReverseDraw(0, AttackAniInfo, 0, -20, -32, 0);
 		}
 		else
 		{
-			CImageMgr::GetInstance()->GetGraphics()->DrawImage
-			(m_sprite->GetSprite(),
-			 Rect((INT)(PlayerPos.x - m_ObjInfo.vecSize.x), 
-				  (INT)(PlayerPos.y - m_ObjInfo.vecSize.y - 20), 
-				  (INT)(m_ObjInfo.vecSize.x * Scale),
-				  (INT)(m_ObjInfo.vecSize.y * Scale)),
-				  (INT)AttackAniInfo.vecStartPos.x + 32, 
-				  (INT)AttackAniInfo.vecStartPos.y, 
-				  (INT)m_ObjInfo.vecSize.x, 
-				  (INT)m_ObjInfo.vecSize.y, 
-				  UnitPixel);
+			Draw(0, AttackAniInfo, 0, -20, +32, 0);
 		}
 		m_PlayerInfo.bAttack = false;
 	}
 	else//공격하지안하고 바라보기만
 	{
-		if (m_PlayerInfo.fCurDelay != 0 && m_PlayerInfo.fCurDelay < 0.2f)
+		if (m_PlayerInfo.fCurDelay != 0 && m_PlayerInfo.fCurDelay < 0.1f)
 		{
 			m_MoverInfo.eAniAttackState = eTemp;
 			if (AttackAniInfo.bFilp == true)
 			{
-				CImageMgr::GetInstance()->GetGraphics()->DrawImage(
-					m_sprite->GetSFilpSprite(),
-					Rect((INT)(PlayerPos.x - m_ObjInfo.vecSize.x), (INT)(PlayerPos.y - m_ObjInfo.vecSize.y - 20), 
-						 (INT)(m_ObjInfo.vecSize.x * Scale), (INT)(m_ObjInfo.vecSize.y * Scale)),
-					     (INT)AttackAniInfo.vecStartPos.x - 32, (INT)AttackAniInfo.vecStartPos.y, 
-					     (INT)m_ObjInfo.vecSize.x,  (INT)m_ObjInfo.vecSize.y, 
-						 UnitPixel);
+				ReverseDraw(0, AttackAniInfo, 0, -20, -32, 0);
 			}
 			else
 			{
-				CImageMgr::GetInstance()->GetGraphics()->DrawImage
-				(m_sprite->GetSprite(),
-				 Rect((INT)(PlayerPos.x - m_ObjInfo.vecSize.x), (INT)(PlayerPos.y - m_ObjInfo.vecSize.y - 20), 
-					  (INT)(m_ObjInfo.vecSize.x * Scale), (INT)(m_ObjInfo.vecSize.y * Scale)),
-					  (INT)(AttackAniInfo.vecStartPos.x + 32), (INT)(AttackAniInfo.vecStartPos.y), 
-					  (INT)(m_ObjInfo.vecSize.x), (INT)(m_ObjInfo.vecSize.y), 
-					  UnitPixel);
+				Draw(0, AttackAniInfo, 0, -20, +32, 0);
+	
 			}
 		}
 		else
 		{
 			if (AttackAniInfo.bFilp == true)
 			{
-				CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSFilpSprite(),
-					Rect((INT)PlayerPos.x - m_ObjInfo.vecSize.x, (INT)PlayerPos.y - m_ObjInfo.vecSize.y - 20, m_ObjInfo.vecSize.x * Scale, m_ObjInfo.vecSize.y * Scale),
-					AttackAniInfo.vecStartPos.x, AttackAniInfo.vecStartPos.y, m_ObjInfo.vecSize.x, m_ObjInfo.vecSize.y, UnitPixel);
+				ReverseDraw(0, AttackAniInfo, 0, -20, 0, 0);
 			}
 			else
 			{
-				CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
-					Rect((INT)PlayerPos.x - m_ObjInfo.vecSize.x, (INT)PlayerPos.y - m_ObjInfo.vecSize.y - 20, m_ObjInfo.vecSize.x * Scale, m_ObjInfo.vecSize.y * Scale),
-					AttackAniInfo.vecStartPos.x, AttackAniInfo.vecStartPos.y, m_ObjInfo.vecSize.x, m_ObjInfo.vecSize.y, UnitPixel);
+				Draw(0, AttackAniInfo, 0, -20, 0, 0);
 			}
 		}
 	}
@@ -444,6 +385,10 @@ void CPlayer::Attack()
 			m_MoverInfo.vecAttackDiretion,
 			m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
 
+		CObjectMgr::GetInstance()->
+			AddObject(new CTear(m_MoverInfo.vecMoveDiretion,GetTransform()->GetPosition(), 
+								 m_MoverInfo.vecAttackDiretion,
+								 m_PlayerInfo.fCurSpeed /2, m_PlayerInfo.bLeft));
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
 	}
 }

@@ -56,7 +56,7 @@ void CTear::Update()
 	{
 		m_fCurDeley += DELTA;
 
-		if (m_fCurDeley > 0.05f)
+		if (m_fCurDeley > 0.01f)
 		{
 			++m_iCurPrame;
 			m_fCurDeley = 0;
@@ -68,8 +68,8 @@ void CTear::Update()
 		if (!IsDead())
 		{
 			DeleteObject(this);
-		}
 	}
+}
 }
 
 void CTear::FixedUpdate()
@@ -82,12 +82,12 @@ void CTear::Render(HDC hdc)
 
 	if (!m_bGravity)
 	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect(GetTransform()->GetPositionX() - 32, GetTransform()->GetPositionY() - 32, 64, 64),
+		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect((UINT)GetTransform()->GetPositionX() - 32, (UINT)GetTransform()->GetPositionY() - 32, 64, 64),
 			160, 0, 32, 32, UnitPixel);
 	}
 	else
 	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect(GetTransform()->GetPositionX() - 32, GetTransform()->GetPositionY() - 32, 64, 64),
+		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect((UINT)GetTransform()->GetPositionX() - 32, (UINT)GetTransform()->GetPositionY() - 32, 64, 64),
 			0 + (m_iCurPrame * 64), 0, 64, 64, UnitPixel);
 	}
 
@@ -162,4 +162,8 @@ void CTear::FireEyeSet(bool left, Vector2 attackdirection)
 			m_vecFireEye.x += 10;
 		}
 	}
+}
+
+void CTear::DeleteTreas()
+{
 }

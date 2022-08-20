@@ -12,18 +12,22 @@ void CImageMgr::Init()
 Image* CImageMgr::GetImage(wstring path)
 {
 	m_iter = m_mapImage.find(path);
+
 	//파일이 존재하지 않는다면
 	if (m_iter == m_mapImage.end())
 	{
 		m_mapImage.insert({ path, Image::FromFile(path.c_str()) });
 		m_iter = m_mapImage.find(path);
 	}
+
 	return (*m_iter).second;
 }
+
 
 void CImageMgr::Release()
 {
 	m_iter = m_mapImage.begin();
+
 	while (m_iter != m_mapImage.end())
 	{
 		delete (*m_iter).second;

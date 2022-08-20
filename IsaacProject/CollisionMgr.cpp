@@ -32,14 +32,14 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION
 			{
 				if (!target->GetSourceObj()->IsDead() && !des->GetSourceObj()->IsDead())
 				{
-					if (IsCollision(target, des))
-					{
-						target->SetCollisonFlag((int)collisionstate);
-						target->SetTargetCollision(des);
-					}
-				}								
+				if (IsCollision(target, des))
+				{
+					target->SetCollisonFlag((int)collisionstate);
+					target->SetTargetCollision(des);
+				}									
 			}
 		}
+	}
 	}
 	else
 	{
@@ -55,7 +55,9 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION
 
 				if (IsCollision(target, des))
 					target->SetCollisonFlag((int)collisionstate);
+
 				target->CollisionCheck();
+
 			}
 		}
 	}
@@ -73,8 +75,9 @@ void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 
 void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
 {
+	int EraseNum = 0;
 	m_iter = m_mapBoxlist.find(target->GetSourceObj()->GetObjType());
-	
+
 	if (target != nullptr)
 	{
 		auto listIter = m_iter->second.begin();
@@ -91,8 +94,12 @@ void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
 		}
 	}
 
+	delete target;
+	target = nullptr;
 
+	for (Targetiter; (*Targetiter) != target; ++Targetiter)
 
+	(*m_iter).second.erase(Targetiter);
 }
 
 //사각형 AABB충돌

@@ -8,6 +8,7 @@ enum class AI_STATE
 	IDLE,
 	PATROL,
 	TRACE,
+	FLYTRACE,
 	ATK,
 	FLEE,
 	DEAD,
@@ -18,9 +19,16 @@ enum class AI_STATE
 class AI
 {
 public:
-	AI();
+	AI(CEnemy* host);
 	~AI();
+
 	void Update();
+	void AddState(CState* state);
+	void ChangeState(AI_STATE state);
+
+	//Get
+	CState* GetState(AI_STATE state);
+	CEnemy* GetHost() { return m_pHost; }
 
 private:
 	CEnemy* m_pHost = nullptr;
