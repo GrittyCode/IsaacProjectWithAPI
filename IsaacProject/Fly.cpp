@@ -12,6 +12,11 @@ CFly::~CFly()
 
 void CFly::Init()
 {
+	//component set
+	CObject::Init();
+	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 20.0f), (m_Transform->GetSizeY() - 20.0f));
+	AddComponent(m_collide);
+
 	//ai설정 팩토리 과정으로 넘어갈예정
 	m_pAI = new AI(this);
 	m_pAI->AddState(new CIdleState);
@@ -19,7 +24,9 @@ void CFly::Init()
 	m_pAI->AddState(new DeadState);
 	m_pAI->ChangeState(AI_STATE::IDLE);
 
-	CObject::Init();
+	//AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(64, 64), ANI_STATE::MOVE));
+
+	//m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32, 32)));
 }
 
 void CFly::Update()
@@ -52,6 +59,33 @@ void CFly::Render(HDC hdc)
 		Rect((UINT)m_Transform->GetPositionX() - 32, (UINT)m_Transform->GetPositionY() - 32, 64, 64),
 		32 + (m_iFrame * 32), 32, 32, 32,
 		UnitPixel);
+
+	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
+	{
+		HBRUSH hOldBrush;
+		//펜설정
+		HPEN hOldPen;
+		HPEN CurPen;
+
+		if (m_collide != nullptr)
+		{
+			CurPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+			hOldPen = (HPEN)SelectObject(hdc, CurPen);
+			hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
+		}
+		else
+		{
+			CurPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+			hOldPen = (HPEN)SelectObject(hdc, CurPen);
+			hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
+		}
+
+		CObject::Render(hdc);
+
+		DeleteObject(hOldBrush);
+		SelectObject(hdc, hOldPen);
+		DeleteObject(CurPen);
+	}
 }
 
 void CFly::Release()

@@ -1,14 +1,15 @@
 #include "stdafx.h"
 #include "Animation.h"
 
-CAnimation::CAnimation(SpriteInfo sprite, int framelimit, float framedelay, Vector2 Size)
+CAnimation::CAnimation(SpriteInfo sprite, int framelimit, float framedelay, Vector2 Size, ANI_STATE state)
 	:m_fCurDelay(0),
 	m_fFrameDelay(framedelay),
 	m_iCurFrame(0),
 	m_iFrameLimit(framelimit),
 	m_tSpriteinfo(sprite),
 	m_vecScreenSize(Size),
-	m_vecWorldpos(Vector2(0, 0))
+	m_vecWorldpos(Vector2(0, 0)),
+	m_eAniState(state)
 
 {
 	m_image = Image::FromFile(sprite.wPath.c_str());

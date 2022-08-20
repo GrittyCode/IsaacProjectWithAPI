@@ -172,7 +172,7 @@ typedef struct tagTileInfo
 		v_StartPos(_v_StartPos),
 		v_EndPos(_v_EndPos),
 		v_Size(_v_Size),
-		LAYER(_LAYER),
+		LAYER(_LAYER),	
 		TYPE(type),
 		isXFlip(xFlip),
 		isYFlip(yFlip)

@@ -33,5 +33,4 @@ public:
 
 protected:
 	MoverInfo m_MoverInfo = MoverInfo{};
-	vector<CAnimation*> m_vecAniState;
 };

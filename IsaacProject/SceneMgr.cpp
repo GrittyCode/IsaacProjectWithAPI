@@ -16,9 +16,18 @@ void CSceneMgr::Init()
 			Vector2(32, 32),
 			Vector2(100, 100),
 			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
-		MoverInfo()));
+			MoverInfo()));
 
-	m_currentScene = new CScene(L"test2.Scene",ROW,COLMN);
+	CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+		Vector2(0, 32),
+		Vector2(32, 32),
+		Vector2(32, 32),
+		Vector2(200, 200),
+		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE),
+		EnemyInfo(4,1,0,50.0f,0)));
+
+
+	m_currentScene = new CScene(L"test1.scene",ROW,COLMN);
 
 	if (m_currentScene != nullptr)
 		m_currentScene->Init();

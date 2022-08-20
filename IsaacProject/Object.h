@@ -35,6 +35,9 @@ public:
 	void Draw(int frame, SpriteInfoTag aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
 
 	wstring GetName() const { return m_strName; }
+
+	void AddAniState(CAnimation* anistate);
+
 protected:
 	CTransform* m_Transform = nullptr;
 	CSprite* m_sprite = nullptr;
@@ -44,9 +47,11 @@ protected:
 	wstring m_strName;
 
 	unordered_map<COMPONENT_TYPE, CComponent*> m_MapComponent;
-
 	unordered_map<COMPONENT_TYPE, CComponent*>::iterator m_iter;
-	//파일 저장 로드를 하기 위한 변수
+
+	map<ANI_STATE, CAnimation*> m_mapAniState;
+	map<ANI_STATE, CAnimation*>::iterator m_Aniiter;
+
 private:
 	BOOL m_bAllive = TRUE;
 	void SetDead() { m_bAllive = FALSE; }
