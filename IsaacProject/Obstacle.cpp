@@ -93,8 +93,6 @@ INT CObstacle::CheckCollisionState()
 void CObstacle::PushMover(CObject* obj)
 {
 		Vector2 vecDir =  m_Transform->GetPosition() - obj->GetTransform()->GetPosition();
-		vecDir.Normalize();
-
 		if (abs(vecDir.x) > abs(vecDir.y))
 		{
 			if (vecDir.x < 0.0f)

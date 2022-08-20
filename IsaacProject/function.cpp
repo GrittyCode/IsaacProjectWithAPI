@@ -98,3 +98,22 @@ float DistanceMeasure(Vector2 sourse, Vector2 taget)
 
 	return tmep;
 }
+
+void CreateObject(CObject* pObj)
+{
+	tEvent evn = {};
+	evn.eEven = EVENT_TYPE::CREATE_OBJECT;
+	evn.lParam = (DWORD_PTR)pObj;
+
+	CEventMgr::GetInstance()->AddEvent(evn);
+}
+
+void DeleteObject(CObject* pObj)
+{
+	tEvent evn = {};
+	evn.eEven = EVENT_TYPE::DELETE_OBJECT;
+	evn.lParam = (DWORD_PTR)pObj;
+
+	CEventMgr::GetInstance()->AddEvent(evn);
+}
+

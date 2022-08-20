@@ -39,12 +39,6 @@ public:
 	virtual void Move() override;
 	void Attack();
 
-	//Release
-	virtual void Release() override
-	{
-		CObject::Release();
-	}
-
 private:
 	PlayerInfo m_PlayerInfo;
 };

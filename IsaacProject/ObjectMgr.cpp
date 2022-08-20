@@ -33,6 +33,7 @@ void CObjectMgr::Init()
 		OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 70.0f, 0)));
 	//백그라운드 임시 생성	
 	AddObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
+	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
 
 	m_player = dynamic_cast<CPlayer*>(m_MapObjectList.find(OBJECT_TYPE::PLAYER)->second.back());
 }
@@ -55,10 +56,13 @@ void CObjectMgr::Update()
 		{
 			for (CObject* obj : (*m_Objiter).second)
 			{
+				if (!obj->IsDead())
+				{
 				obj->Update();
 			}
 		}
 	}
+}
 }
 
 void CObjectMgr::FixedUpdate()
@@ -101,11 +105,22 @@ void CObjectMgr::Render(HDC hdc)
 
 		if (m_Objiter != m_MapObjectList.end())
 		{
-			for (CObject* obj : (*m_Objiter).second)
+			auto iter = m_Objiter->second.begin();
+
+
+			for (; iter != (*m_Objiter).second.end();)
 			{
-				obj->Render(hdc);
+				if (!(*iter)->IsDead())
+				{
+					(*iter)->Render(hdc);
+					++iter;
 			}
+				else
+				{
+					iter = m_Objiter->second.erase(iter);
 		}
+	}
+}
 	}
 }
 
@@ -126,35 +141,23 @@ void CObjectMgr::Release()
 		{
 			m_Objiter = m_MapObjectList.find((OBJECT_TYPE)i);
 
-			if (m_Objiter != m_MapObjectList.end())
+			auto list_iter = (*m_Objiter).second.begin();
+
+			for (UINT i = 0; i < m_Objiter->second.size(); ++i)
 			{
-				for (CObject* obj : (*m_Objiter).second)
+				if ((*list_iter) != nullptr)
 				{
-					obj->Release();
-					delete obj;
-				}
-				(*m_Objiter).second.clear();
-			}
-		}
+					(*list_iter)->Release();
+					delete* list_iter;
+					*list_iter = nullptr;
 	}
 }
 
-void CObjectMgr::ReMoveObject(CObject* object)
-{
-	//CCollisionMgr::GetInstance()->DeleateCollider(object->GetCollide());
-	m_Objiter =  m_MapObjectList.find(object->GetObjType());
+			m_Objiter->second.clear();
+		}
 
-	auto TagetIter = m_Objiter->second.begin();
-
-	object->Release();
-	delete object;
-	object = nullptr;
-
-	//CCollisionMgr::GetInstance()->DeleateCollider(object->GetCollide());
-
-	for(TagetIter; (*TagetIter) != object; ++TagetIter)
-
-	(*m_Objiter).second.erase(TagetIter);
+		m_MapObjectList.clear();
+	}
 }
 
 BOOL CObjectMgr::AddTile(CTile* tile)
@@ -191,10 +194,10 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 		switch (info.type)
 		{
 		case OBJECT_TYPE::BACKGROUND:
-			AddObject(new CBackground(info));
+			CreateObject(new CBackground(info));
 			break;
 		case OBJECT_TYPE::OBSTACLE:
-			AddObject(new CObstacle(info));
+			CreateObject(new CObstacle(info));
 			break;
 		case OBJECT_TYPE::BOOM_OBSTACLE:
 			break;
@@ -205,7 +208,7 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 		case OBJECT_TYPE::ITEM:
 			break;
 		case OBJECT_TYPE::PLAYER:
-			AddObject(new CPlayer(info, MoverInfo()));
+			CreateObject(new CPlayer(info, MoverInfo()));
 			break;
 		case OBJECT_TYPE::TEAR:
 			break;

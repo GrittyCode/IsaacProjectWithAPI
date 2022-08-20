@@ -110,8 +110,8 @@ typedef struct SquareTag
 	{
 		left = pos.x - size.x;
 		right = pos.x + size.x;
-		top = pos.y - size.x;
-		bottom = pos.y + size.x;
+		top = pos.y - size.y;
+		bottom = pos.y + size.y;
 	}
 
 

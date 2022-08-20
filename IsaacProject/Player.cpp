@@ -9,7 +9,6 @@ CPlayer::CPlayer(ObjectInfo objinfo, MoverInfo moverInfo)
 
 CPlayer::~CPlayer()
 {
-	CObject::Release();
 }
 
 void CPlayer::Init()
@@ -40,6 +39,7 @@ void CPlayer::Init()
 	m_PlayerInfo.fAcceleration = m_MoverInfo.fSpeed / 0.1f;
 	m_PlayerInfo.bLeft = true;
 
+
 	//ÀÌµ¿
 	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(0, 0), false));//IDLE
 	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(352,32),true));//UPMOVE
@@ -52,6 +52,7 @@ void CPlayer::Init()
 	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(0, 0), false));//DOWNATTACK
 	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(288, 0), true));//LEFTATTACK
 	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(64, 0), false));//RIGHTATTACK
+	
 }
 
 void CPlayer::Update()
@@ -68,6 +69,8 @@ void CPlayer::FixedUpdate()
 
 void CPlayer::Render(HDC hdc)
 {
+	Vector2 PlayerPos = GetTransform()->GetPosition();
+
 	if (m_PlayerInfo.ePlayerState == PLAYER_STATE::IDLE)
 	{
 		Draw(0, m_MoverInfo.vecActAniState[(UINT)ANISTATE::DOWNMOVE], 0, 0, 0, 0);
@@ -89,8 +92,8 @@ void CPlayer::Render(HDC hdc)
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
 	{
-		wchar_t chState[128];
-		wchar_t chCurFrame[4];
+		static wchar_t chState[128];
+		static wchar_t chCurFrame[4];
 
 		memset(chState, 0, 128);
 		memset(chCurFrame, 0, 4);
@@ -378,6 +381,9 @@ void CPlayer::Attack()
 
 	if (m_PlayerInfo.bAttackON && m_PlayerInfo.bAttack)
 	{
+		CreateObject(new CTear(m_MoverInfo.vecMoveDiretion, GetTransform()->GetPosition(),
+			m_MoverInfo.vecAttackDiretion,
+			m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
 
 		CObjectMgr::GetInstance()->
 			AddObject(new CTear(m_MoverInfo.vecMoveDiretion,GetTransform()->GetPosition(), 

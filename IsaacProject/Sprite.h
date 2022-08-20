@@ -11,7 +11,7 @@ public:
 	virtual void Render(HDC hdc) override;
 
 	Image* const GetSprite() { return m_sprite; }
-	Image* const GetFilpSprite() { return m_SpriteFileY; }
+	Image* const GetSFilpSprite() { return m_SpriteFileY; }
 
 	void SetPath(wstring path);
 

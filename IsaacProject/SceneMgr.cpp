@@ -195,7 +195,6 @@ wstring CSceneMgr::GetCurSceneName()
 
 
 
-
 //LEGACY CODE
 
 /*

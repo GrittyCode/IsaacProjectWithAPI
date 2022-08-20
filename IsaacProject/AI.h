@@ -15,6 +15,7 @@ enum class AI_STATE
 	AI_STATE_END
 };
 
+
 class AI
 {
 public:

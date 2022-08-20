@@ -1,6 +1,13 @@
 #pragma once
 
 
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT,
+	DELETE_OBJECT,
+	SCENE_CHANGE,
+	AI_STATE_CHANGE
+};
 
 #pragma region COMPONENT
 

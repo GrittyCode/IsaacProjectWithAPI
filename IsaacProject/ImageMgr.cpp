@@ -3,6 +3,11 @@
 
 CImageMgr* CImageMgr::m_pInstance = nullptr;
 
+void CImageMgr::Init()
+{
+	m_graphics = new Graphics(CGameMgr::GetInstance()->GetMemDC());
+};
+
 
 Image* CImageMgr::GetImage(wstring path)
 {

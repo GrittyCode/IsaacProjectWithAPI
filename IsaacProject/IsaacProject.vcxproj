@@ -151,6 +151,8 @@
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="TraceState.h" />
     <ClInclude Include="Fly.h" />
+    <ClInclude Include="EventMgr.h" />
+    <ClInclude Include="FactoryMgr.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="IdleState.h" />
@@ -194,6 +196,8 @@
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="TraceState.cpp" />
     <ClCompile Include="Fly.cpp" />
+    <ClCompile Include="EventMgr.cpp" />
+    <ClCompile Include="FactoryMgr.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="IdleState.cpp" />

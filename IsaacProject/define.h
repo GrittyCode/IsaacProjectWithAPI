@@ -89,5 +89,7 @@ static ClassName* m_pInstance;
 #pragma endregion
 
 
+//
+#define GETIMAGE(path) CImageMgr::GetInstance()->GetImage(path)
 
 #pragma region NULLCHECK

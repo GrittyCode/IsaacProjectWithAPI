@@ -1,10 +1,22 @@
 #pragma once
+
+enum class IMAGE_TYPE
+{
+	PLAYER,
+	BOSS,
+	TEAR,
+	FLY,
+	HUMAN,
+	MOSQUITO,
+	IMAGE_TYPE_END
+};
+
 class CImageMgr
 {
 	SINGLETONE(CImageMgr)
 
 public:
-	void Init() { m_graphics = new Graphics(CGameMgr::GetInstance()->GetMemDC()); }
+	void Init();
 	Image* GetImage(wstring path);
 	Graphics* GetGraphics() { return m_graphics; }
 	void Release();

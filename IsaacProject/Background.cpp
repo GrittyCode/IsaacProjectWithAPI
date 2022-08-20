@@ -33,5 +33,4 @@ void CBackground::Render(HDC hdcd)
 
 void CBackground::Release()
 {
-	CObject::Release();
 }

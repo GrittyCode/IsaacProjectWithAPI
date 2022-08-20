@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "Object.h"
 
-CObject::CObject()
+CObject::CObject():
+	m_bAllive(true)
 {
 	m_Transform = nullptr; 
 	m_sprite = nullptr;
 }
 
 CObject::CObject(ObjectInfo info)
-	:	m_ObjInfo(info)
+	:	m_ObjInfo(info),
+		m_bAllive(true)
 {
 	m_Transform = nullptr;
 	m_sprite = nullptr;
@@ -16,6 +18,7 @@ CObject::CObject(ObjectInfo info)
 
 CObject::~CObject()
 {
+
 }
 
 void CObject::Init()
@@ -54,6 +57,12 @@ void CObject::Release()
 		//찾는 컴포넌트가 있다면
 		if (m_iter != m_MapComponent.end())
 		{
+			if ((COMPONENT_TYPE)i == COMPONENT_TYPE::BOXCOLLIDE2D)
+			{
+				CCollisionMgr::GetInstance()->DeleateCollider(dynamic_cast<CBoxCollider2D*>((*m_iter).second));
+			}
+
+			(*m_iter).second->Release();
 			delete (*m_iter).second;
 			(*m_iter).second = nullptr;
 		}
@@ -61,7 +70,7 @@ void CObject::Release()
 	m_MapComponent.clear();
 }
 
-bool CObject::AddComponent(CComponent* component)
+BOOL CObject::AddComponent(CComponent* component)
 {
 
 	//컴포넌트가 존재하지 않는다면

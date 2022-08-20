@@ -10,6 +10,7 @@ CSprite::CSprite(wstring path, INT orderLayer)
 CSprite::~CSprite()
 {
 	delete m_sprite;
+	delete m_SpriteFileY;
 }
 
 void CSprite::Init()

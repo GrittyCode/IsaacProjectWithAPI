@@ -65,12 +65,16 @@ void CTear::Update()
 
 	if (m_iCurPrame == 11)
 	{
-		//CObjectMgr::GetInstance()->ReMoveObject(this);
+		if (!IsDead())
+		{
+			DeleteObject(this);
 	}
+}
 }
 
 void CTear::FixedUpdate()
 {
+	CObject::FixedUpdate();
 }
 
 void CTear::Render(HDC hdc)
@@ -125,6 +129,10 @@ void CTear::Move()
 
 INT CTear::CheckCollisionState()
 {
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE)
+	{
+		DeleteObject(this);
+	}
     return 0;
 }
 

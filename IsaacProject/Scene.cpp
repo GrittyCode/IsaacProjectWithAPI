@@ -51,6 +51,7 @@ void CScene::FixedUpdate()
 	
 
 	//传拱 面倒 贸府
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::TEAR, OBJECT_TYPE::OBSTACLE, COLLISION_FLAG::OBSTACLE);
 
 
 

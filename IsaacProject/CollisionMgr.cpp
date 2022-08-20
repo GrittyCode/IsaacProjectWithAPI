@@ -30,6 +30,8 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION
 			m_iter = m_mapBoxlist.find(ades);
 			for (auto des : (*m_iter).second)
 			{
+				if (!target->GetSourceObj()->IsDead() && !des->GetSourceObj()->IsDead())
+				{
 				if (IsCollision(target, des))
 				{
 					target->SetCollisonFlag((int)collisionstate);
@@ -38,14 +40,16 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION
 			}
 		}
 	}
+	}
 	else
 	{
 		for (auto target : (*m_iter).second)
 		{
 			m_iter = m_mapBoxlist.find(ades);
+
 			for (auto des : (*m_iter).second)
 			{
-				//자기 자신일때는..
+				//자기 자신일때는 바로 넘어간다.
 				if (target == des)
 					continue;
 
@@ -74,8 +78,21 @@ void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
 	int EraseNum = 0;
 	m_iter = m_mapBoxlist.find(target->GetSourceObj()->GetObjType());
 
-	list<CBoxCollider2D*>::iterator Targetiter;
-	Targetiter = m_mapBoxlist.find(target->GetSourceObj()->GetObjType())->second.begin();
+	if (target != nullptr)
+	{
+		auto listIter = m_iter->second.begin();
+		for (; listIter != (*m_iter).second.end();)
+		{
+			if ((*listIter) == target)
+			{
+				listIter = (*m_iter).second.erase(listIter);
+			}
+			else 
+			{
+				++listIter;
+			}
+		}
+	}
 
 	delete target;
 	target = nullptr;

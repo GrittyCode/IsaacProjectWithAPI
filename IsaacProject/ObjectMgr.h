@@ -11,7 +11,6 @@ public:
 	void FixedUpdate();
 	void Render(HDC hdc);
 	void Release();
-	void ReMoveObject(CObject* object);
 
 
 	//GET

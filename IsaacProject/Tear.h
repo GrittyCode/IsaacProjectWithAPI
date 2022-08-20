@@ -11,10 +11,7 @@ public:
 	virtual void Render(HDC hdc);
 	virtual void Move();
 	virtual INT CheckCollisionState();
-
 	void FireEyeSet(bool left, Vector2 attackdirection);
-
-	void DeleteTreas();
 
 private:
 	float m_fDistance;
@@ -25,4 +22,3 @@ private:
 	float m_fCurDeley;
 	Vector2 m_vecFireEye;
 };
-

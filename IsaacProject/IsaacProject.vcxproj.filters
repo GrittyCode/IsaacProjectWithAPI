@@ -313,11 +313,20 @@
     <Filter Include="05.Object\02.Background">
       <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object\03.Obstacle">
+      <UniqueIdentifier>{a89a6558-7649-4197-97bb-2017766df0b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\01.Mover\03.Enemy">
+      <UniqueIdentifier>{06686093-77bf-4669-adff-57c8c31f4439}</UniqueIdentifier>
+    </Filter>
     <Filter Include="08.Module">
       <UniqueIdentifier>{74f11c6c-c28b-411a-9175-a58329686424}</UniqueIdentifier>
     </Filter>
     <Filter Include="08.Module\00.State">
       <UniqueIdentifier>{20b207d6-1576-44fa-ae0d-9c0fe09013d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Module\00.State\Idle">
+      <UniqueIdentifier>{6b5c8d2e-2266-4525-961e-0363fd877ba5}</UniqueIdentifier>
     </Filter>
     <Filter Include="05.Object\01.Mover\02.Tear">
       <UniqueIdentifier>{bd494dbe-6bf0-4dcd-805c-94602707b382}</UniqueIdentifier>

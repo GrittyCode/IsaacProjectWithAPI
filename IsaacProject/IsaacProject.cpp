@@ -87,6 +87,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 CGameMgr::GetInstance()->Update();
                 CGameMgr::GetInstance()->FixedUpdate();
                 CGameMgr::GetInstance()->Render();
+                //이벤트 지연 처리
+                CEventMgr::GetInstance()->Update();
             }
             frame.RenderFrame();
             //cout << CTimeMgr::GetInstance()->GetDeltaTime() << endl;
