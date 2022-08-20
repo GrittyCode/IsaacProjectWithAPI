@@ -2,13 +2,15 @@
 class CAnimation
 {
 public:
-	CAnimation(SpriteInfo sprite,int framelimit,float framedelay, Vector2 Size);
+	CAnimation(SpriteInfo sprite,int framelimit,float framedelay, Vector2 Size, ANI_STATE state);
 	~CAnimation();
 
 public:
 	void Update(Vector2 pos);
 	void Render();
 	void ResetDelay();
+
+	ANI_STATE GetState() { return m_eAniState; };
 
 private:
 	int m_iCurFrame;
@@ -23,5 +25,6 @@ private:
 	SpriteInfo m_tSpriteinfo;
 
 	Image* m_image;
+	ANI_STATE m_eAniState;
 };
 

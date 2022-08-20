@@ -30,8 +30,12 @@ void CTraceState::Update()
 	Host->GetTransform()->SetPosition(Vector2(Host->GetTransform()->GetPosition().x + (MoveDirection.x * DELTA * Host->GetEnemyInfo().fSpeed),
 	Host->GetTransform()->GetPosition().y + (MoveDirection.y * DELTA * Host->GetEnemyInfo().fSpeed)));
 
-	if (DistanceMeasure(PlayerPos,Host->GetTransform()->GetPosition()) < 20)
+	/*if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
+		PushMover(m_collide->GetTarget(OBJECT_TYPE::PLAYER)->GetOwnerObj());*/
+
+
+	/*if ()
 	{
 		GetAI()->ChangeState(AI_STATE::DEAD);
-	}
+	}*/
 }

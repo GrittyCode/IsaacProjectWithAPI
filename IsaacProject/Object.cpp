@@ -152,5 +152,21 @@ void CObject::Draw(int frame, SpriteInfoTag aniinfo,int offset_x,int offset_y, i
 			UnitPixel);
 }
 
+void CObject::AddAniState(CAnimation* anistate)
+{
+	if (anistate == nullptr)
+	{
+		return;
+	}
 
+	m_Aniiter = m_mapAniState.find(anistate->GetState());
 
+	if (m_Aniiter == m_mapAniState.end())
+	{
+		m_mapAniState.insert({ anistate->GetState() , anistate });
+	}
+	else
+	{
+		return;
+	}
+}
