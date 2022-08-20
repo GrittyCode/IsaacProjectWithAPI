@@ -15,7 +15,7 @@ CObstacle::CObstacle(ObjectInfo objinfo)
 void CObstacle::Init()
 {
 	CObject::Init();
-	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 2.0f), (m_Transform->GetSizeY() - 2.0f));
+	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 12.0f), (m_Transform->GetSizeY() - 12.0f));
 	AddComponent(m_collide);
 }
 

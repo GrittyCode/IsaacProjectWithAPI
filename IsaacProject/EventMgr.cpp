@@ -51,8 +51,8 @@ void CEventMgr::Excute(const tEvent& eve)
 	case EVENT_TYPE::SCENE_CHANGE:
 	{
 		//lParam SceneName
-		SceneInfo* changeScene = (SceneInfo*)eve.lParam;
-		CSceneMgr::GetInstance()->ChangeScene(changeScene.);
+		//SceneInfo* changeScene = (SceneInfo*)eve.lParam;
+		//CSceneMgr::GetInstance()->ChangeScene();
 	}
 		break;
 	}

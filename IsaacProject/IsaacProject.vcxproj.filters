@@ -394,6 +394,15 @@
     <Filter Include="05.Object\05.Door">
       <UniqueIdentifier>{25f0d33f-8b95-42a0-9ee0-6a1a0a56b5a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Object\06.Key">
+      <UniqueIdentifier>{25a66c95-38ff-40fd-98f9-72e10e4480ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\07.Bomb">
+      <UniqueIdentifier>{1cd24620-f031-4f93-909b-48f44347996f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\08.Item">
+      <UniqueIdentifier>{f57157e9-fe3e-4218-a231-f83cb0fd4212}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="IsaacProject.rc">
