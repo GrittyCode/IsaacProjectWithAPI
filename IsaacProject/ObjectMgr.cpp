@@ -11,32 +11,6 @@ void CObjectMgr::Init()
 		list<CObject*> temp;
 		m_MapObjectList.insert({ (OBJECT_TYPE)i, temp });
 	}
-
- 	//플레이어 등록하기 위한 꼼수
-	AddObject(new CPlayer(
-		ObjectInfo(
-			L"../Resources/Sprites/character_001_isaac.png",
-			Vector2(0, 0),
-			Vector2(32, 32),
-			Vector2(32, 32),
-			Vector2(100, 100),
-			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
-			MoverInfo()));
-
-	AddObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
-		Vector2(0, 0),
-		Vector2(0, 0),
-		Vector2(64, 64),
-		Vector2(200, 200),
-		Vector2(1, 1),
-		OBJECT_TYPE::ENEMY,
-		OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 70.0f, 0)));
-
-	//백그라운드 임시 생성	
-	AddObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
-	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
-
-	m_player = dynamic_cast<CPlayer*>(m_MapObjectList.find(OBJECT_TYPE::PLAYER)->second.back());
 }
 
 void CObjectMgr::Update()
@@ -60,10 +34,10 @@ void CObjectMgr::Update()
 				if (!obj->IsDead())
 				{
 				obj->Update();
+				}
 			}
 		}
 	}
-}
 }
 
 void CObjectMgr::FixedUpdate()
@@ -96,14 +70,6 @@ void CObjectMgr::LateUpdate()
 
 void CObjectMgr::Render(HDC hdc)
 {
-	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::TOOL)
-	{
-		for (auto tile : m_vecTile)
-		{
-			tile->Render(hdc);
-		}
-	}
-
 	for (int i = 0; i < (int)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
 	{
 		m_Objiter = m_MapObjectList.find((OBJECT_TYPE)i);
@@ -119,13 +85,22 @@ void CObjectMgr::Render(HDC hdc)
 				{
 					(*iter)->Render(hdc);
 					++iter;
-			}
+				}
 				else
 				{
 					iter = m_Objiter->second.erase(iter);
+				}
+			}
 		}
 	}
-}
+
+
+	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::TOOL)
+	{
+		for (auto tile : m_vecTile)
+		{
+			tile->Render(hdc);
+		}
 	}
 }
 
@@ -178,6 +153,10 @@ BOOL CObjectMgr::AddObject(CObject* object)
 
 	if (m_Objiter != m_MapObjectList.end() && object != nullptr)
 	{	
+		if (object->GetObjType() == OBJECT_TYPE::PLAYER)
+		{
+			m_player = dynamic_cast<CPlayer*>(object);
+		}
 		object->Init();
 		(*m_Objiter).second.push_back(object);
 		return TRUE;
@@ -194,6 +173,7 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 {
 	m_Objiter = m_MapObjectList.find(info.type);
 
+
 	if (m_Objiter != m_MapObjectList.end())
 	{
 		switch (info.type)
@@ -204,10 +184,6 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 		case OBJECT_TYPE::OBSTACLE:
 			CreateObject(new CObstacle(info));
 			break;
-		case OBJECT_TYPE::BOOM_OBSTACLE:
-			break;
-		case OBJECT_TYPE::TEAR_OBSTACLE:
-			break;
 		case OBJECT_TYPE::DOOR:
 			break;
 		case OBJECT_TYPE::ITEM:
@@ -215,9 +191,10 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 		case OBJECT_TYPE::PLAYER:
 			CreateObject(new CPlayer(info, MoverInfo()));
 			break;
-		case OBJECT_TYPE::TEAR:
+		case OBJECT_TYPE::PLAYER_TEAR:
 			break;
 		case OBJECT_TYPE::ENEMY:
+			CreateObject(new CObstacle(info));
 			break;
 		case OBJECT_TYPE::BOSS:
 			break;

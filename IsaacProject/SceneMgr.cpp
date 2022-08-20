@@ -5,6 +5,19 @@ CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
 void CSceneMgr::Init()
 {
+	//백그라운드 임시 생성	
+	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
+	//플레이어 등록하기 위한 꼼수
+	CreateObject(new CPlayer(
+		ObjectInfo(
+			L"../Resources/Sprites/character_001_isaac.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(100, 100),
+			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
+		MoverInfo()));
+
 	m_currentScene = new CScene(L"test2.Scene",ROW,COLMN);
 
 	if (m_currentScene != nullptr)
@@ -59,6 +72,7 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 	else if (mode == GAME_MODE::TOOL)
 	{
 		Release();
+		CObjectMgr::GetInstance()->Init();
 		m_currentScene = new CToolScene();
 		m_currentScene->Init();
 	}

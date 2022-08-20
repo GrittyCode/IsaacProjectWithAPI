@@ -19,7 +19,7 @@ void CCollisionMgr::Init()
 	}
 }
 
-void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION_FLAG collisionstate)
+void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 {
 	m_iter = m_mapBoxlist.find(sour);
 	
@@ -30,12 +30,12 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION
 			m_iter = m_mapBoxlist.find(ades);
 			for (auto des : (*m_iter).second)
 			{
-				if (!target->GetSourceObj()->IsDead() && !des->GetSourceObj()->IsDead())
+				if (!target->GetOwnerObj()->IsDead() && !des->GetOwnerObj()->IsDead())
 				{
 				if (IsCollision(target, des))
 				{
-					target->SetCollisonFlag((int)collisionstate);
-					target->SetTargetCollision(des);
+					target->SetCollisonFlag(pow(2,(UINT)ades - 1));
+					target->PushTargetCollision(des);
 				}									
 			}
 		}
@@ -54,7 +54,7 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades, COLLISION
 					continue;
 
 				if (IsCollision(target, des))
-					target->SetCollisonFlag((int)collisionstate);
+					target->SetCollisonFlag((int)ades);
 
 				target->CollisionCheck();
 
@@ -75,7 +75,7 @@ void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 
 void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
 {
-	m_iter = m_mapBoxlist.find(target->GetSourceObj()->GetObjType());
+	m_iter = m_mapBoxlist.find(target->GetOwnerType());
 
 	if (target != nullptr)
 	{

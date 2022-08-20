@@ -115,8 +115,8 @@ void CToolScene::FixedUpdate()
 
 void CToolScene::Render(HDC hdc)
 {
-	CObjectMgr::GetInstance()->Render(hdc);
 
+	CObjectMgr::GetInstance()->Render(hdc);
 	POINT CursorPos;
 
 	GetCursorPos(&CursorPos);
@@ -167,16 +167,14 @@ void CToolScene::Render(HDC hdc)
 INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);
-	TCHAR str[128] = { 0 };
-	TCHAR FilePath[128] = FILE_PATH;
+	static TCHAR str[128] = { 0 };
+	static TCHAR FilePath[128] = FILE_PATH;
 
-	wstring OBJECT_TYPE[(int)OBJECT_TYPE::OBJECT_TYPE_END] = 
+	static wstring OBJECT_TYPE[(int)OBJECT_TYPE::OBJECT_TYPE_END] = 
 			{L"BACKGROUND", L"OBSTACLE",
-			L"BOOM_OBSTACLE",L"TEAR_OBSTACLE", 
-		    L"DOOR", L"ITEM", L"PLAYER",
-			L"TEAR",L"ENEMY",L"BOSS"};
-
-
+			L"PLAYER_TEAR",L"ENEMY_TEAR", 
+		    L"BOMB", L"DOOR", L"ITEM",
+			L"ENEMY",L"PLAYER",L"BOSS"};
 	static HWND hcomboType = nullptr;
 
     switch (message)
@@ -209,7 +207,8 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 		break;
 		case IDC_SCENE_SAVE:
 		{
-			CToolDlg::GetInstance()->SaveSceneFromTool();
+			GetDlgItemText(g_hToolDlg, IDC_NAME_INPUT, (LPWSTR)str, 128);
+			CToolDlg::GetInstance()->SaveSceneFromTool(str);
 		}
 		break;
 		case IDC_SAVE_BUTTON:
@@ -223,7 +222,7 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 		break;
 		case IDC_LODE_BUTTON:
 		{
-			TCHAR filter[] = L"scene File\0*.scene\0";
+			TCHAR filter[] = L"Bmp File\0*.bmp\0";
 			OPENFILENAME OFN;
 			TCHAR filePathName[100] = L"";
 			TCHAR lpstrFile[100] = L"";
@@ -237,7 +236,6 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 			OFN.lpstrInitialDir = L".";
 
 			wchar_t Directory[256] = L"..\\";
-			wchar_t tempDir[256] = L"";
 
 			int Cnt = 3;
 
@@ -249,7 +247,7 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 				{
 					if (!bCheck)
 					{
-						if ((tempDir[i] != OFN.lpstrFile[i]))
+						if ((OriginDirectory[i] != OFN.lpstrFile[i]))
 							bCheck = true;
 
 						continue;
@@ -264,8 +262,9 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 				}
 			}
 
-			SetCurrentDirectory(tempDir);
-			CSceneMgr::GetInstance()->LoadScene(Directory);
+			SetCurrentDirectory(OriginDirectory);
+
+			CreateObject(new CBackground(ObjectInfo(Directory,OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
 
 		}
 		break;

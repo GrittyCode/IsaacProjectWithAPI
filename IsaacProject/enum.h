@@ -19,20 +19,6 @@ enum class COMPONENT_TYPE
 	COMPONENT_TYPE_END
 };
 
-
-enum class COLLISION_FLAG
-{
-	NONE,
-	OBSTACLE = 1,
-	ENEMY = 2,
-	TEAR = 4,
-	BOMB = 8,
-	DOOR = 16,
-	ITEM = 32,
-	PLAYER = 64,
-	COLLISION_FLAG_END
-};
-
 #pragma endregion
 
 
@@ -51,17 +37,32 @@ enum class OBJECT_TYPE
 {
 	BACKGROUND,
 	OBSTACLE,
-	BOOM_OBSTACLE,
-	TEAR_OBSTACLE,
+	PLAYER_TEAR, 
+	ENEMY_TEAR,
+	BOMB,
 	DOOR,
 	ITEM,
-	BOMB,
-	PLAYER,
-	TEAR,
 	ENEMY,
+	PLAYER,
 	BOSS,
 	OBJECT_TYPE_END
 };
+
+enum class COLLISION_FLAG
+{
+	BACKGROUND = 0,
+	OBSTACLE = 1,
+	PLAYER_TEAR = 2,
+	ENEMY_TEAR = 4,
+	BOMB = 8,
+	DOOR = 16,
+	ITEM = 32,
+	ENEMY = 64,
+	PLAYER = 128,
+	BOSS = 256,
+	OBJECT_TYPE_END
+};
+
 
 enum class OBJECT_INFO
 {

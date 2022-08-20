@@ -21,7 +21,7 @@ CTear::CTear(Vector2 movediretiony,Vector2 worldpos, Vector2 attackdirection,flo
 	m_fCurDeley = 0;
 	m_iCurPrame = 0;
 
-	m_ObjInfo.type = OBJECT_TYPE::TEAR;
+	m_ObjInfo.type = OBJECT_TYPE::PLAYER_TEAR;
 }
 
 CTear::~CTear()

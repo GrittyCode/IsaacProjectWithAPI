@@ -253,9 +253,9 @@ void CPlayer::Attack()
 
 	if (m_PlayerInfo.bAttackON && m_PlayerInfo.bAttack)
 	{
-		CreateObject(new CTear(m_MoverInfo.vecMoveDiretion, GetTransform()->GetPosition(),
-			m_MoverInfo.vecAttackDiretion,
-			m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
+		CreateObject(
+			new CTear(m_MoverInfo.vecMoveDiretion, GetTransform()->GetPosition(),
+			m_MoverInfo.vecAttackDiretion, m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
 
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
 		m_PlayerInfo.bAttack = false;
