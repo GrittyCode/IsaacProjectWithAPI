@@ -6,6 +6,7 @@ public:
 	CTransform(Vector2 pos, Vector2 size) :m_vecPos(pos), m_vecSize(size) { m_vecRot = Vector2(0.0f, 0.0f); m_vecLook = Vector2(0.0f, 0.0f); };
 	CTransform(Vector2 pos, Vector2 rot, Vector2 look) {};
 	virtual ~CTransform() {};
+	virtual void Release() override {};
 public:
 	//GET
 	Vector2 GetPosition() { return m_vecPos; } const

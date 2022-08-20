@@ -33,7 +33,6 @@ void CObstacle::FixedUpdate()
 
 void CObstacle::Render(HDC hdc)
 {
-
 	CImageMgr::GetInstance()->GetGraphics()->DrawImage(
 		m_sprite->GetSprite(),
 		Rect((INT)m_ObjInfo.vecWorldPos.x - (INT)m_ObjInfo.vecSize.x,
@@ -78,13 +77,11 @@ void CObstacle::Release()
 	CObject::Release();
 }
 
-
-
-
 INT CObstacle::CheckCollisionState()
 {
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
-		PushMover(m_collide->GetTargetCollide()->GetSourceObj());
+		PushMover(m_collide->GetTarget(OBJECT_TYPE::PLAYER)->GetOwnerObj());
+
 	m_collide->OffCollisionFlag();
 
 	return 0;

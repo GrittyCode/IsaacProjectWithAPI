@@ -53,8 +53,8 @@
 #include "CollisionMgr.h"
 #include "SceneMgr.h"
 #include "FrameMgr.h"
-#include "FactoryMgr.h"
 #include "EventMgr.h"
+#include "FactoryMgr.h"
 
 //Dig
 #include "ToolDlg.h"

@@ -325,9 +325,6 @@
     <Filter Include="05.Object\02.Background">
       <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Object\03.Obstacle">
-      <UniqueIdentifier>{a89a6558-7649-4197-97bb-2017766df0b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Object\01.Mover\03.Enemy">
       <UniqueIdentifier>{06686093-77bf-4669-adff-57c8c31f4439}</UniqueIdentifier>
     </Filter>

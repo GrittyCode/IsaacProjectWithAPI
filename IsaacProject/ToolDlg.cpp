@@ -402,11 +402,10 @@ void CToolDlg::SetObjectTemp()
 }
 
 
-BOOL CToolDlg::SaveSceneFromTool()
+BOOL CToolDlg::SaveSceneFromTool(wstring sceneName)
 {
 	wstring directory = L"..\\Resources\\Scene\\";
-	wstring scene_name = L"test2.scene";
-	wstring desination = directory + scene_name;
+	wstring desination = directory + sceneName;
 
 	wofstream ofs(desination, ios::out | ios::trunc);
 
@@ -454,56 +453,3 @@ void CToolDlg::BarPosUP()
 void CToolDlg::BarPosDown()
 {
 }
-
-
-
-
-
-
-
-
-//LEGECY CODE
-
-/*
-	//타일맵 크기 저장
-	auto map = CObjectMgr::GetInstance()->GetMapTileVector();
-
-	//타일맵 저장 -> 포지션, 타일 정보
-	if (ofs.is_open())
-	{
-		int mapRow = 0;
-		int mapColmn = 0;
-
-		//씬의 크기 받아오기
-		mapRow = CSceneMgr::GetInstance()->GetCurScene()->GetRow();
-		mapColmn = CSceneMgr::GetInstance()->GetCurScene()->GetColmn();
-
-		ofs << mapRow << '\n' << mapColmn << '\n'; //전체 크기 받아오기
-
-		vector<CTile*>* vecTile;
-		vecTile = CObjectMgr::GetInstance()->GetMapTileVector();
-				//해당 벡터 모두 돌며 저장
-		for (CTile* tile : *vecTile)
-		{
-			//타일 포지션 저장 분기
-			ofs << tile->GetTilePos().row << ',' << tile->GetTilePos().colmn << ','
-				<< tile->GetTilePos().WorldPos.x / Scale << ',' << tile->GetTilePos().WorldPos.y / Scale << ','
-				<< tile->GetTilePos().LocalPos.x / Scale << ',' << tile->GetTilePos().LocalPos.y / Scale << '\n';
-
-			//타일 정보 저장 분기
-			ofs << tile->GetTileInfo().path << ','
-				<< tile->GetTileInfo().v_StartPos.x << ',' << tile->GetTileInfo().v_StartPos.y << ','
-				<< tile->GetTileInfo().v_EndPos.x << ',' << tile->GetTileInfo().v_EndPos.y << ','
-				<< tile->GetTileInfo().v_Size.x << ',' << tile->GetTileInfo().v_Size.y << ','
-				<< (UINT)tile->GetTileInfo().LAYER << ',' << (UINT)tile->GetTileInfo().TYPE << ','
-				<< tile->GetTileInfo().isXFlip << ',' << tile->GetTileInfo().isYFlip << '\n';
-		}
-
-
-	}
-	else
-	{
-		MessageBox(g_hWnd, L"타일맵 씬 저장 오류!", L"저장 오류", TRUE);
-		return (INT_PTR)FALSE;
-	}
-	*/

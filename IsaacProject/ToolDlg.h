@@ -32,7 +32,7 @@ public:
 	void SetTileTemp();
 	void SetObjectTemp();
 	void SetObjectType(int n) {m_stObj.type = (OBJECT_TYPE)n;}
-	BOOL SaveSceneFromTool();
+	BOOL SaveSceneFromTool(wstring sceneName);
 
 	//METHOD
 	void BarPosUP();

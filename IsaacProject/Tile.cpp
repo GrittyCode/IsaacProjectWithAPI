@@ -61,9 +61,17 @@ void CTile::Render(HDC hdc)
 	}
 	else
 	{
+		//Ææ¼³Á¤
+		HBRUSH	hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
+		HPEN CurPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+		HPEN hOldPen = (HPEN)SelectObject(hdc, CurPen);
+
 		Rectangle(hdc, (INT)m_Pos.WorldPos.x, (INT)m_Pos.WorldPos.y, 
 			(INT)m_Pos.WorldPos.x  + (int)(TILE_SIZE * Scale), (INT)m_Pos.WorldPos.y + (int)(TILE_SIZE * Scale));
-		int i = 0;
+		
+		DeleteObject(hOldBrush);
+		SelectObject(hdc, hOldPen);
+		DeleteObject(CurPen);
 	}
 	
 }

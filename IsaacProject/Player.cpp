@@ -267,7 +267,7 @@ void CPlayer::Move()
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::TAP 
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::HOLD)
 	{
-		m_MoverInfo.vecMoveDiretion.y = m_MoverInfo.vecMoveDiretion.y == -1 ? 0 :  1;
+		m_MoverInfo.vecMoveDiretion.y = m_MoverInfo.vecMoveDiretion.y == -1.f ? 0.f :  1.f;
 
 		if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::TAP)
 		{
@@ -381,14 +381,10 @@ void CPlayer::Attack()
 
 	if (m_PlayerInfo.bAttackON && m_PlayerInfo.bAttack)
 	{
-		CreateObject(new CTear(m_MoverInfo.vecMoveDiretion, GetTransform()->GetPosition(),
-			m_MoverInfo.vecAttackDiretion,
-			m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
+		CreateObject(
+			new CTear(m_MoverInfo.vecMoveDiretion, GetTransform()->GetPosition(),
+			m_MoverInfo.vecAttackDiretion, m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
 
-		CObjectMgr::GetInstance()->
-			AddObject(new CTear(m_MoverInfo.vecMoveDiretion,GetTransform()->GetPosition(), 
-								 m_MoverInfo.vecAttackDiretion,
-								 m_PlayerInfo.fCurSpeed /2, m_PlayerInfo.bLeft));
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
 	}
 }

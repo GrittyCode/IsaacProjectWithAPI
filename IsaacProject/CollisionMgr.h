@@ -9,7 +9,7 @@ class CCollisionMgr
 	SINGLETONE(CCollisionMgr)
 public:
 	void Init();
-	void CheckCollision(OBJECT_TYPE target, OBJECT_TYPE des, COLLISION_FLAG collisionstate);
+	void CheckCollision(OBJECT_TYPE target, OBJECT_TYPE des);
 	void AddCollider(OBJECT_TYPE type, CBoxCollider2D* box);
 	void DeleateCollider(CBoxCollider2D* target);
 
