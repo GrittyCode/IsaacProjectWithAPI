@@ -11,6 +11,7 @@ enum class AI_STATE
 	FLYTRACE,
 	ATK,
 	FLEE,
+	HUNT,
 	DEAD,
 	AI_STATE_END
 };

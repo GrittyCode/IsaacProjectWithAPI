@@ -5,7 +5,6 @@ CEventMgr* CEventMgr::m_pInstance = nullptr;
 
 void CEventMgr::Init()
 {
-
 }
 
 void CEventMgr::Update()
@@ -48,12 +47,13 @@ void CEventMgr::Excute(const tEvent& eve)
 		m_vecDead.push_back(pDeadObj);
 	}
 		break;
-	case EVENT_TYPE::SCENE_CHANGE:
-	{
-		//lParam SceneName
-		SceneInfo* changeScene = (SceneInfo*)eve.lParam;
-		CSceneMgr::GetInstance()->ChangeScene(changeScene.);
-	}
-		break;
+	//case EVENT_TYPE::SCENE_CHANGE:
+	//{
+	//	//lParam SceneName
+	//	SceneInfo* changeScene = (SceneInfo*)eve.lParam;
+	//	CSceneMgr::GetInstance()->ChangeScene(changeScene);
+	//}
+	//	break;
+	break;
 	}
 }

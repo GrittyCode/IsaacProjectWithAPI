@@ -15,6 +15,7 @@ CIdleState::~CIdleState()
 
 void CIdleState::Enter()
 {
+	GetAI()->GetHost()->SetAniState(ANI_STATE::IDLE);
 }
 
 void CIdleState::Exit()

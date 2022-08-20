@@ -29,7 +29,9 @@ public:
 
 	//GET
 	Vector2 GetoMoveDir() const { return m_MoverInfo.vecMoveDiretion; }
+	Vector2 GetoAttackDir() const { return m_MoverInfo.vecAttackDiretion; }
 	float GetSpeed() const { return m_MoverInfo.fSpeed; }
+
 
 protected:
 	MoverInfo m_MoverInfo = MoverInfo{};
