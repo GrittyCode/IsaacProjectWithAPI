@@ -163,7 +163,3 @@ void CTear::FireEyeSet(bool left, Vector2 attackdirection)
 		}
 	}
 }
-
-void CTear::DeleteTreas()
-{
-}

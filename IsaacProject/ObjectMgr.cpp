@@ -148,10 +148,10 @@ void CObjectMgr::Release()
 				if ((*list_iter) != nullptr)
 				{
 					(*list_iter)->Release();
-					delete* list_iter;
+					delete *list_iter;
 					*list_iter = nullptr;
-	}
-}
+				}
+		}
 
 			m_Objiter->second.clear();
 		}

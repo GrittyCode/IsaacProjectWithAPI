@@ -100,6 +100,12 @@
     <ClCompile Include="DeadState.cpp">
       <Filter>08.Module\00.State\07.Dead</Filter>
     </ClCompile>
+    <ClCompile Include="EventMgr.cpp">
+      <Filter>02.Manager\10.EventMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryMgr.cpp">
+      <Filter>02.Manager\11.FactoryMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -224,6 +230,12 @@
     </ClInclude>
     <ClInclude Include="DeadState.h">
       <Filter>08.Module\00.State\07.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="EventMgr.h">
+      <Filter>02.Manager\10.EventMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryMgr.h">
+      <Filter>02.Manager\11.FactoryMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +372,12 @@
     </Filter>
     <Filter Include="08.Module\00.State\03.Trace">
       <UniqueIdentifier>{b6d0af0c-708f-4ce6-bed0-d95503880493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\10.EventMgr">
+      <UniqueIdentifier>{7a0f1668-2c00-42a7-a00c-acadbf64cae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\11.FactoryMgr">
+      <UniqueIdentifier>{d74c1b9d-1602-4584-899e-6f73c8893649}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

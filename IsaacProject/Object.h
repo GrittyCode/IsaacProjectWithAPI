@@ -53,6 +53,5 @@ private:
 	void SetDead() { m_bAllive = FALSE; }
 
 	friend class CEventMgr;
-	ObjectInfo m_ObjInfo;
 };
 
