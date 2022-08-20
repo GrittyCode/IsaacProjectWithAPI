@@ -381,7 +381,6 @@ typedef struct SpriteInfoTag
 		vecOffset(offset)
 	{
 	}
-
 } SpriteInfo,SPRITEINFO;
 
 

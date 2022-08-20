@@ -71,7 +71,6 @@ void CGameMgr::Update()
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 
-	//tset.Update();
 }
 
 void CGameMgr::FixedUpdate()

@@ -93,6 +93,23 @@ void CSceneMgr::CreateStageFromTool()
 	}
 }
 
+BOOL CSceneMgr::LoadMap(wstring mapPath)
+{
+	wstring mapDirectory = (L"..//Resources//Map//");
+
+	mapDirectory += mapPath;
+
+	wifstream ifs(mapDirectory, ios::in);
+	wstring sceneName;
+
+	for (int i = 0; i < 10; ++i)
+	{
+	}
+
+
+	return 0;
+}
+
 BOOL CSceneMgr::LoadScene(wstring scenePath)
 {
 	Release();
@@ -100,8 +117,6 @@ BOOL CSceneMgr::LoadScene(wstring scenePath)
 #ifdef DEBUG
 	wcout << OriginDirectory << endl;
 #endif // DEBUG
-
-	
 
 	wstring mapDirectory = (L"..//Resources//Scene//");
 
@@ -206,126 +221,3 @@ wstring CSceneMgr::GetCurSceneName()
 
 	return L"";
 }
-
-
-
-//LEGACY CODE
-
-/*
-	//타일맵 저장 -> 포지션, 타일 정보
-	if (ifs.is_open())
-	{
-		for (UINT i = 0; i < (i_tileColmn * i_tileRow); ++i)
-		{
-				//타일 포지션 생성
-				for (int pos = 0; pos < (int)TILE_POS::TILE_POS_END; ++pos)
-				{
-					//내부 쓰레기 값 삭제
-					tempStr.clear();
-
-					while (true)
-					{
-						//문자 하나 가져오기
-						ifs.get(tempchar);
-
-						if (tempchar == ',' || tempchar == '\n')
-						{
-							break;
-						}
-
-						//받은 문자 하나 병합
-						tempStr += tempchar;
-					}
-
-					switch (pos)
-					{
-					case (int)TILE_POS::IDX_ROW:
-						tempPos.row = _wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_POS::IDX_COLMN:
-						tempPos.colmn = _wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_POS::WORLDPOS_X:
-						tempPos.WorldPos.x = _wtoi(tempStr.c_str()) * Scale;
-						break;
-					case (int)TILE_POS::WORLDPOS_Y:
-						tempPos.WorldPos.y = _wtoi(tempStr.c_str()) * Scale;
-						break;
-					case (int)TILE_POS::LOCALPOS_X:
-						tempPos.LocalPos.x = _wtoi(tempStr.c_str()) * Scale;
-						break;
-					case (int)TILE_POS::LOCALPOS_Y:
-						tempPos.LocalPos.y = _wtoi(tempStr.c_str()) * Scale;
-						break;
-					}
-				}
-
-				tempStr.clear();
-
-				//타일 이미지 생성
-				for (int info = 0; info < (int)TILE_INFO::TILE_INFO_END; ++info)
-				{
-					tempStr.clear();
-
-					while (true)
-					{
-						//문자 하나 가져오기
-						ifs.get(tempchar);
-
-						if (tempchar == ',' || tempchar == '\n')
-						{
-							break;
-						}
-
-						//받은 문자 하나 병합
-						tempStr += tempchar;
-					}
-
-					switch (info)
-					{
-					case (int)TILE_INFO::PATH:
-						tempInfo.path = tempStr;
-						break;
-					case (int)TILE_INFO::STARTPOS_X:
-						tempInfo.v_StartPos.x = (FLOAT)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::STARTPOS_Y:
-						tempInfo.v_StartPos.y = (FLOAT)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::ENDPOS_X:
-						tempInfo.v_EndPos.x = (FLOAT)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::ENDPOS_Y:
-						tempInfo.v_EndPos.y = (FLOAT)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::SIZE_X:
-						tempInfo.v_Size.x = (FLOAT)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::SIZE_Y:
-						tempInfo.v_Size.y = (FLOAT)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::LAYER:
-						tempInfo.LAYER = (SORTING_LAYER)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::TYPE:
-						tempInfo.TYPE = (TILE_TYPE)_wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::FLIP_X:
-						tempInfo.isXFlip = _wtoi(tempStr.c_str());
-						break;
-					case (int)TILE_INFO::FLIP_Y:
-						tempInfo.isYFlip = _wtoi(tempStr.c_str());
-						break;
-					}
-				}
-
-
-				//타일 생성
-				CObjectMgr::GetInstance()->AddTile(new CTile(tempInfo, tempPos));
-
-		}
-	}
-
-
-
-*/

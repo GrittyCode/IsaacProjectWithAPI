@@ -109,6 +109,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>08.Module\01.Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>05.Object\05.Door</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -242,6 +245,9 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>08.Module\01.Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>05.Object\05.Door</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +390,9 @@
     </Filter>
     <Filter Include="08.Module\01.Animation">
       <UniqueIdentifier>{3d649544-9c3b-41d9-b205-80259e2e92e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\05.Door">
+      <UniqueIdentifier>{25f0d33f-8b95-42a0-9ee0-6a1a0a56b5a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

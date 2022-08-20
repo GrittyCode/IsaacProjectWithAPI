@@ -38,6 +38,7 @@
 #include "Obstacle.h"
 #include "Enemy.h"
 #include "Fly.h"
+#include "Door.h"
 
 //Scene
 #include "Scene.h"

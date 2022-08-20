@@ -16,16 +16,15 @@ CScene::CScene(wstring name, UINT row, UINT colmn)
 	m_colmn = colmn;
 
 	CSceneMgr::GetInstance()->LoadScene(m_Name);
-
 }
 
 CScene::~CScene()
 {
-	Release();
 }
 
 void CScene::Init()
 {
+
 }
 
 void CScene::Update()
@@ -59,13 +58,25 @@ void CScene::FixedUpdate()
 	CObjectMgr::GetInstance()->FixedUpdate();
 }
 
+
+
+
 void CScene::Render(HDC hdc)
 {
 	CObjectMgr::GetInstance()->Render(hdc);
 }
 
+
 void CScene::Release()
 {
+	auto iter = m_MapObjectList.begin();
+
+	for (; iter != m_MapObjectList.end(); ++iter)
+	{
+
+	}
+
 	CObjectMgr::GetInstance()->Release();
+	
 }
 

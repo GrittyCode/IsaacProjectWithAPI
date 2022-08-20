@@ -20,6 +20,7 @@ public:
 	BOOL LoadMap(wstring mapPath);
 	*/
 
+	BOOL LoadMap(wstring mapPath);
 	BOOL LoadScene(wstring scenePath);
 
 	//Get
@@ -28,7 +29,7 @@ public:
 
 
 private:
-	vector<SceneInfo> m_VecSceneInfo;
+	map<wstring,CScene*> m_MapScene;
 	CScene* m_currentScene = nullptr;
 };
 
