@@ -31,6 +31,7 @@ void CObjectMgr::Init()
 		Vector2(1, 1),
 		OBJECT_TYPE::ENEMY,
 		OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 70.0f, 0)));
+
 	//백그라운드 임시 생성	
 	AddObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
 	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
@@ -150,8 +151,8 @@ void CObjectMgr::Release()
 					(*list_iter)->Release();
 					delete* list_iter;
 					*list_iter = nullptr;
-	}
-}
+				}
+			}	
 
 			m_Objiter->second.clear();
 		}

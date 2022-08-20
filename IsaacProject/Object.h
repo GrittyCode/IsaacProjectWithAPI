@@ -44,8 +44,6 @@ protected:
 
 	unordered_map<COMPONENT_TYPE, CComponent*> m_MapComponent;
 
-
-
 	unordered_map<COMPONENT_TYPE, CComponent*>::iterator m_iter;
 	//파일 저장 로드를 하기 위한 변수
 private:
@@ -53,6 +51,5 @@ private:
 	void SetDead() { m_bAllive = FALSE; }
 
 	friend class CEventMgr;
-	ObjectInfo m_ObjInfo;
 };
 

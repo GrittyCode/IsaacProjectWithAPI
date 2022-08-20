@@ -73,35 +73,6 @@ void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 	}
 }
 
-void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
-{
-	int EraseNum = 0;
-	m_iter = m_mapBoxlist.find(target->GetSourceObj()->GetObjType());
-
-	if (target != nullptr)
-	{
-		auto listIter = m_iter->second.begin();
-		for (; listIter != (*m_iter).second.end();)
-		{
-			if ((*listIter) == target)
-			{
-				listIter = (*m_iter).second.erase(listIter);
-			}
-			else 
-			{
-				++listIter;
-			}
-		}
-	}
-
-	delete target;
-	target = nullptr;
-
-	for (Targetiter; (*Targetiter) != target; ++Targetiter)
-
-	(*m_iter).second.erase(Targetiter);
-}
-
 //사각형 AABB충돌
 BOOL CCollisionMgr::IsCollision(CBoxCollider2D* source, CBoxCollider2D* dest)
 {
