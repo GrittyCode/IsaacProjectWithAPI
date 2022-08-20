@@ -1,0 +1,51 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+IsaacProject/Debug/IsaacProject.exe.recipe
+*.tlog
+*.tlog
+*.tlog
+*.aps
+IsaacProject/IsaacProject.aps
+*.tlog
+*.pdb
+*.idb
+.vs/IsaacProject/v16/.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.recipe
+*.ilk
+*.log
+*.res
