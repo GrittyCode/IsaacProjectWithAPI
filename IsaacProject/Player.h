@@ -26,8 +26,6 @@ public:
 	virtual void FixedUpdate() override;
 	//Render
 	virtual void Render(HDC hdc) override;
-	void MoveRender(HDC hdc);
-	void AttackRender(HDC hdc);
 	//Get
 	PLAYER_STATE GetPlayerState() { return m_PlayerInfo.ePlayerState; }
 

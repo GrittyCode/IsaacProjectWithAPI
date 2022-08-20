@@ -351,16 +351,37 @@ struct tKeyInfo
 	bool		bPrevPush;//이전 프레임에서 눌렀는지 여부를 따짐
 };
 
-typedef struct ActAniInfoTag
+typedef struct SpriteInfoTag
 {
+	wstring wPath;
 	Vector2 vecStartPos;
+	Vector2 vecSpriteSize;
+	Vector2 vecOffset;
 	bool bFilp;
 
-	ActAniInfoTag(Vector2 startPos, bool filp)
+	SpriteInfoTag()
+	{
+		wPath = L"";
+		vecStartPos = Vector2(0,0);
+		vecSpriteSize = Vector2(0,0);
+		bFilp = false;
+	}
+
+	SpriteInfoTag(Vector2 startPos, bool filp)
 		:vecStartPos(startPos)
 		, bFilp(filp)
 	{
 	}
 
-} ActAniInfo,ACTANIINFO;
+	SpriteInfoTag(wstring path, Vector2 startPos, Vector2 size, bool filp,Vector2 offset)
+		:wPath(path),
+		vecStartPos(startPos),
+		vecSpriteSize(size),
+		bFilp(filp),
+		vecOffset(offset)
+	{
+	}
+
+} SpriteInfo,SPRITEINFO;
+
 

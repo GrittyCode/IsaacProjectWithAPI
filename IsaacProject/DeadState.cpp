@@ -21,4 +21,5 @@ void DeadState::Exit()
 
 void DeadState::Update()
 {
+	DeleteObject(GetAI()->GetHost());
 }

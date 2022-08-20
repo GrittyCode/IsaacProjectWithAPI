@@ -255,9 +255,10 @@ enum class DIRECTION
 	LEFT
 };
 
-enum class ANISTATE
+enum class ANI_STATE
 {
 	IDLE,
+	IDLEBody,
 	UPMOVE,
 	DOWNMOVE,
 	LEFTMOVE,
@@ -266,7 +267,8 @@ enum class ANISTATE
 	DOWNATTACK,
 	LEFTATTACK,
 	RIGHTATTACK,
-	HUNT
+	HUNT,
+	DEAD
 };
 
 #pragma endregion

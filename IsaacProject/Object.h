@@ -10,6 +10,7 @@ public:
 	virtual void Init();
 	virtual void Update() = 0;
 	virtual void FixedUpdate();
+	virtual void LateUpdate();
 	virtual void Render(HDC hdc);
 	virtual void Release();
 	virtual INT CheckCollisionState() =  0;
@@ -30,8 +31,8 @@ public:
 	CBoxCollider2D* GetCollide() const { return m_collide; }
 
 	//Render
-	void ReverseDraw(int frame, ActAniInfo aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
-	void Draw(int frame, ActAniInfo aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
+	void ReverseDraw(int frame, SpriteInfoTag aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
+	void Draw(int frame, SpriteInfoTag aniinfo, int offset_x, int offset_y, int Startoffset_x, int Startoffset_y);
 
 	wstring GetName() const { return m_strName; }
 protected:

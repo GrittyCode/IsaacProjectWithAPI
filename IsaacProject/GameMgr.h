@@ -6,6 +6,7 @@ public:
 	void Init();
 	void Update();
 	void FixedUpdate();
+	void LateUpdate();
 	void Render();
 	void SetGameMode(INT key) { m_mode = (GAME_MODE)key; };
 	void Release();

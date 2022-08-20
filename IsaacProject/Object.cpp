@@ -37,6 +37,10 @@ void CObject::FixedUpdate()
 	CheckCollisionState();
 }
 
+void CObject::LateUpdate()
+{
+}
+
 void CObject::Render(HDC hdc)
 {
 	m_iter = m_MapComponent.begin();
@@ -116,7 +120,7 @@ CComponent* const CObject::GetComponent(COMPONENT_TYPE type)
 	return nullptr;
 }
 
-void CObject::ReverseDraw(int frame,ActAniInfo aniinfo, int offset_x, int offsetx_y, int Startoffset_x, int Startoffset_y)
+void CObject::ReverseDraw(int frame, SpriteInfoTag aniinfo, int offset_x, int offsetx_y, int Startoffset_x, int Startoffset_y)
 {
 	Vector2 WorldPos = GetTransform()->GetPosition();
 
@@ -132,7 +136,7 @@ void CObject::ReverseDraw(int frame,ActAniInfo aniinfo, int offset_x, int offset
 			UnitPixel);
 }
 
-void CObject::Draw(int frame, ActAniInfo aniinfo,int offset_x,int offset_y, int Startoffset_x, int Startoffset_y)
+void CObject::Draw(int frame, SpriteInfoTag aniinfo,int offset_x,int offset_y, int Startoffset_x, int Startoffset_y)
 {
 	Vector2 WorldPos = GetTransform()->GetPosition();
 

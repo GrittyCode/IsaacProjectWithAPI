@@ -73,6 +73,27 @@ void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 	}
 }
 
+void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
+{
+	m_iter = m_mapBoxlist.find(target->GetSourceObj()->GetObjType());
+
+	if (target != nullptr)
+	{
+		auto listIter = m_iter->second.begin();
+		for (; listIter != (*m_iter).second.end();)
+		{
+			if ((*listIter) == target)
+			{
+				listIter = (*m_iter).second.erase(listIter);
+			}
+			else
+			{
+				++listIter;
+			}
+		}
+	}
+}
+
 //사각형 AABB충돌
 BOOL CCollisionMgr::IsCollision(CBoxCollider2D* source, CBoxCollider2D* dest)
 {
@@ -89,41 +110,3 @@ BOOL CCollisionMgr::IsCollision(CBoxCollider2D* source, CBoxCollider2D* dest)
 }
 
 
-
-
-//LEGECY CODE
-/*
-//type to CollisionFlg
-INT CCollisionMgr::ChangeObjTypeToCollisionFlag(OBJECT_TYPE type)
-{
-	switch (type)
-	{
-	case OBJECT_TYPE::BACKGROUND:
-		return -1;
-	case OBJECT_TYPE::OBSTACLE:
-	case OBJECT_TYPE::BOOM_OBSTACLE:
-	case OBJECT_TYPE::TEAR_OBSTACLE:
-		return (INT)COLLISION_FLAG::OBSTACLE;
-	case OBJECT_TYPE::DOOR:
-		return (INT)COLLISION_FLAG::DOOR;
-		break;
-	case OBJECT_TYPE::ITEM:
-		return (INT)COLLISION_FLAG::ITEM;
-		break;
-	case OBJECT_TYPE::BOMB:
-		return (INT)COLLISION_FLAG::BOMB;
-		break;
-	case OBJECT_TYPE::PLAYER:
-		return (INT)COLLISION_FLAG::PLAYER;
-		break;
-	case OBJECT_TYPE::TEAR:
-		return (INT)COLLISION_FLAG::TEAR;
-		break;
-	case OBJECT_TYPE::ENEMY:
-		return (INT)COLLISION_FLAG::ENEMY;
-		break;
-	}
-
-	return ERROR_STATE;
-}
-*/

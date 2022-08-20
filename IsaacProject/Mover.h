@@ -5,9 +5,9 @@ struct MoverInfo
 	float fSpeed = 0;
 	Vector2 vecMoveDiretion = Vector2(0,0);
 	Vector2 vecAttackDiretion = Vector2(0, 0);
-	vector<ActAniInfo> vecActAniState;
-	ANISTATE eAniAttackState = ANISTATE::IDLE;
-	ANISTATE eAniMoveState = ANISTATE::IDLE;
+	vector<SpriteInfoTag> vecActAniState;
+	ANI_STATE eAniAttackState = ANI_STATE::IDLE;
+	ANI_STATE eAniMoveState = ANI_STATE::IDLE;
 };
 
 
@@ -30,6 +30,8 @@ public:
 	//GET
 	Vector2 GetoMoveDir() const { return m_MoverInfo.vecMoveDiretion; }
 	float GetSpeed() const { return m_MoverInfo.fSpeed; }
+
 protected:
 	MoverInfo m_MoverInfo = MoverInfo{};
+	vector<CAnimation*> m_vecAniState;
 };

@@ -90,6 +90,10 @@ void CObjectMgr::FixedUpdate()
 	}
 }
 
+void CObjectMgr::LateUpdate()
+{
+}
+
 void CObjectMgr::Render(HDC hdc)
 {
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::TOOL)
@@ -149,10 +153,10 @@ void CObjectMgr::Release()
 				if ((*list_iter) != nullptr)
 				{
 					(*list_iter)->Release();
-					delete* list_iter;
+					delete *list_iter;
 					*list_iter = nullptr;
 				}
-			}	
+		}
 
 			m_Objiter->second.clear();
 		}

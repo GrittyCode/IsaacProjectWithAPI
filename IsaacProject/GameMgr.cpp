@@ -81,6 +81,10 @@ void CGameMgr::FixedUpdate()
 	CSceneMgr::GetInstance()->FixedUpdate();
 }
 
+void CGameMgr::LateUpdate()
+{
+}
+
 void CGameMgr::Render()
 {
 	CSceneMgr::GetInstance()->Render(m_hMemDC);

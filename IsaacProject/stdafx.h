@@ -24,6 +24,7 @@
 #include "IdleState.h"
 #include "TraceState.h"
 #include "DeadState.h"
+#include "Animation.h"
 
 
 //Objecct

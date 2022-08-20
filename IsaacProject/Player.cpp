@@ -19,13 +19,12 @@ void CPlayer::Init()
 	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() * 0.4f, m_Transform->GetSizeY() - 20.0f);
 	AddComponent(m_collide);
 
-
 	//MOVER INFO ADD
 	m_MoverInfo.vecAttackDiretion = Vector2(0, 0);
 	m_MoverInfo.vecMoveDiretion = Vector2(0, 0);
 	m_MoverInfo.fSpeed = 300.0f;
-	m_MoverInfo.eAniAttackState = ANISTATE::IDLE;
-	m_MoverInfo.eAniMoveState = ANISTATE::IDLE;
+	m_MoverInfo.eAniAttackState = ANI_STATE::IDLE;
+	m_MoverInfo.eAniMoveState = ANI_STATE::IDLE;
 	
 	//PLAYER INFO ADD
 	m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
@@ -39,20 +38,31 @@ void CPlayer::Init()
 	m_PlayerInfo.fAcceleration = m_MoverInfo.fSpeed / 0.1f;
 	m_PlayerInfo.bLeft = true;
 
+	//Move Animation
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32,32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 32), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 64), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 64), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32)));
 
-	//이동
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(0, 0), false));//IDLE
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(352,32),true));//UPMOVE
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(0, 32), false));//DOWNMOVE
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(352, 64), true));//LEFTMOVE
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(0, 64), false));//RIGHTMOVE
+	//Attack AniMation
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(128, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(288, 0), Vector2(32, 32), true, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
+	m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(64, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
 
-	//공격방향
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(128, 0), false));//UPATTACK
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(0, 0), false));//DOWNATTACK
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(288, 0), true));//LEFTATTACK
-	m_MoverInfo.vecActAniState.push_back(ActAniInfo(Vector2(64, 0), false));//RIGHTATTACK
-	
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(0, 0), false));//IDLE
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(352,32),true));//UPMOVE
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(0, 32), false));//DOWNMOVE
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(352, 64), true));//LEFTMOVE
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(0, 64), false));//RIGHTMOVE
+
+	////Attack AniMation
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(128, 0), false));//UPATTACK
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(0, 0), false));//DOWNATTACK
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(288, 0), true));//LEFTATTACK
+	//m_MoverInfo.vecActAniState.push_back(SpriteInfoTag(Vector2(64, 0), false));//RIGHTATTACK	
 }
 
 void CPlayer::Update()
@@ -71,25 +81,10 @@ void CPlayer::Render(HDC hdc)
 {
 	Vector2 PlayerPos = GetTransform()->GetPosition();
 
-	if (m_PlayerInfo.ePlayerState == PLAYER_STATE::IDLE)
-	{
-		Draw(0, m_MoverInfo.vecActAniState[(UINT)ANISTATE::DOWNMOVE], 0, 0, 0, 0);
-		AttackRender(hdc);
-	}
-	else if (m_PlayerInfo.ePlayerState == PLAYER_STATE::MOVE)
-	{
-		MoveRender(hdc);
-		AttackRender(hdc);
-	}
-	else if (m_PlayerInfo.ePlayerState == PLAYER_STATE::HUNT)
-	{
+	m_vecAniState[(UINT)m_MoverInfo.eAniMoveState]->Update(GetTransform()->GetPosition());
+	m_vecAniState[(UINT)m_MoverInfo.eAniAttackState]->Update(GetTransform()->GetPosition());
 
-	}
-	else if (m_PlayerInfo.ePlayerState == PLAYER_STATE::DEAD)
-	{
-
-	}
-
+	//디버그모드
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
 	{
 		static wchar_t chState[128];
@@ -119,6 +114,11 @@ void CPlayer::Render(HDC hdc)
 		SelectObject(hdc, hOldPen);
 		DeleteObject(CurPen);
 	}
+
+	//라스트 업데이트에서 해야하는데 흑흑 젠장
+	m_MoverInfo.eAniAttackState = ANI_STATE::IDLE;
+	m_MoverInfo.eAniMoveState = ANI_STATE::IDLEBody;
+	m_PlayerInfo.bAttackON = false;
 }
 
 INT CPlayer::CheckCollisionState()
@@ -127,74 +127,6 @@ INT CPlayer::CheckCollisionState()
 
 	return 0;
 }
-
-
-void CPlayer::MoveRender(HDC hdc)
-{
-	Vector2 PlayerPos = GetTransform()->GetPosition();
-	ActAniInfo MoveAniInfo = m_MoverInfo.vecActAniState[(UINT)m_MoverInfo.eAniMoveState];
-
-	//몸체
-	if (MoveAniInfo.bFilp == true)
-	{
-		ReverseDraw(m_PlayerInfo.iCurFrame, MoveAniInfo,0,0,0,0);
-	}
-	else
-	{
-		Draw(m_PlayerInfo.iCurFrame, MoveAniInfo,0,0,0,0);
-	}
-}
-
-void CPlayer::AttackRender(HDC hdc)
-{
-	Vector2 PlayerPos = GetTransform()->GetPosition();
-	ANISTATE eTemp = m_MoverInfo.eAniAttackState;
-	ActAniInfo AttackAniInfo = m_MoverInfo.vecActAniState[(UINT)m_MoverInfo.eAniAttackState];
-	m_MoverInfo.eAniAttackState = ANISTATE::DOWNATTACK;
-
-	//얼굴
-	if (m_PlayerInfo.bAttackON && m_PlayerInfo.bAttack)//공격조건 달성시
-	{
-		if (AttackAniInfo.bFilp == true)
-		{
-			ReverseDraw(0, AttackAniInfo, 0, -20, -32, 0);
-		}
-		else
-		{
-			Draw(0, AttackAniInfo, 0, -20, +32, 0);
-		}
-		m_PlayerInfo.bAttack = false;
-	}
-	else//공격하지안하고 바라보기만
-	{
-		if (m_PlayerInfo.fCurDelay != 0 && m_PlayerInfo.fCurDelay < 0.1f)
-		{
-			m_MoverInfo.eAniAttackState = eTemp;
-			if (AttackAniInfo.bFilp == true)
-			{
-				ReverseDraw(0, AttackAniInfo, 0, -20, -32, 0);
-			}
-			else
-			{
-				Draw(0, AttackAniInfo, 0, -20, +32, 0);
-	
-			}
-		}
-		else
-		{
-			if (AttackAniInfo.bFilp == true)
-			{
-				ReverseDraw(0, AttackAniInfo, 0, -20, 0, 0);
-			}
-			else
-			{
-				Draw(0, AttackAniInfo, 0, -20, 0, 0);
-			}
-		}
-	}
-	m_PlayerInfo.bAttackON = false;
-}
-
 
 void CPlayer::Move()
 {
@@ -206,90 +138,33 @@ void CPlayer::Move()
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::A) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecMoveDiretion.x = -1;
-
-		if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::A) == KEY_STATE::TAP)
-		{
-			m_PlayerInfo.iCurFrame = 0;
-			m_PlayerInfo.fFrameStay = 0;
-		}
-		else if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::A) == KEY_STATE::HOLD)
-		{
-			if (m_PlayerInfo.fFrameStay > 0.1)
-			{
-				++m_PlayerInfo.iCurFrame;
-				m_PlayerInfo.fFrameStay = 0;
-			}
-		}
-
-		m_MoverInfo.eAniMoveState = ANISTATE::LEFTMOVE;
+		m_MoverInfo.eAniMoveState = ANI_STATE::LEFTMOVE;
 	}
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::D) == KEY_STATE::TAP 
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::D) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecMoveDiretion.x = m_MoverInfo.vecMoveDiretion.x == -1.f ? 0.f : 1.f;
-		 
-		if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::D) == KEY_STATE::TAP)
-		{
-			m_PlayerInfo.iCurFrame = 0;
-			m_PlayerInfo.fFrameStay = 0;
-		}
-		else if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::D) == KEY_STATE::HOLD)
-		{
-			if (m_PlayerInfo.fFrameStay > 0.1)
-			{
-				++m_PlayerInfo.iCurFrame;
-				m_PlayerInfo.fFrameStay = 0;
-			}
-		}
-		m_MoverInfo.eAniMoveState = ANISTATE::RIGHTMOVE;
+		m_MoverInfo.eAniMoveState = ANI_STATE::RIGHTMOVE;
 	}
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::W) == KEY_STATE::TAP 
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::W) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecMoveDiretion.y = -1;
-
-		if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::W) == KEY_STATE::TAP)
-		{
-			m_PlayerInfo.iCurFrame = 0;
-			m_PlayerInfo.fFrameStay = 0;
-		}
-		else if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::W) == KEY_STATE::HOLD)
-		{
-			if (m_PlayerInfo.fFrameStay > 0.1)
-			{
-				++m_PlayerInfo.iCurFrame;
-				m_PlayerInfo.fFrameStay = 0;
-			}
-		}
-
-		m_MoverInfo.eAniMoveState = ANISTATE::UPMOVE;
+		m_MoverInfo.eAniMoveState = ANI_STATE::UPMOVE;
 	}
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::TAP 
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecMoveDiretion.y = m_MoverInfo.vecMoveDiretion.y == -1 ? 0 :  1;
-
-		if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::TAP)
-		{
-			m_PlayerInfo.iCurFrame = 0;
-			m_PlayerInfo.fFrameStay = 0;
-		}
-		else if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::HOLD)
-		{
-			if (m_PlayerInfo.fFrameStay > 0.1)
-			{
-				++m_PlayerInfo.iCurFrame;
-				m_PlayerInfo.fFrameStay = 0;
-			}
-		}
-
-		m_MoverInfo.eAniMoveState = ANISTATE::DOWNMOVE;
+		m_MoverInfo.eAniMoveState = ANI_STATE::DOWNMOVE;
 	}
 
-	//프레임을 벗어나면 초기화
-	if (m_PlayerInfo.iCurFrame > 9)
-	{ 
-		m_PlayerInfo.iCurFrame = 0;
+	if ((CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::A) == KEY_STATE::TAP)||
+		(CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::D) == KEY_STATE::TAP)||
+		(CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::W) == KEY_STATE::TAP)||
+		(CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::TAP))
+	{
+		m_PlayerInfo.fCurSpeed = 0;
 	}
 	
 	if(m_MoverInfo.vecMoveDiretion.Length() != 0.0f)
@@ -313,9 +188,6 @@ void CPlayer::Move()
 	else
 	{
 		m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
-		m_PlayerInfo.iCurFrame = 0;
-		m_PlayerInfo.fFrameStay = 0;
-		m_PlayerInfo.fCurSpeed = 0;
 	}
 
 	//이동
@@ -340,7 +212,7 @@ void CPlayer::Attack()
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::LEFT) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecAttackDiretion = Vector2(-1, 0);
-		m_MoverInfo.eAniAttackState = ANISTATE::LEFTATTACK;
+		m_MoverInfo.eAniAttackState = ANI_STATE::LEFTATTACK;
 		m_PlayerInfo.bAttackON = true;
 	}
 
@@ -348,7 +220,7 @@ void CPlayer::Attack()
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::RIGHT) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecAttackDiretion = Vector2(1, 0);
-		m_MoverInfo.eAniAttackState = ANISTATE::RIGHTATTACK;
+		m_MoverInfo.eAniAttackState = ANI_STATE::RIGHTATTACK;
 		m_PlayerInfo.bAttackON = true;
 	}
 
@@ -356,7 +228,7 @@ void CPlayer::Attack()
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::UP) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecAttackDiretion = Vector2(0, -1);
-		m_MoverInfo.eAniAttackState = ANISTATE::UPATTACK;
+		m_MoverInfo.eAniAttackState = ANI_STATE::UPATTACK;
 		m_PlayerInfo.bAttackON = true;
 	}
 
@@ -364,7 +236,7 @@ void CPlayer::Attack()
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::DOWN) == KEY_STATE::HOLD)
 	{
 		m_MoverInfo.vecAttackDiretion = Vector2(0, 1);
-		m_MoverInfo.eAniAttackState = ANISTATE::DOWNATTACK;
+		m_MoverInfo.eAniAttackState = ANI_STATE::DOWNATTACK;
 		m_PlayerInfo.bAttackON = true;
 	}
 
@@ -385,10 +257,7 @@ void CPlayer::Attack()
 			m_MoverInfo.vecAttackDiretion,
 			m_PlayerInfo.fCurSpeed / 2, m_PlayerInfo.bLeft));
 
-		CObjectMgr::GetInstance()->
-			AddObject(new CTear(m_MoverInfo.vecMoveDiretion,GetTransform()->GetPosition(), 
-								 m_MoverInfo.vecAttackDiretion,
-								 m_PlayerInfo.fCurSpeed /2, m_PlayerInfo.bLeft));
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
+		m_PlayerInfo.bAttack = false;
 	}
 }

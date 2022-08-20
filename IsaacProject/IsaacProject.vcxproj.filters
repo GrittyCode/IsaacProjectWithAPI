@@ -100,6 +100,15 @@
     <ClCompile Include="DeadState.cpp">
       <Filter>08.Module\00.State\07.Dead</Filter>
     </ClCompile>
+    <ClCompile Include="EventMgr.cpp">
+      <Filter>02.Manager\10.EventMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryMgr.cpp">
+      <Filter>02.Manager\11.FactoryMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>08.Module\01.Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -225,6 +234,15 @@
     <ClInclude Include="DeadState.h">
       <Filter>08.Module\00.State\07.Dead</Filter>
     </ClInclude>
+    <ClInclude Include="EventMgr.h">
+      <Filter>02.Manager\10.EventMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryMgr.h">
+      <Filter>02.Manager\11.FactoryMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>08.Module\01.Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="IsaacProject.ico">
@@ -313,9 +331,6 @@
     <Filter Include="05.Object\02.Background">
       <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Object\03.Obstacle">
-      <UniqueIdentifier>{a89a6558-7649-4197-97bb-2017766df0b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Object\01.Mover\03.Enemy">
       <UniqueIdentifier>{06686093-77bf-4669-adff-57c8c31f4439}</UniqueIdentifier>
     </Filter>
@@ -360,6 +375,15 @@
     </Filter>
     <Filter Include="08.Module\00.State\03.Trace">
       <UniqueIdentifier>{b6d0af0c-708f-4ce6-bed0-d95503880493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\10.EventMgr">
+      <UniqueIdentifier>{19f2d302-25fb-4775-a4d0-9220e987636a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\11.FactoryMgr">
+      <UniqueIdentifier>{a459fe96-74a3-466a-a75c-20f661324918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Module\01.Animation">
+      <UniqueIdentifier>{3d649544-9c3b-41d9-b205-80259e2e92e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
