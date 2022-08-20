@@ -13,9 +13,5 @@ public:
 	virtual void Render(HDC hdc);
 	virtual void Release();
 	virtual INT CheckCollisionState();
-
-	float m_fCurDelay;
-
-	int m_iFrame;
 };
 

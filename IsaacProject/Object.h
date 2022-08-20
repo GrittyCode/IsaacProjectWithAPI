@@ -17,10 +17,10 @@ public:
 	BOOL AddComponent(CComponent* component);
 	BOOL const IsDead() const { return !m_bAllive; }
 
-
 	//Set
 	void const SetObjState(OBJECT_STATE state) { m_ObjInfo.state = state; }
 	void  SetName(const wstring& strName) { m_strName = strName; }
+	void SetAniState(const ANI_STATE anistate) { m_AniState = anistate; }
 	//GET
 	OBJECT_TYPE const GetObjType() { return m_ObjInfo.type; }
 	OBJECT_STATE const GetObjState() { return  m_ObjInfo.state; }
@@ -51,6 +51,7 @@ protected:
 
 	map<ANI_STATE, CAnimation*> m_mapAniState;
 	map<ANI_STATE, CAnimation*>::iterator m_Aniiter;
+	ANI_STATE m_AniState;
 
 private:
 	BOOL m_bAllive = TRUE;

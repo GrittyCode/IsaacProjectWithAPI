@@ -5,7 +5,6 @@ CEventMgr* CEventMgr::m_pInstance = nullptr;
 
 void CEventMgr::Init()
 {
-
 }
 
 void CEventMgr::Update()
