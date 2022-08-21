@@ -376,8 +376,6 @@ void CToolDlg::SetObjectTemp()
 			m_stObj.type,
 			OBJECT_STATE::IDLE);
 	}
-
-
 }
 
 

@@ -11,7 +11,7 @@ void CSceneMgr::Init()
 	m_MapScene.insert({ L"Tool.scene", new CToolScene(L"Tool.scene")});
 	
 	//첫번째 씬을 시작 씬으로 지정
-	m_currentScene = (*m_MapScene.find(L"MapTest.scene")).second;
+	m_currentScene = (*m_MapScene.find(L"Test1.scene")).second;
 
 	if (m_currentScene != nullptr)
 		m_currentScene->Init();

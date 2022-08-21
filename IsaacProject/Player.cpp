@@ -16,7 +16,7 @@ void CPlayer::Init()
 	CObject::Init();
 	GetTransform()->SetPosition(Vector2(m_ObjInfo.vecWorldPos.x, m_ObjInfo.vecWorldPos.y));
 
-	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() * 0.4f, m_Transform->GetSizeY() - 20.0f);
+	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() * 0.4f, m_Transform->GetSizeY() - 15.0f);
 	AddComponent(m_collide);
 
 	//MOVER INFO ADD

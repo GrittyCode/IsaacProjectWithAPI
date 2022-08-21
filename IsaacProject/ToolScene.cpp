@@ -115,8 +115,8 @@ void CToolScene::Update()
 	else if (CToolDlg::GetInstance()->GetTileMode() == (UINT)TILE_MODE::OBJECT)
 	{
 		ObjectInfo CurInfo = CToolDlg::GetInstance()->GetObjInfo();
-		CursorPos.x -= (CursorPos.x % 64);
-		CursorPos.y -= (CursorPos.y % 64);
+		CursorPos.x -= (CursorPos.x % 26);
+		CursorPos.y -= (CursorPos.y % 26);
 		CurInfo.vecWorldPos = CursorPos;
 		CObjectMgr::GetInstance()->SetObjectFromFile(CurInfo);
 	}
