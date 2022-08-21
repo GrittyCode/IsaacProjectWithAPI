@@ -135,6 +135,8 @@ void CSceneMgr::CreateStageFromTool()
 
 BOOL CSceneMgr::LoadMap(wstring mapPath)
 {
+	INT iGoldenRoomCnt = 1;
+
 	wstring mapDirectory = (L"..//Resources//Map//");
 
 	mapDirectory += mapPath;
@@ -142,11 +144,33 @@ BOOL CSceneMgr::LoadMap(wstring mapPath)
 	wifstream ifs(mapDirectory, ios::in);
 	wstring sceneName;
 
-	for (int i = 0; i < 10; ++i)
+	int iRoomCount = 0;
+	int Startrow = rand() % 5;
+	int Startcolmn = rand() % 5;
+
+	m_createdMap.push_back(POINT{Startcolmn, Startrow});
+	//상하좌우 생성
+	int dir[4][2] = { {0,1}, {0,-1}, {-1,0},{1,0} };
+
+	auto iter = m_createdMap.begin();
+
+	//씬 10개 생성
+	while (iRoomCount < 10)
 	{
+		int select = rand() % m_createdMap.size();
+		//선택된 방은 당연히 1로 생성되었다는 것을 표시
+		m_iMiniMap[m_createdMap[select].y][m_createdMap[select].x] = 1;
+		m_createdMap.erase(iter + select);
+		iRoomCount++;
+		//현재 선택된 방에서 4방향으로 생성
+		//최대 4개 생성이 가능
+		int CreateNum = rand() % 4 + 1;
+		for (int i = 0; i < CreateNum; ++i)
+		{
+			int dirRandom = rand() % 4;
+		}
+
 	}
-
-
 	return 0;
 }
 

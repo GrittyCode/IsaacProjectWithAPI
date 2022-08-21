@@ -1,6 +1,5 @@
 #pragma once
 
-
 struct DoorInfo
 {
 	wstring strSceneame;
@@ -8,13 +7,20 @@ struct DoorInfo
 };
 
 
-class CDoor
+class CDoor : public CObject
 {
 public:
+	void Init();
+	void Update();
+	void FixedUpdate();
+	void Render(HDC hdc);
+public:
 	void ChangeSceneFromDoor();
-	CDoor();
+	virtual INT CheckCollisionState() override;
+	CDoor(ObjectInfo objInfo, DoorInfo doorInfo);
 	~CDoor();
 private:
 	DoorInfo m_doorInfo;
+
 };
 

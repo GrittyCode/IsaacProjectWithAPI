@@ -328,7 +328,7 @@ typedef struct ObjectInfoTag
 	Vector2 vecScale;
 	OBJECT_TYPE type;
 	OBJECT_STATE state;
-	
+
 }ObjectInfo;
 
 
