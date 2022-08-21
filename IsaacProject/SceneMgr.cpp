@@ -11,12 +11,12 @@ void CSceneMgr::Init()
 	m_MapScene.insert({ L"Tool.scene", new CToolScene(L"Tool.scene")});
 	
 	//첫번째 씬을 시작 씬으로 지정
-	m_currentScene = (*m_MapScene.find(L"start.scene")).second;
+	m_currentScene = (*m_MapScene.find(L"MapTest.scene")).second;
 
 	if (m_currentScene != nullptr)
 		m_currentScene->Init();
-	m_Player =
-		new CPlayer(
+
+	m_Player = new CPlayer(
 			ObjectInfo(
 				L"../Resources/Sprites/character_001_isaac.png",
 				Vector2(0, 0),
@@ -25,40 +25,37 @@ void CSceneMgr::Init()
 				Vector2(100, 100),
 				Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
 			MoverInfo());
-
 	m_Player->Init();
-
-	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(80,0),
-		Vector2(0,0),
-		Vector2(1, 624),
-		Vector2(0, 0),
-		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
-
-	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(80, 0),
-		Vector2(0, 0),
-		Vector2(936, 80),
-		Vector2(0, 0),
-		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
 	CObjectMgr::GetInstance()->SetPlayer(m_Player);
 
 	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(856, 80),
-		Vector2(0, 0),
-		Vector2(0, 624),
-		Vector2(0, 0),
-		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
+		Vector2(0,0),
+		Vector2(0,0),
+		Vector2(30, 630),
+		Vector2(60, 0),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
 	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(856, 544),
 		Vector2(0, 0),
-		Vector2(0, 624),
 		Vector2(0, 0),
-		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
+		Vector2(936, 30),
+		Vector2(0, 10),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
-	/*936
-		624*/
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(30, 624),
+		Vector2(876, 0),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(0,0),
+		Vector2(0,0),
+		Vector2(936, 30),
+		Vector2(0, 544),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
+
 }
 
 void CSceneMgr::Update()
