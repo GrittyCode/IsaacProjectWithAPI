@@ -89,28 +89,35 @@ INT CObstacle::CheckCollisionState()
 
 void CObstacle::PushMover(CObject* obj)
 {
-		Vector2 vecDir =  m_Transform->GetPosition() - obj->GetTransform()->GetPosition();
+		RECT intersectRect = {};
+		RECT aRect = m_collide->GetAABB();
+		RECT bRect = obj->GetCollide()->GetAABB();
 
-		if (abs(vecDir.x) > abs(vecDir.y))
+		IntersectRect(&intersectRect, &aRect, &bRect);
+
+		//방향 벡터 구하기
+		Vector2 vecDir = { m_Transform->GetPosition() - obj->GetTransform()->GetPosition() };
+		vecDir.Normalize();
+
+		Vector2 vecRect = { (intersectRect.right - intersectRect.left), (intersectRect.bottom - intersectRect.top) };
+
+		if (abs(vecRect.x) > abs(vecRect.y))
 		{
-			float xDiff;
-			//x축 리턴 위 대각선 이동
-			if (vecDir.x < 0.0f)
-				xDiff = GetCollide()->GetAABB().right - obj->GetCollide()->GetAABB().left;
+			float yDiff = intersectRect.bottom - intersectRect.top;
+
+			if (vecDir.y > 0)
+				obj->GetTransform()->SetPositionY(obj->GetTransform()->GetPositionY() - yDiff);
 			else
-				xDiff = GetCollide()->GetAABB().left - obj->GetCollide()->GetAABB().right;
-			obj->GetTransform()->SetPositionX(obj->GetTransform()->GetPositionX() + xDiff);
+				obj->GetTransform()->SetPositionY(obj->GetTransform()->GetPositionY() + yDiff);
 		}
 		else
 		{
-			float yDiff;
+			float xDiff = intersectRect.right - intersectRect.left;
 			//x축 리턴 위 대각선 이동
-			if (vecDir.y < 0.0f)
-				yDiff = GetCollide()->GetAABB().bottom - obj->GetCollide()->GetAABB().top;
+
+			if (vecDir.x > 0)
+				obj->GetTransform()->SetPositionX(obj->GetTransform()->GetPositionX() - xDiff);
 			else
-				yDiff = GetCollide()->GetAABB().top - obj->GetCollide()->GetAABB().bottom;
-
-
-			obj->GetTransform()->SetPositionY(obj->GetTransform()->GetPositionY() + yDiff);
+				obj->GetTransform()->SetPositionX(obj->GetTransform()->GetPositionX() + xDiff);
 		}
 }

@@ -1,10 +1,8 @@
 ..\Resources\BackGround\test.bmp,0,0,0,0,0,0,0,0,0,0,0,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,312,312,1,1,1,1
 ../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,416,312,1,1,1,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,520,312,1,1,1,1
 ../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,624,312,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,128,32,160,64,32,32,494,182,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,128,32,160,64,32,32,546,182,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,128,32,160,64,32,32,494,442,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,128,32,160,64,32,32,546,442,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,64,96,96,128,32,32,234,286,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,64,96,96,128,32,32,234,442,1,1,1,1
-../Resources/Sprites/Object/Object_Wall.png,64,96,96,128,32,32,234,130,1,1,1,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,728,312,1,1,1,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,520,416,1,1,1,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,520,208,1,1,1,1
