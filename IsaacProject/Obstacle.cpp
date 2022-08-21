@@ -15,7 +15,7 @@ CObstacle::CObstacle(ObjectInfo objinfo)
 void CObstacle::Init()
 {
 	CObject::Init();
-	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 12.0f), (m_Transform->GetSizeY() - 12.0f));
+	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 10.0f), (m_Transform->GetSizeY() - 10.0f));
 	AddComponent(m_collide);
 }
 
@@ -90,18 +90,27 @@ INT CObstacle::CheckCollisionState()
 void CObstacle::PushMover(CObject* obj)
 {
 		Vector2 vecDir =  m_Transform->GetPosition() - obj->GetTransform()->GetPosition();
+
 		if (abs(vecDir.x) > abs(vecDir.y))
 		{
+			float xDiff;
+			//x축 리턴 위 대각선 이동
 			if (vecDir.x < 0.0f)
-				obj->GetTransform()->SetPositionX(GetCollide()->GetAABB().right + (obj->GetCollide()->GetCollisionSize().x));
+				xDiff = GetCollide()->GetAABB().right - obj->GetCollide()->GetAABB().left;
 			else
-				obj->GetTransform()->SetPositionX(GetCollide()->GetAABB().left - (obj->GetCollide()->GetCollisionSize().x));
+				xDiff = GetCollide()->GetAABB().left - obj->GetCollide()->GetAABB().right;
+			obj->GetTransform()->SetPositionX(obj->GetTransform()->GetPositionX() + xDiff);
 		}
 		else
 		{
+			float yDiff;
+			//x축 리턴 위 대각선 이동
 			if (vecDir.y < 0.0f)
-				obj->GetTransform()->SetPositionY(GetCollide()->GetAABB().bottom + (obj->GetCollide()->GetCollisionSize().y));
+				yDiff = GetCollide()->GetAABB().bottom - obj->GetCollide()->GetAABB().top;
 			else
-				obj->GetTransform()->SetPositionY(GetCollide()->GetAABB().top - (obj->GetCollide()->GetCollisionSize().y));
+				yDiff = GetCollide()->GetAABB().top - obj->GetCollide()->GetAABB().bottom;
+
+
+			obj->GetTransform()->SetPositionY(obj->GetTransform()->GetPositionY() + yDiff);
 		}
 }

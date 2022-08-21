@@ -384,8 +384,8 @@ void CToolDlg::SetObjectTemp()
 
 		StartSclaseX = (m_rcCurCopyScale.left / TOOL_TILE_SIZE) * 32;
 		StartSclaseY = (m_rcCurCopyScale.top / TOOL_TILE_SIZE) * 32;
-		ScaleX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 32;
-		ScaleY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 32;
+		ScaleX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 26;
+		ScaleY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 26;
 
 		m_stObj = ObjectInfo(
 			wSrt,

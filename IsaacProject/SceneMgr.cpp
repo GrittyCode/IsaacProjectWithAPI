@@ -7,6 +7,7 @@ void CSceneMgr::Init()
 {
 	//플레이어 임시 생성
 	LoadMap(L"test.map");
+
 	m_MapScene.insert({ L"Tool.scene", new CToolScene(L"Tool.scene")});
 	
 	//첫번째 씬을 시작 씬으로 지정
