@@ -115,8 +115,8 @@ void CToolScene::Update()
 	else if (CToolDlg::GetInstance()->GetTileMode() == (UINT)TILE_MODE::OBJECT)
 	{
 		ObjectInfo CurInfo = CToolDlg::GetInstance()->GetObjInfo();
-		CursorPos.x -= (CursorPos.x % 26);
-		CursorPos.y -= (CursorPos.y % 26);
+		CursorPos.x -= (CursorPos.x % 64);
+		CursorPos.y -= (CursorPos.y % 64);
 		CurInfo.vecWorldPos = CursorPos;
 		CObjectMgr::GetInstance()->SetObjectFromFile(CurInfo);
 	}
@@ -171,9 +171,8 @@ void CToolScene::Render(HDC hdc)
 
 		g.DrawImage(image, Rect((int)CursorPos.x - stTemp.vecSize.x, (int)CursorPos.y - stTemp.vecSize.y,
 			(int)(stTemp.vecSize.x * Scale), (int)(stTemp.vecSize.y * Scale)),
-			(int)stTemp.vecStartPos.x, (int)stTemp.vecStartPos.y, (int)stTemp.vecSize.x, (int)stTemp.vecSize.y, UnitPixel, &imgAttr);
-	}
-	
+			(int)stTemp.vecStartPos.x, (int)stTemp.vecStartPos.y, (int)stTemp.vecEndPos.x, (int)stTemp.vecEndPos.y, UnitPixel, &imgAttr);
+	}	
 
 	g.ReleaseHDC(hdc);
 	delete image; 

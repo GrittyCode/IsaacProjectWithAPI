@@ -39,7 +39,7 @@ void CObstacle::Render(HDC hdc)
 			 (INT)m_ObjInfo.vecWorldPos.y - (INT)m_ObjInfo.vecSize.y,
 			 (INT)m_ObjInfo.vecSize.x * 2,
 			 (INT)m_ObjInfo.vecSize.y * 2),
-		(INT)m_ObjInfo.vecStartPos.x, (INT)m_ObjInfo.vecStartPos.y, (INT)m_ObjInfo.vecSize.x, (INT)m_ObjInfo.vecSize.y, UnitPixel);
+		(INT)m_ObjInfo.vecStartPos.x, (INT)m_ObjInfo.vecStartPos.y, (INT)m_ObjInfo.vecEndPos.x, (INT)m_ObjInfo.vecEndPos.y, UnitPixel);
 
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)

@@ -307,43 +307,23 @@ void CToolDlg::SetTileTemp()
 	int SclaseY = 0;
 
 	if (m_iTileMOde == (UINT)TILE_MODE::MAP)
+
+	if (m_iButton == 1)
 	{
-		if (m_iButton == 1)
-		{
-			wSrt = L"../Resources/Sprites/Map/01_basement.png";
-		}
-		else if (m_iButton == 2)
-		{
-			wSrt = L"../Resources/Sprites/Map/02_cellar.png";
-		}
-		else
-		{
-			wSrt = L"../Resources/Sprites/Map/0e_diceroom.png";
-		}
-		StartSclaseX = (m_rcCurCopyScale.left / TOOL_TILE_SIZE) * 26;
-		StartSclaseY = (m_rcCurCopyScale.top / TOOL_TILE_SIZE) * 26;
-		SclaseX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 26;
-		SclaseY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 26;
+		wSrt = L"../Resources/Sprites/Map/01_basement.png";
 	}
-	else if (m_iTileMOde == (UINT)TILE_MODE::OBJECT)
+	else if (m_iButton == 2)
 	{
-		if (m_iButton == 1)
-		{
-			wSrt = L"../Resources/Sprites/Object/Object_Wall.png";
-		}
-		else if (m_iButton == 2)
-		{
-			wSrt = L"../Resources/Sprites/Object/Object_door.png";
-		}
-		else
-		{
-			wSrt = L"../Resources/Sprites/Object/Object_firewoodpoop.png";
-		}
-		StartSclaseX = (m_rcCurCopyScale.left / TOOL_TILE_SIZE) * 32;
-		StartSclaseY = (m_rcCurCopyScale.top / TOOL_TILE_SIZE) * 32;
-		SclaseX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 32;
-		SclaseY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 32;
+		wSrt = L"../Resources/Sprites/Map/02_cellar.png";
 	}
+	else
+	{
+		wSrt = L"../Resources/Sprites/Map/0e_diceroom.png";
+	}
+	StartSclaseX = (m_rcCurCopyScale.left / TILE_SIZE) * 26;
+	StartSclaseY = (m_rcCurCopyScale.top / TILE_SIZE) * 26;
+	SclaseX = (m_rcCurCopyScale.right / TILE_SIZE) * 26;
+	SclaseY = (m_rcCurCopyScale.bottom / TILE_SIZE) * 26;
 
 	m_stTemp = TileInfo(wSrt,
 		Vec2(StartSclaseX, StartSclaseY),
@@ -384,14 +364,13 @@ void CToolDlg::SetObjectTemp()
 
 		StartSclaseX = (m_rcCurCopyScale.left / TOOL_TILE_SIZE) * 32;
 		StartSclaseY = (m_rcCurCopyScale.top / TOOL_TILE_SIZE) * 32;
-		ScaleX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 26;
-		ScaleY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 26;
+		ScaleX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 32;
+		ScaleY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 32;
 
-		m_stObj = ObjectInfo(
-			wSrt,
+		m_stObj = ObjectInfo(wSrt,
 			Vec2(StartSclaseX, StartSclaseY),
-			Vec2(ScaleX, ScaleY),
-			Vec2(ScaleX - StartSclaseX, ScaleY - StartSclaseY),
+			Vec2((ScaleX - StartSclaseX), (ScaleX - StartSclaseX)),
+			Vec2((ScaleX - StartSclaseX), (ScaleY - StartSclaseY)),
 			Vec2(1.0f, 1.0f),
 			Vec2(1.0f,1.0f),
 			m_stObj.type,
