@@ -2,20 +2,18 @@
 #include "Scene.h"
 
 CScene::CScene()
-	:m_Name(L""),
-	m_row(18),
-	m_colmn(12)
+	:m_Name(L"")
 {
-	
 }
 
-CScene::CScene(wstring name, UINT row, UINT colmn)
+CScene::CScene(wstring name)
 {
 	m_Name = name;
-	m_row = row;
-	m_colmn = colmn;
-
-	CSceneMgr::GetInstance()->LoadScene(m_Name);
+	
+	for (UINT i = 0; i < (int)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
+	{
+		m_MapObjectList.insert({ (OBJECT_TYPE)i, list<CObject*>() });
+	}
 }
 
 CScene::~CScene()
@@ -24,7 +22,9 @@ CScene::~CScene()
 
 void CScene::Init()
 {
-
+	//오브젝트 매니저와 연결한다.
+	CObjectMgr::GetInstance()->Init();
+	CObjectMgr::GetInstance()->ConnectScene(&m_MapObjectList);
 }
 
 void CScene::Update()
@@ -55,6 +55,10 @@ void CScene::FixedUpdate()
 	//벽 충돌 처리
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::OBSTACLE, OBJECT_TYPE::PLAYER);
 
+
+	//문 충돌 처리
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::DOOR, OBJECT_TYPE::PLAYER);
+
 	CObjectMgr::GetInstance()->FixedUpdate();
 }
 
@@ -78,5 +82,36 @@ void CScene::Release()
 
 	CObjectMgr::GetInstance()->Release();
 	
+}
+
+void CScene::AddObjectToScene(ObjectInfo objInfo)
+{
+	m_iter = m_MapObjectList.find(objInfo.type);
+
+	if (m_iter != m_MapObjectList.end())
+	{	
+		switch (objInfo.type)
+		{
+			case OBJECT_TYPE::BACKGROUND:
+			{
+				CBackground* obj = new CBackground(objInfo);
+				obj->Init();
+				(*m_iter).second.push_back(obj);
+			}
+			break;
+			case OBJECT_TYPE::OBSTACLE:
+			{
+				CObstacle* obj = new CObstacle(objInfo);
+				obj->Init();
+				(*m_iter).second.push_back(obj);
+			}
+			break;
+			case OBJECT_TYPE::ITEM:
+			{
+
+			}
+			break;
+		}
+	}
 }
 

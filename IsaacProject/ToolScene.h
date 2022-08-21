@@ -3,6 +3,7 @@
 class CToolScene : public CScene
 {
 public:
+	CToolScene(wstring path);
 	CToolScene();
 	~CToolScene();
 

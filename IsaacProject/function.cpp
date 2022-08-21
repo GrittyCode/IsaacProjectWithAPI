@@ -117,3 +117,12 @@ void DeleteObject(CObject* pObj)
 	CEventMgr::GetInstance()->AddEvent(evn);
 }
 
+void ChageScene(wstring* sceneName)
+{
+	tEvent evn = {};
+	evn.eEven = EVENT_TYPE::SCENE_CHANGE;
+	evn.lParam = (DWORD_PTR)sceneName;
+
+	CEventMgr::GetInstance()->AddEvent(evn);
+}
+

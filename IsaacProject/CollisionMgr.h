@@ -12,7 +12,7 @@ public:
 	void CheckCollision(OBJECT_TYPE target, OBJECT_TYPE des);
 	void AddCollider(OBJECT_TYPE type, CBoxCollider2D* box);
 	void DeleateCollider(CBoxCollider2D* target);
-
+	void ChanageScene(map<OBJECT_TYPE, list<CObject*>>* mapObjList);
 private:
 	BOOL IsCollision(CBoxCollider2D* target, CBoxCollider2D* des);
 	map<OBJECT_TYPE, list<CBoxCollider2D*>> m_mapBoxlist;

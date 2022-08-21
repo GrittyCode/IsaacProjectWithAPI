@@ -438,12 +438,9 @@ BOOL CToolDlg::SaveSceneFromTool(wstring sceneName)
 			}
 		}
 	}
-
 	MessageBox(g_hWnd, L"씬 저장 완료!", L"저장 완료", TRUE);
 	ofs.close();
-
 	return (INT_PTR)TRUE;
-
 }
 
 void CToolDlg::BarPosUP()

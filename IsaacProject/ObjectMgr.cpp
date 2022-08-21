@@ -5,11 +5,19 @@ CObjectMgr* CObjectMgr::m_pInstance = nullptr;
 
 void CObjectMgr::Init()
 {
-	//MAP 리스트 메모리 등록
-	for (size_t i = 0; (OBJECT_TYPE)i < OBJECT_TYPE::OBJECT_TYPE_END; ++i)
+	if (m_player == nullptr)
 	{
-		list<CObject*> temp;
-		m_MapObjectList.insert({ (OBJECT_TYPE)i, temp });
+		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 32),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(200, 200),
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),
+			DoorInfo(L"test5.scene", Vector2(800, 500))));
+	}
+	else
+	{
+
 	}
 }
 
@@ -25,15 +33,15 @@ void CObjectMgr::Update()
 
 	for (int i = 0; i < (int)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
 	{
-		m_Objiter = m_MapObjectList.find((OBJECT_TYPE)i);
+		auto objiter = m_MapObjectList->find((OBJECT_TYPE)i);
 
-		if (m_Objiter != m_MapObjectList.end())
+		if (objiter != m_MapObjectList->end())
 		{
-			for (CObject* obj : (*m_Objiter).second)
+			for (CObject* obj : (*objiter).second)
 			{
 				if (!obj->IsDead())
 				{
-				obj->Update();
+					obj->Update();
 				}
 			}
 		}
@@ -52,9 +60,9 @@ void CObjectMgr::FixedUpdate()
 
 	for (int i = 0; i < (int)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
 	{
-		m_Objiter = m_MapObjectList.find((OBJECT_TYPE)i);
+		m_Objiter = m_MapObjectList->find((OBJECT_TYPE)i);
 
-		if (m_Objiter != m_MapObjectList.end())
+		if (m_Objiter != m_MapObjectList->end())
 		{
 			for (CObject* obj : (*m_Objiter).second)
 			{
@@ -68,13 +76,16 @@ void CObjectMgr::LateUpdate()
 {
 }
 
+
 void CObjectMgr::Render(HDC hdc)
 {
+
 	for (int i = 0; i < (int)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
 	{
-		m_Objiter = m_MapObjectList.find((OBJECT_TYPE)i);
+		CScene* scene = CSceneMgr::GetInstance()->GetCurScene();
+		m_Objiter = m_MapObjectList->find((OBJECT_TYPE)i);
 
-		if (m_Objiter != m_MapObjectList.end())
+		if (m_Objiter != m_MapObjectList->end())
 		{
 			auto iter = m_Objiter->second.begin();
 
@@ -115,11 +126,11 @@ void CObjectMgr::Release()
 
 	m_vecTile.clear();
 
-	if (!m_MapObjectList.empty())
+	if (!m_MapObjectList->empty())
 	{
 		for (int i = 0; i < (int)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
 		{
-			m_Objiter = m_MapObjectList.find((OBJECT_TYPE)i);
+			m_Objiter = m_MapObjectList->find((OBJECT_TYPE)i);
 
 			auto list_iter = (*m_Objiter).second.begin();
 
@@ -136,22 +147,55 @@ void CObjectMgr::Release()
 			m_Objiter->second.clear();
 		}
 
-		m_MapObjectList.clear();
+		m_MapObjectList->clear();
 	}
 }
 
-BOOL CObjectMgr::AddTile(CTile* tile)
+
+
+void CObjectMgr::ErasePlayer()
 {
-	tile->Init();
-	m_vecTile.push_back(tile);
-	return TRUE;
+
+	if (m_MapObjectList != nullptr)
+	{
+		m_Objiter = m_MapObjectList->find(OBJECT_TYPE::PLAYER);
+
+		if (m_Objiter != m_MapObjectList->end())
+		{
+			(*m_Objiter).second.pop_front(); //PLAYER 빼주기
+		}
+	}
 }
+
+void CObjectMgr::SetPlayer(CPlayer* player)
+{
+	if (player != nullptr)
+	{
+		m_player = player;
+
+		m_Objiter = m_MapObjectList->find(OBJECT_TYPE::PLAYER);
+
+		if (m_Objiter != m_MapObjectList->end())
+		{
+			(*m_Objiter).second.push_back(player); //PLAYER 넣어주기
+		}
+	}
+}
+
+void CObjectMgr::ConnectScene(map<OBJECT_TYPE, list<CObject*>>* temp)
+{
+	ErasePlayer();
+	m_MapObjectList = temp;
+	SetPlayer(m_player);
+	CCollisionMgr::GetInstance()->ChanageScene(m_MapObjectList);
+}
+
 
 BOOL CObjectMgr::AddObject(CObject* object)
 {
-	m_Objiter = m_MapObjectList.find(object->GetObjType());
+	m_Objiter = m_MapObjectList->find(object->GetObjType());
 
-	if (m_Objiter != m_MapObjectList.end() && object != nullptr)
+	if (m_Objiter != m_MapObjectList->end() && object != nullptr)
 	{	
 		if (object->GetObjType() == OBJECT_TYPE::PLAYER)
 		{
@@ -171,10 +215,10 @@ BOOL CObjectMgr::AddObject(CObject* object)
 
 BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 {
-	m_Objiter = m_MapObjectList.find(info.type);
+	m_Objiter = m_MapObjectList->find(info.type);
 
 
-	if (m_Objiter != m_MapObjectList.end())
+	if (m_Objiter != m_MapObjectList->end())
 	{
 		switch (info.type)
 		{
@@ -183,8 +227,6 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 			break;
 		case OBJECT_TYPE::OBSTACLE:
 			CreateObject(new CObstacle(info));
-			break;
-		case OBJECT_TYPE::DOOR:
 			break;
 		case OBJECT_TYPE::ITEM:
 			break;
@@ -203,4 +245,12 @@ BOOL CObjectMgr::SetObjectFromFile(ObjectInfo info)
 		return TRUE;
 	}
 	return FALSE;
+}
+
+
+BOOL CObjectMgr::AddTile(CTile* tile)
+{
+	tile->Init();
+	m_vecTile.push_back(tile);
+	return TRUE;
 }

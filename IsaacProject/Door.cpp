@@ -58,11 +58,15 @@ void CDoor::Render(HDC hdc)
 
 void CDoor::ChangeSceneFromDoor()
 {
-
-	
+	ChageScene(&m_doorInfo.strSceneame);
 }
 
 INT CDoor::CheckCollisionState()
 {
-	return 0;
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
+	{
+		m_collide->OffCollisionFlag();
+		ChangeSceneFromDoor();
+	}
+	return TRUE;
 }

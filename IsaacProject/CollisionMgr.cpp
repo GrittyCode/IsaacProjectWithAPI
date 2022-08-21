@@ -66,6 +66,7 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 
 void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 {
+
 	m_iter = m_mapBoxlist.find(type);
 	if (m_iter != m_mapBoxlist.end())
 	{
@@ -89,6 +90,27 @@ void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
 			else
 			{
 				++listIter;
+			}
+		}
+	}
+}
+
+void CCollisionMgr::ChanageScene(map<OBJECT_TYPE, list<CObject*>>* mapObjList)
+{
+	m_mapBoxlist.clear();
+	Init();
+
+	auto iter = mapObjList->begin();
+
+	for (; iter != mapObjList->end(); ++iter)
+	{
+		auto listiter = (*iter).second.begin();
+		for (; listiter != (*iter).second.end(); ++listiter)
+		{
+			if ((*listiter)->GetCollide() != nullptr)
+			{
+				auto boxiter = m_mapBoxlist.find((*listiter)->GetObjType());
+				(*boxiter).second.push_back((*listiter)->GetCollide());
 			}
 		}
 	}

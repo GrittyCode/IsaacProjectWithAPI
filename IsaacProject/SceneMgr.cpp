@@ -5,32 +5,31 @@ CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
 void CSceneMgr::Init()
 {
-	//백그라운드 임시 생성	
-	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
-	//플레이어 등록하기 위한 꼼수
-	CreateObject(new CPlayer(
-		ObjectInfo(
-			L"../Resources/Sprites/character_001_isaac.png",
-			Vector2(0, 0),
-			Vector2(32, 32),
-			Vector2(32, 32),
-			Vector2(100, 100),
-			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
-			MoverInfo()));
-
-	CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
-		Vector2(0, 32),
-		Vector2(32, 32),
-		Vector2(32, 32),
-		Vector2(200, 200),
-		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE),
-		EnemyInfo(4,1,0,50.0f,0)));
-
-
-	m_currentScene = new CScene(L"test1.scene",ROW,COLMN);
+	//플레이어 임시 생성
+	LoadMap(L"test.map");
+	m_MapScene.insert({ L"Tool.scene", new CToolScene(L"Tool.scene")});
+	
+	//첫번째 씬을 시작 씬으로 지정
+	m_currentScene = (*m_MapScene.find(L"start.scene")).second;
 
 	if (m_currentScene != nullptr)
 		m_currentScene->Init();
+
+	m_Player =
+		new CPlayer(
+			ObjectInfo(
+				L"../Resources/Sprites/character_001_isaac.png",
+				Vector2(0, 0),
+				Vector2(32, 32),
+				Vector2(32, 32),
+				Vector2(100, 100),
+				Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
+			MoverInfo());
+
+	m_Player->Init();
+
+	CObjectMgr::GetInstance()->SetPlayer(m_Player);
+
 }
 
 void CSceneMgr::Update()
@@ -55,23 +54,26 @@ void CSceneMgr::Release()
 {
 	if (m_currentScene != nullptr)
 		m_currentScene->Release();
-
-	delete m_currentScene;
-	m_currentScene = nullptr;
 }
 
-void CSceneMgr::ChangeScene(INT index)
+
+void CSceneMgr::ChangeScene(wstring scenePath)
 {
-	Release();
+	auto iter = m_MapScene.find(scenePath);
+
+	if (iter != m_MapScene.end())
+	{
+		//등록되어있는 씬으로 옮긴다.
+		m_currentScene = (*iter).second;
+		m_currentScene->Init();
+	}
 }
 
 void CSceneMgr::ChangeMode(GAME_MODE mode)
 {
 	if (mode == GAME_MODE::GAME)
 	{
-		Release();
-		m_currentScene = new CScene(L"test.Scene", ROW, COLMN);
-		m_currentScene->Init();
+		ChangeScene(L"start.scene");
 
 		if (g_ToolDig != nullptr)
 		{
@@ -80,10 +82,7 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 	}
 	else if (mode == GAME_MODE::TOOL)
 	{
-		Release();
-		CObjectMgr::GetInstance()->Init();
-		m_currentScene = new CToolScene();
-		m_currentScene->Init();
+		ChangeScene(L"Tool.scene");
 	}
 	else//디버깅모드
 	{
@@ -91,71 +90,46 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 	}
 }
 
-void CSceneMgr::CreateStageFromTool()
-{
-	for (int i = 0; i < COLMN; ++i)
-	{
-		for (int j = 0; j < ROW; ++j)
-		{
-			CObjectMgr::GetInstance()->AddTile(new CTile(TileInfo(), TilePos(j, i)));
-		}
-	}
-}
-
 BOOL CSceneMgr::LoadMap(wstring mapPath)
 {
-	INT iGoldenRoomCnt = 1;
-
 	wstring mapDirectory = (L"..//Resources//Map//");
 
 	mapDirectory += mapPath;
 
-	wifstream ifs(mapDirectory, ios::in);
-	wstring sceneName;
+	wifstream wifs(mapDirectory, ios::in);
 
-	int iRoomCount = 0;
-	int Startrow = rand() % 5;
-	int Startcolmn = rand() % 5;
+	wchar_t strTemp[255];
 
-	m_createdMap.push_back(POINT{Startcolmn, Startrow});
-	//상하좌우 생성
-	int dir[4][2] = { {0,1}, {0,-1}, {-1,0},{1,0} };
+	//씬 개수 얻어오기
+	wifs.getline(strTemp, 255);
+	int iSceneCount = _wtoi(strTemp);
 
-	auto iter = m_createdMap.begin();
 
-	//씬 10개 생성
-	while (iRoomCount < 10)
+
+	for (int i = 0; i < iSceneCount; ++i)
 	{
-		int select = rand() % m_createdMap.size();
-		//선택된 방은 당연히 1로 생성되었다는 것을 표시
-		m_iMiniMap[m_createdMap[select].y][m_createdMap[select].x] = 1;
-		m_createdMap.erase(iter + select);
-		iRoomCount++;
-		//현재 선택된 방에서 4방향으로 생성
-		//최대 4개 생성이 가능
-		int CreateNum = rand() % 4 + 1;
-		for (int i = 0; i < CreateNum; ++i)
-		{
-			int dirRandom = rand() % 4;
-		}
-
+		wifs.getline(strTemp, 255);
+		CScene* Scene = new CScene(strTemp); //이름 지정
+		SetSceneFromSceneSave(Scene);
+		m_MapScene.insert({ *Scene->GetName(), Scene});
 	}
+		
+	
 	return 0;
 }
 
-BOOL CSceneMgr::LoadScene(wstring scenePath)
+BOOL CSceneMgr::SetSceneFromSceneSave(CScene* desScene)
 {
-	Release();
 
 #ifdef DEBUG
 	wcout << OriginDirectory << endl;
 #endif // DEBUG
 
-	wstring mapDirectory = (L"..//Resources//Scene//");
+	wstring SceneDirectory = (L"..//Resources//Scene//");
 
-	mapDirectory += scenePath;
+	SceneDirectory += *desScene->GetName();
 
-	wifstream ifs(mapDirectory, ios::in);
+	wifstream ifs(SceneDirectory, ios::in);
 
 	//오브젝트 정보를 받을 구조체
 	ObjectInfo objInfo;
@@ -232,8 +206,9 @@ BOOL CSceneMgr::LoadScene(wstring scenePath)
 				tempStr.clear();
 			}
 
-			//파일에 등록된 오브젝트들을 오브젝트 매니저에 세팅한다.
-			CObjectMgr::GetInstance()->SetObjectFromFile(objInfo);
+			//파일에 등록된 오브젝트들을 각 씬들에 배치한다.
+
+			desScene->AddObjectToScene(objInfo);
 		}
 	}
 	else //파일로드 실패
@@ -249,8 +224,56 @@ wstring CSceneMgr::GetCurSceneName()
 {
 	if (m_currentScene != nullptr)
 	{
-		return m_currentScene->GetName();
+		return *m_currentScene->GetName();
 	}
-
 	return L"";
 }
+
+
+
+void CSceneMgr::CreateStageFromTool()
+{
+	for (int i = 0; i < COLMN; ++i)
+	{
+		for (int j = 0; j < ROW; ++j)
+		{
+			CObjectMgr::GetInstance()->AddTile(new CTile(TileInfo(), TilePos(j, i)));
+		}
+	}
+}
+
+
+
+
+
+/*
+	//백그라운드 임시 생성
+	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
+	//플레이어 등록하기 위한 꼼수
+	CreateObject(new CPlayer(
+		ObjectInfo(
+			L"../Resources/Sprites/character_001_isaac.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(100, 100),
+			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
+			MoverInfo()));
+
+	CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+		Vector2(0, 32),
+		Vector2(32, 32),
+		Vector2(32, 32),
+		Vector2(200, 200),
+		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE),
+		EnemyInfo(4,1,0,50.0f,0)));
+
+
+	CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+		Vector2(0, 32),
+		Vector2(32, 32),
+		Vector2(32, 32),
+		Vector2(200, 200),
+		Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),
+		DoorInfo(L"test1.scene", Vector2(500,500))));
+	*/

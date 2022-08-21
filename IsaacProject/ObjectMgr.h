@@ -2,6 +2,7 @@
 class CObjectMgr
 {
 	SINGLETONE(CObjectMgr)
+
 public:
 	BOOL SetObjectFromFile(ObjectInfo info);
 	BOOL AddObject(CObject* object);
@@ -13,14 +14,17 @@ public:
 	void Render(HDC hdc);
 	void Release();
 
-
+	//SET
+	void ConnectScene(map<OBJECT_TYPE, list<CObject*>>* temp);
+	void SetPlayer(CPlayer* player);
+	void ErasePlayer();
 	//GET
-	map<OBJECT_TYPE, list<CObject*>>* GetMapObjectList()  { return &m_MapObjectList; };
+	map<OBJECT_TYPE, list<CObject*>>* GetMapObjectList()  { return m_MapObjectList; };
 	vector<CTile*>* GetMapTileVector() { return &m_vecTile; };
-	CPlayer* GetPlayer() const { return m_player; };
+	CPlayer* GetPlayer() { return m_player; };
 
 private:
-	map<OBJECT_TYPE, list<CObject*>> m_MapObjectList;
+	map<OBJECT_TYPE, list<CObject*>>* m_MapObjectList = nullptr;
 	map<OBJECT_TYPE, list<CObject*>>::iterator m_Objiter;
 	CPlayer* m_player = nullptr;
 

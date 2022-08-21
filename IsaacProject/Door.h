@@ -2,6 +2,12 @@
 
 struct DoorInfo
 {
+	DoorInfo(wstring sceneName, Vector2 Pos)
+		:strSceneame(sceneName),
+		 vecPlayerPos(Pos)
+	{
+
+	}
 	wstring strSceneame;
 	Vector2 vecPlayerPos;
 };

@@ -1,0 +1,5 @@
+..\Resources\BackGround\test.bmp,0,0,0,0,0,0,0,0,0,0,0,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,156,156,1,1,1,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,364,156,1,1,1,1
+../Resources/Sprites/Object/Object_Wall.png,128,96,192,160,64,64,520,156,1,1,1,1
+

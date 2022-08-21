@@ -6,9 +6,18 @@
 
 INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
-CToolScene::CToolScene()
-	:m_rcTool(RECT())
+CToolScene::CToolScene(wstring path)
+	:CScene(path),
+	 m_rcTool(RECT())
 {
+
+}
+
+CToolScene::CToolScene()
+	:CScene(L"Tool.Scene"),
+     m_rcTool(RECT())
+{
+	
 }
 
 CToolScene::~CToolScene()
@@ -17,6 +26,8 @@ CToolScene::~CToolScene()
 
 void CToolScene::Init()
 {
+	CScene::Init();
+	CObjectMgr::GetInstance()->ErasePlayer();
 	//Tool의 window크기 설정
 	RECT rc = { 0,0,1000,1000 };
 
@@ -32,6 +43,8 @@ void CToolScene::Init()
 	ShowWindow(g_ToolDig, SW_SHOW);
 
 	CSceneMgr::GetInstance()->CreateStageFromTool();
+
+	
 }
 
 void CToolScene::Update()
@@ -115,8 +128,9 @@ void CToolScene::FixedUpdate()
 
 void CToolScene::Render(HDC hdc)
 {
+	
+	CScene::Render(hdc);
 
-	CObjectMgr::GetInstance()->Render(hdc);
 	POINT CursorPos;
 
 	GetCursorPos(&CursorPos);
@@ -263,8 +277,10 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 			}
 
 			SetCurrentDirectory(OriginDirectory);
-
+			CScene* curScnee = CSceneMgr::GetInstance()->GetCurScene();
 			CreateObject(new CBackground(ObjectInfo(Directory,OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
+			int i = 0;
+
 
 		}
 		break;
