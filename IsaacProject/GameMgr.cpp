@@ -70,7 +70,6 @@ void CGameMgr::Update()
 
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
-
 }
 
 void CGameMgr::FixedUpdate()
@@ -104,4 +103,5 @@ void CGameMgr::Release()
 	CTimeMgr::DestroyInst();
 	CImageMgr::DestroyInst();
 	CCameraMgr::DestroyInst();
+	CEffectMgr::DestroyInst();
 }

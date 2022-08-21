@@ -14,6 +14,10 @@ CBackground::CBackground(ObjectInfo objInfo)
 void CBackground::Init()
 {
 	CObject::Init();
+	GetTransform()->SetPosition(Vector2(m_ObjInfo.vecWorldPos.x, m_ObjInfo.vecWorldPos.y));
+
+	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() - 10.0f, m_Transform->GetSizeY() - 20.0f);
+	AddComponent(m_collide);
 }
 
 void CBackground::Update()

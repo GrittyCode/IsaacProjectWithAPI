@@ -1,6 +1,7 @@
 #pragma once
 
 class CObject;
+class CAnimation;
 class CScene;
 
 Vector2 VectorSum(Vector2 movevec, Vector2 attackvec, float playerspeed, float tearsspeed);
@@ -15,5 +16,9 @@ BOOL Save(HDC hdc, HBITMAP hBitmap, const wchar_t* name, uint16_t BitsPerPixel =
 float DistanceMeasure(Vector2 sourse, Vector2 taget);
 
 void CreateObject(CObject* pObj);
+void DeleteObject(CObject* pObj);
+
+void CreateEffect(CAnimation* pObj);
+void DeleteEffect(CAnimation* pObj);
 void DeleteObject(CObject* pObj);
 void ChageScene(wstring* sceneName);

@@ -33,6 +33,15 @@ void CSprite::Render(HDC hdc)
 {
 }
 
+void CSprite::Release()
+{
+	delete m_sprite;
+	delete m_SpriteFileY;
+
+	m_sprite = nullptr;
+	m_SpriteFileY = nullptr;
+}
+
 void CSprite::SetPath(wstring path)
 {
 	m_path = path;

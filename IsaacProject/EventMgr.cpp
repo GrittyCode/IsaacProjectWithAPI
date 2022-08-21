@@ -47,7 +47,22 @@ void CEventMgr::Excute(const tEvent& eve)
 		m_vecDead.push_back(pDeadObj);
 	}
 		break;
-	case EVENT_TYPE::SCENE_CHANGE:
+	//case EVENT_TYPE::SCENE_CHANGE:
+	//{
+	//	//lParam SceneName
+	//	SceneInfo* changeScene = (SceneInfo*)eve.lParam;
+	//	CSceneMgr::GetInstance()->ChangeScene(changeScene);
+	//}
+	//	break;
+	case EVENT_TYPE::CREATE_EFFECT:
+	{
+		//lparam : OBJECT Address
+		CAnimation* pObj = (CAnimation*)eve.lParam;
+
+		CEffectMgr::GetInstance()->AddEffecter(pObj);
+	}
+		break;
+	case EVENT_TYPE::DELETE_EFFECT:
 	{
 		wstring* name = (wstring*)(eve.lParam);
 		auto iter = CSceneMgr::GetInstance()->GetMapScene()->find(*name);

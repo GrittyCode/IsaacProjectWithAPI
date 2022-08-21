@@ -3,9 +3,11 @@ class CAnimation
 {
 public:
 	CAnimation(SpriteInfo sprite,int framelimit,float framedelay, Vector2 Size, ANI_STATE state);
+	CAnimation(SpriteInfo sprite, int framelimit, float framedelay, Vector2 Size, ANI_STATE state, Vector2 worldpos);
 	~CAnimation();
 
 public:
+	void Update();
 	void Update(Vector2 pos);
 	void Render();
 	void ResetDelay();

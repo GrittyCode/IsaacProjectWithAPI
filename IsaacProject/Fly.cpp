@@ -22,14 +22,17 @@ void CFly::Init()
 	m_pAI->AddState(new CIdleState);
 	m_pAI->AddState(new CTraceState);
 	m_pAI->AddState(new DeadState);
+	m_pAI->AddState(new CHuntstate);
 	m_pAI->ChangeState(AI_STATE::IDLE);
 
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)),
 		3, 0.03f, Vector2(32, 32), ANI_STATE::IDLE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)),
 		3, 0.03f, Vector2(32, 32), ANI_STATE::MOVE));
-	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0,64), Vector2(64, 64), false, Vector2(0, 0)),
-		4, 0.03f, Vector2(32, 32), ANI_STATE::DEAD));
+	/*AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0,64), Vector2(64, 64), false, Vector2(0, 0)),
+		4, 0.3f, Vector2(32, 32), ANI_STATE::DEAD));
+	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 64), Vector2(64, 64), false, Vector2(0, 0)),
+		4, 0.03f, Vector2(32, 32), ANI_STATE::HUNT, false));*/
 
 	m_AniState = ANI_STATE::IDLE;
 	//m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32, 32)));

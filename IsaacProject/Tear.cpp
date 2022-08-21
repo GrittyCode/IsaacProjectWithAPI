@@ -56,7 +56,7 @@ void CTear::Update()
 	{
 		m_fCurDeley += DELTA;
 
-		if (m_fCurDeley > 0.01f)
+		if (m_fCurDeley > 0.02f)
 		{
 			++m_iCurPrame;
 			m_fCurDeley = 0;
@@ -68,8 +68,8 @@ void CTear::Update()
 		if (!IsDead())
 		{
 			DeleteObject(this);
+		}
 	}
-}
 }
 
 void CTear::FixedUpdate()
@@ -93,7 +93,6 @@ void CTear::Render(HDC hdc)
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
 	{
-
 		HBRUSH hOldBrush;
 		//Ææ¼³Á¤
 		HPEN hOldPen;
@@ -131,7 +130,16 @@ INT CTear::CheckCollisionState()
 {
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE)
 	{
-		DeleteObject(this);
+		m_bGravity = true;
+		m_sprite->SetPath(L"../Resources/Sprites/tear.png");
+		m_sprite->Init();
+	}
+
+	if (m_collide->GetFlag() & (INT)COLLISION_FLAG::ENEMY)
+	{
+		m_bGravity = true;
+		m_sprite->SetPath(L"../Resources/Sprites/tear.png");
+		m_sprite->Init();
 	}
     return 0;
 }
