@@ -7,6 +7,7 @@ void CSceneMgr::Init()
 {
 	//플레이어 임시 생성
 	LoadMap(L"test.map");
+
 	m_MapScene.insert({ L"Tool.scene", new CToolScene(L"Tool.scene")});
 	
 	//첫번째 씬을 시작 씬으로 지정
@@ -14,7 +15,6 @@ void CSceneMgr::Init()
 
 	if (m_currentScene != nullptr)
 		m_currentScene->Init();
-
 	m_Player =
 		new CPlayer(
 			ObjectInfo(
@@ -59,11 +59,6 @@ void CSceneMgr::Init()
 
 	/*936
 		624*/
-
-	m_currentScene = new CScene(L"test1.scene",ROW,COLMN);
-
-	if (m_currentScene != nullptr)
-		m_currentScene->Init();
 }
 
 void CSceneMgr::Update()

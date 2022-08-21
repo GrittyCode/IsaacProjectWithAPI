@@ -34,8 +34,7 @@ void CEventMgr::Excute(const tEvent& eve)
 		//lparam : OBJECT Address
 		CObject* pObj = (CObject*)eve.lParam;
 		CObjectMgr::GetInstance()->AddObject(pObj);
-	}
-		
+	}		
 		break;
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
@@ -47,13 +46,6 @@ void CEventMgr::Excute(const tEvent& eve)
 		m_vecDead.push_back(pDeadObj);
 	}
 		break;
-	//case EVENT_TYPE::SCENE_CHANGE:
-	//{
-	//	//lParam SceneName
-	//	SceneInfo* changeScene = (SceneInfo*)eve.lParam;
-	//	CSceneMgr::GetInstance()->ChangeScene(changeScene);
-	//}
-	//	break;
 	case EVENT_TYPE::CREATE_EFFECT:
 	{
 		//lparam : OBJECT Address
@@ -64,6 +56,11 @@ void CEventMgr::Excute(const tEvent& eve)
 		break;
 	case EVENT_TYPE::DELETE_EFFECT:
 	{
+		//사라짐?
+	}
+		break;
+	case EVENT_TYPE::SCENE_CHANGE:
+	{
 		wstring* name = (wstring*)(eve.lParam);
 		auto iter = CSceneMgr::GetInstance()->GetMapScene()->find(*name);
 
@@ -72,10 +69,8 @@ void CEventMgr::Excute(const tEvent& eve)
 			//등록되어있는 씬으로 옮긴다.
 			CSceneMgr::GetInstance()->ChangeScene(*name);
 		}
-		//lParam SceneName
-		//SceneInfo* changeScene = (SceneInfo*)eve.lParam;
-		//CSceneMgr::GetInstance()->ChangeScene();
 	}
 		break;
+
 	}
 }
