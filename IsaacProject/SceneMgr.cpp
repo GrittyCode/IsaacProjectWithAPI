@@ -26,6 +26,36 @@ void CSceneMgr::Init()
 		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE),
 		EnemyInfo(4,1,0,50.0f,0)));
 
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(80,0),
+		Vector2(0,0),
+		Vector2(1, 624),
+		Vector2(0, 0),
+		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(80, 0),
+		Vector2(0, 0),
+		Vector2(936, 80),
+		Vector2(0, 0),
+		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(856, 80),
+		Vector2(0, 0),
+		Vector2(0, 624),
+		Vector2(0, 0),
+		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(856, 544),
+		Vector2(0, 0),
+		Vector2(0, 624),
+		Vector2(0, 0),
+		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE)));
+
+	/*936
+		624*/
 
 	m_currentScene = new CScene(L"test1.scene",ROW,COLMN);
 
@@ -49,6 +79,7 @@ void CSceneMgr::Render(HDC hdc)
 {
 	if(m_currentScene != nullptr)
 		m_currentScene->Render(hdc);
+	CEffectMgr::GetInstance()->Update();
 }
 
 void CSceneMgr::Release()

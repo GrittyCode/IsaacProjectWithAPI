@@ -43,8 +43,8 @@ void CTraceState::Update()
 		//	m_vecDead.push_back(pDeadObj);
 		//}
 
-	if (Host->GetCollide()->GetFlag() & (UINT)COLLISION_FLAG::PLAYER_TEAR)
+	/*if (Host->GetCollide()->GetFlag() & (UINT)COLLISION_FLAG::PLAYER_TEAR)
 	{
-		GetAI()->ChangeState(AI_STATE::HUNT);
-	}
+		GetAI()->ChangeState(AI_STATE::DEAD);
+	}*/
 }

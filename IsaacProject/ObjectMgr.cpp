@@ -131,7 +131,7 @@ void CObjectMgr::Release()
 					delete *list_iter;
 					*list_iter = nullptr;
 				}
-		}
+			}
 
 			m_Objiter->second.clear();
 		}

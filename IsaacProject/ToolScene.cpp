@@ -160,6 +160,7 @@ void CToolScene::Render(HDC hdc)
 			(int)stTemp.vecStartPos.x, (int)stTemp.vecStartPos.y, (int)stTemp.vecSize.x, (int)stTemp.vecSize.y, UnitPixel, &imgAttr);
 	}
 	
+
 	g.ReleaseHDC(hdc);
 	delete image; 
 }

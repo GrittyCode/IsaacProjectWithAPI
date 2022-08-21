@@ -117,3 +117,20 @@ void DeleteObject(CObject* pObj)
 	CEventMgr::GetInstance()->AddEvent(evn);
 }
 
+void CreateEffect(CAnimation* pObj)
+{
+	tEvent evn = {};
+	evn.eEven = EVENT_TYPE::CREATE_EFFECT;
+	evn.lParam = (DWORD_PTR)pObj;
+
+	CEventMgr::GetInstance()->AddEvent(evn);
+}
+
+void DeleteEffect(CAnimation* pObj)
+{
+	tEvent evn = {};
+	evn.eEven = EVENT_TYPE::DELETE_EFFECT;
+	evn.lParam = (DWORD_PTR)pObj;
+
+	CEventMgr::GetInstance()->AddEvent(evn);
+}

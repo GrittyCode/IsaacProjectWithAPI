@@ -20,8 +20,51 @@ CAnimation::CAnimation(SpriteInfo sprite, int framelimit, float framedelay, Vect
 	}
 }
 
+CAnimation::CAnimation(SpriteInfo sprite, int framelimit, float framedelay, Vector2 Size, ANI_STATE state, Vector2 worldpos)
+	:m_fCurDelay(0),
+	m_fFrameDelay(framedelay),
+	m_iCurFrame(0),
+	m_iFrameLimit(framelimit),
+	m_tSpriteinfo(sprite),
+	m_vecScreenSize(Size),
+	m_vecWorldpos(worldpos),
+	m_eAniState(state)
+{
+	m_image = Image::FromFile(sprite.wPath.c_str());
+
+	if (m_tSpriteinfo.bFilp)
+	{
+		m_image->RotateFlip(Rotate180FlipY);
+	}
+}
+
 CAnimation::~CAnimation()
 {
+	delete m_image;
+	m_image = nullptr;
+}
+
+void CAnimation::Update()
+{
+	if (m_fFrameDelay != 0)
+	{
+		m_fCurDelay += DELTA;
+
+		if (m_fCurDelay > m_fFrameDelay)
+		{
+			++m_iCurFrame;
+			cout << m_iCurFrame << endl;
+			m_fCurDelay = 0;
+		}
+
+		if (m_iCurFrame == m_iFrameLimit)
+		{
+			tEvent DeletEffect = { EVENT_TYPE::DELETE_EFFECT, (DWORD_PTR)this};
+			CEventMgr::GetInstance()->AddEvent(DeletEffect);
+		}
+	}
+
+	Render();
 }
 
 void CAnimation::Update(Vector2 pos)
@@ -64,11 +107,11 @@ void CAnimation::Render()
 	else
 	{
 		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_image,
-			Rect((UINT)m_vecWorldpos.x - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.x,
-				(UINT)m_vecWorldpos.y - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.y,
-				(UINT)m_vecScreenSize.x * Scale,
-				(UINT)m_vecScreenSize.y * Scale),
-				(UINT)m_tSpriteinfo.vecStartPos.x - (m_iCurFrame * m_tSpriteinfo.vecSpriteSize.x),
+			Rect((UINT)(m_vecWorldpos.x - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.x),
+				(UINT)(m_vecWorldpos.y - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.y),
+				(UINT)(m_vecScreenSize.x * Scale),
+				(UINT)(m_vecScreenSize.y * Scale)),
+				(UINT)(m_tSpriteinfo.vecStartPos.x - (m_iCurFrame * m_tSpriteinfo.vecSpriteSize.x)),
 				(UINT)m_tSpriteinfo.vecStartPos.y,
 				(UINT)m_tSpriteinfo.vecSpriteSize.x,
 				(UINT)m_tSpriteinfo.vecSpriteSize.y, UnitPixel);

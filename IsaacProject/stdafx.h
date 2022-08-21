@@ -59,6 +59,7 @@
 #include "FrameMgr.h"
 #include "EventMgr.h"
 #include "FactoryMgr.h"
+#include "EffectMgr.h"
 
 //Dig
 #include "ToolDlg.h"

@@ -9,7 +9,7 @@ public:
 	virtual void Update() override;
 	virtual void FixedUpdate() override;
 	virtual void Render(HDC hdc) override;
-	virtual void Release() {};
+	virtual void Release();
 
 	Image* const GetSprite() { return m_sprite; }
 	Image* const GetFilpSprite() { return m_SpriteFileY; }

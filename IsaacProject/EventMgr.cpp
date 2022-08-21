@@ -54,6 +54,23 @@ void CEventMgr::Excute(const tEvent& eve)
 	//	CSceneMgr::GetInstance()->ChangeScene(changeScene);
 	//}
 	//	break;
-	break;
+	case EVENT_TYPE::CREATE_EFFECT:
+	{
+		//lparam : OBJECT Address
+		CAnimation* pObj = (CAnimation*)eve.lParam;
+
+		CEffectMgr::GetInstance()->AddEffecter(pObj);
+	}
+		break;
+	case EVENT_TYPE::DELETE_EFFECT:
+	{
+		//lParam OBJECT Address
+		//Object를 Dead상태로 변경
+		//삭제예정 오브젝트들을 모아둔다.
+		CAnimation* pDeadObj = (CAnimation*)eve.lParam;
+
+		CEffectMgr::GetInstance()->DeletEffect(pDeadObj);
+	}
+		break;
 	}
 }
