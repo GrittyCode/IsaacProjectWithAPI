@@ -16,9 +16,12 @@ CBoxCollider2D::CBoxCollider2D(CObject* target, float sizeX, float sizeY)
 	m_vecSize.y = sizeY;
 }
 
-const Square CBoxCollider2D::GetAABB() const
+ RECT CBoxCollider2D::GetAABB()
 {
-	return Square( (m_Owner->GetTransform()->GetPosition() + m_vecOffset), m_vecSize);
+	return RECT{ (LONG)(m_Owner->GetTransform()->GetPositionX() - m_vecSize.x + m_vecOffset.x),
+				(LONG)(m_Owner->GetTransform()->GetPositionY() - m_vecSize.y + m_vecOffset.y),
+				(LONG)(m_Owner->GetTransform()->GetPositionX() + m_vecSize.x + m_vecOffset.x),
+				(LONG)(m_Owner->GetTransform()->GetPositionY() + m_vecSize.y + m_vecOffset.y)};
 }
 
 void CBoxCollider2D::Init()

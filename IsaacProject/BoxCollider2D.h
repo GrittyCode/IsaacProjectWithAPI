@@ -6,7 +6,7 @@ public:
 	CBoxCollider2D();
 	virtual ~CBoxCollider2D();
 public:
-	const Square GetAABB() const;
+	RECT GetAABB();
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void FixedUpdate() override;
