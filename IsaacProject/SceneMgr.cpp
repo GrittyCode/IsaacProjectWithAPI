@@ -28,6 +28,14 @@ void CSceneMgr::Init()
 	m_Player->Init();
 	CObjectMgr::GetInstance()->SetPlayer(m_Player);
 
+	CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+		Vector2(0, 0),
+		Vector2(32, 32),
+		Vector2(32, 32),
+		Vector2(300, 300),
+		Vector2(1, 1),
+		OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0,0),
 		Vector2(0,0),

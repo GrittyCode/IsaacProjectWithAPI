@@ -321,16 +321,17 @@ void CToolDlg::SetTileTemp()
 	{
 		wSrt = L"../Resources/Sprites/Map/0e_diceroom.png";
 	}
-	StartSclaseX = (m_rcCurCopyScale.left / TILE_SIZE) * 26;
-	StartSclaseY = (m_rcCurCopyScale.top / TILE_SIZE) * 26;
-	SclaseX = (m_rcCurCopyScale.right / TILE_SIZE) * 26;
-	SclaseY = (m_rcCurCopyScale.bottom / TILE_SIZE) * 26;
+
+	StartSclaseX = (m_rcCurCopyScale.left / TOOL_TILE_SIZE) * 26;
+	StartSclaseY = (m_rcCurCopyScale.top / TOOL_TILE_SIZE) * 26;
+	SclaseX = (m_rcCurCopyScale.right / TOOL_TILE_SIZE) * 26;
+	SclaseY = (m_rcCurCopyScale.bottom / TOOL_TILE_SIZE) * 26;
 
 	m_stTemp = TileInfo(wSrt,
-		Vec2(StartSclaseX, StartSclaseY),
-		Vec2(SclaseX, SclaseY),
-		Vec2(SclaseX - StartSclaseX, SclaseY - StartSclaseY),
-		SORTING_LAYER::TILE,
+		Vec2(StartSclaseX,StartSclaseY),
+		Vec2((SclaseX - StartSclaseX), (SclaseY - StartSclaseY)),
+		Vec2((SclaseX - StartSclaseX),(SclaseY - StartSclaseY)),
+		SORTING_LAYER::TILE, 
 		TILE_TYPE::NONE,
 		m_bFlipX,
 		m_bFlipY);

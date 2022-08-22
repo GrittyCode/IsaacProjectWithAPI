@@ -161,7 +161,7 @@ void CToolScene::Render(HDC hdc)
 		g.SetTransform(&mat);*/
 		g.DrawImage(image, Rect((int)CursorPos.x, (int)CursorPos.y,
 			(int)(stTemp.v_Size.x * Scale), (int)(stTemp.v_Size.y * Scale)),
-			(int)stTemp.v_StartPos.x, (int)stTemp.v_StartPos.y, (int)stTemp.v_Size.x, (int)stTemp.v_Size.y, UnitPixel, &imgAttr);
+			(int)stTemp.v_StartPos.x, (int)stTemp.v_StartPos.y, (int)stTemp.v_EndPos.x, (int)stTemp.v_EndPos.y, UnitPixel, &imgAttr);
 	}
 	else if (CToolDlg::GetInstance()->GetTileMode() == (UINT)TILE_MODE::OBJECT)
 	{
