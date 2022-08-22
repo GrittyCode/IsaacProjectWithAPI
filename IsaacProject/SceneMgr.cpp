@@ -104,6 +104,10 @@ void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 
 	m_bIsChange = true;
 
+	if (iMinMap < 1)
+	{
+		++iMinMap;
+	}
 
 	if (iter != m_MapScene.end())
 	{
@@ -115,22 +119,21 @@ void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 		switch (dir)
 		{
 		case DIRECTION::UP:
-			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(WINDOW_X * 0.5f , (float)WINDOW_Y - PADDING_DOOR));
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(WINDOW_X * 0.5f , (float)WINDOW_Y - 130));
 			break;
 		case DIRECTION::DOWN:
 			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(WINDOW_X * 0.5f , 0.f + PADDING_DOOR));
 			break;
 		case DIRECTION::LEFT:
-			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2((float)WINDOW_X  - PADDING_DOOR, WINDOW_Y * 0.5f));
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2((float)WINDOW_X  - 130.0f, WINDOW_Y * 0.5f));
 			break;
 		case DIRECTION::RIGHT:
-			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(0.f + PADDING_DOOR, WINDOW_Y * 0.5f));
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(0.f + 130.0f, WINDOW_Y * 0.5f));
 			break;
 		case DIRECTION::DIRECTION_END:
 			break;
 		}
 	}
-
 }
 
 void CSceneMgr::ChangeMode(GAME_MODE mode)

@@ -31,5 +31,13 @@ public:
 
 private:
 	DoorInfo m_doorInfo;
+
+	bool m_bOpen = false;
+
+	float m_fDoorDelay = 0.2f;
+	float m_fCurDelay = 0.0f;
+
+	int m_iFramelimit = 4;
+	int m_iCurFrame = 0;
 };
 

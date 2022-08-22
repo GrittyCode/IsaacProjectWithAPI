@@ -19,6 +19,9 @@ public:
 	//Get
 	wstring* const GetName() { return &m_Name; }
 
+	//Set
+	void SetState(SCENE_STATE state) { m_state = state; };
+
 private:
 	wstring m_Name;
 	//현재 씬에 존재하고 있는 오브젝트들의 맵 리스트

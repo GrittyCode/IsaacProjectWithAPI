@@ -31,7 +31,7 @@ void CBackground::FixedUpdate()
 void CBackground::Render(HDC hdcd)
 {
 	CImageMgr::GetInstance()->GetGraphics()->
-		DrawImage(m_sprite->GetSprite(), 0,0, 
+		DrawImage(m_sprite->GetSprite(), float(WINDOW_X - m_sprite->GetSprite()->GetWidth()) / 2.0f, float(WINDOW_Y - m_sprite->GetSprite()->GetHeight()) / 2.0f,
 			m_sprite->GetSprite()->GetWidth(), m_sprite->GetSprite()->GetHeight());
 }
 

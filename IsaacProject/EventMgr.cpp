@@ -26,7 +26,7 @@ void CEventMgr::Update()
 
 	if (CSceneMgr::GetInstance()->GetCurScene()->AllEnemyDie())
 	{
-		int i = 0;
+		CSceneMgr::GetInstance()->GetCurScene()->SetState(SCENE_STATE::OPEN);
 	}
 
 }

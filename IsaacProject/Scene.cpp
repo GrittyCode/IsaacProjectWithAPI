@@ -75,42 +75,105 @@ void CScene::Init()
 		Vector2(0, 0),
 		Vector2(0, 0),
 		Vector2(5, 640),
-		Vector2(200, 80),
+		Vector2(840, 80),
 		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
 
-	if (iMinMap == 1)
+	if (iMinMap == 0)
 	{
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
-			Vector2(0, 0),
+			Vector2(64, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
 			Vector2(468, 68),
-			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),DoorInfo(L"test5.scene", Vector2(800, 500), DIRECTION::UP)));
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
+
+		CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/controls.png",
+			Vector2(0, 0),
+			Vector2(0, 0),
+			Vector2(325, 84),
+			Vector2(468, 322),
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE)));
 	}
 
-	if (iMinMap == 0)
+	if (iMinMap == 1)
 	{
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 128),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(64, 322),
-			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test5.scene", Vector2(800, 500), DIRECTION::LEFT)));
+			Vector2(64, WINDOW_Y * 0.5),
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::LEFT)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 256),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(872, 322),
-			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test5.scene", Vector2(800, 500), DIRECTION::RIGHT)));
+			Vector2(872, WINDOW_Y * 0.5),
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::RIGHT)));
 
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(468, 68),
-			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test5.scene", Vector2(800, 500), DIRECTION::UP)));
+			Vector2(WINDOW_X * 0.5, 68),
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
+
+		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
+			Vector2(0, 0),
+			Vector2(0, 0),
+			Vector2(64, 64),
+			Vector2(WINDOW_X * 0.5, 550),
+			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::DOWN)));
+
+		//파리생성
+		CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(300, 300),
+			Vector2(1, 1),
+			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(8, 1, 0, 50.f, 0.f)));
+
+		CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(150, 150),
+			Vector2(1, 1),
+			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+
+		CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(600, 200),
+			Vector2(1, 1),
+			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+
+		CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(600, 60),
+			Vector2(1, 1),
+			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+
+		CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(300, 300),
+			Vector2(1, 1),
+			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+
+		CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(32, 32),
+			Vector2(500, 100),
+			Vector2(1, 1),
+			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
 	}
 }
 
