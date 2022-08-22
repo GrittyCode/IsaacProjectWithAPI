@@ -39,6 +39,7 @@
 #include "Enemy.h"
 #include "Fly.h"
 #include "Door.h"
+#include "MapCollider.h"
 
 //Scene
 #include "Scene.h"
@@ -58,7 +59,6 @@
 #include "EventMgr.h"
 #include "FactoryMgr.h"
 #include "EffectMgr.h"
-
 
 #include "fmod.h"
 #pragma comment(lib, "fmodex_vc.lib")

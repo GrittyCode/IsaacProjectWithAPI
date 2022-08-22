@@ -26,34 +26,57 @@ void CScene::Init()
 	CObjectMgr::GetInstance()->Init();
 	CObjectMgr::GetInstance()->ConnectScene(&m_MapObjectList);
 
+
+	//눈물 벽 충돌
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0, 0),
 		Vector2(0, 0),
-		Vector2(30, 630),
+		Vector2(10, 640),
 		Vector2(60, 0),
 		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0, 0),
 		Vector2(0, 0),
-		Vector2(936, 30),
-		Vector2(0, 10),
+		Vector2(956, 10),
+		Vector2(0, 32),
 		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0, 0),
 		Vector2(0, 0),
-		Vector2(30, 624),
+		Vector2(10, 640),
 		Vector2(876, 0),
 		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0, 0),
 		Vector2(0, 0),
-		Vector2(936, 30),
-		Vector2(0, 544),
+		Vector2(936, 10),
+		Vector2(0, 525),
 		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
+	//플레이어와 벽충돌
+	CreateObject(new CMapCollider(ObjectInfo(L"",
+		Vector2(0,0),
+		Vector2(0, 0),
+		Vector2(936, 5),
+		Vector2(0, 85),
+		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CMapCollider(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(5, 640),
+		Vector2(95, 0),
+		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CMapCollider(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(5, 640),
+		Vector2(840, 80),
+		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
 }
 
 void CScene::Update()
@@ -85,14 +108,13 @@ void CScene::FixedUpdate()
 	//벽 충돌 처리
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::OBSTACLE, OBJECT_TYPE::PLAYER);
 
-
 	//문 충돌 처리
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::DOOR, OBJECT_TYPE::PLAYER);
 
+	//map콜라이더
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::MAP_COLLIDER, OBJECT_TYPE::PLAYER);
 	CObjectMgr::GetInstance()->FixedUpdate();
 }
-
-
 
 
 void CScene::Render(HDC hdc)

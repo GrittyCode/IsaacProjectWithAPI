@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "SoundMgr.h"
 
 CPlayer::CPlayer(ObjectInfo objinfo, MoverInfo moverInfo)
 	: CMover(objinfo,moverInfo),
@@ -39,16 +40,24 @@ void CPlayer::Init()
 	m_PlayerInfo.bLeft = true;
 	
 	//Move Animation
+
+	//IDEL
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32, 32), ANI_STATE::IDLE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(32, 32), ANI_STATE::IDLEBody));
+
+	//MOVE(BODY)
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 32), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1, Vector2(32, 32), ANI_STATE::UPMOVE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::DOWNMOVE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 64), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::LEFTMOVE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 64), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::RIGHTMOVE));
+
+	//ATTACK(PACE)
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(128, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32), ANI_STATE::UPATTACK));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32), ANI_STATE::DOWNATTACK));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(288, 0), Vector2(32, 32), true, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32), ANI_STATE::LEFTATTACK));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(64, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32), ANI_STATE::RIGHTATTACK));
+
+	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(128,192), Vector2(64, 64), false, Vector2(0, -20)), 0, 0, Vector2(64, 64), ANI_STATE::HUNT));
 
 	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32,32), ANI_STATE::IDLE));
 	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(32, 32),ANI_STATE::DOWNMOVE));
@@ -66,7 +75,6 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-	m_PlayerInfo.fFrameStay += DELTA;
 	Move();
 	Attack();
 }
@@ -80,8 +88,55 @@ void CPlayer::Render(HDC hdc)
 {
 	Vector2 PlayerPos = GetTransform()->GetPosition();
 
-	m_mapAniState.find(m_MoverInfo.eAniMoveState)->second->Update(GetTransform()->GetPosition());
-	m_mapAniState.find(m_MoverInfo.eAniAttackState)->second->Update(GetTransform()->GetPosition());
+	ImageAttributes imageAttributes;
+
+	if (m_PlayerInfo.fFrameStay != 0)
+	{
+		float alphaPercent = 1;
+
+		if (m_PlayerInfo.fFrameStay > 0.15f && m_PlayerInfo.fFrameStay < 0.3f)
+		{
+			alphaPercent = 0.f;
+		}
+
+		ColorMatrix colorMatrix =
+		{
+			  1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+			  0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+			  0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+			  0.0f, 0.0f, 0.0f, alphaPercent, 0.0f,
+			  0.0f, 0.0f, 0.0f, 0.0f, 1.0f
+		};
+
+		imageAttributes.SetColorMatrix(&colorMatrix, ColorMatrixFlagsDefault, ColorAdjustTypeDefault);
+
+		if (m_PlayerInfo.fFrameStay > 0.3f)
+		{
+			m_PlayerInfo.fFrameStay = 0;
+		}
+	}
+
+	if (m_PlayerInfo.ePlayerState != PLAYER_STATE::HUNT)
+	{
+		m_mapAniState.find(m_MoverInfo.eAniMoveState)->second->Update(GetTransform()->GetPosition(), &imageAttributes);
+		m_mapAniState.find(m_MoverInfo.eAniAttackState)->second->Update(GetTransform()->GetPosition(), &imageAttributes);
+
+	}
+	else
+	{
+		if (m_PlayerInfo.fFrameStay == 0)
+		{
+			CSoundMgr::GetInstance()->MyPlaySound(L"hurt grunt 2.wav", CSoundMgr::CHANNELID::PLAYER_HURT);
+		}
+
+		m_mapAniState.find(m_MoverInfo.eAniAttackState)->second->Update(GetTransform()->GetPosition());
+		m_PlayerInfo.fFrameStay += DELTA;
+
+		if (m_PlayerInfo.fFrameStay > 0.2f)
+		{
+			m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
+		}
+	}
 
 	//디버그모드
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
@@ -115,13 +170,23 @@ void CPlayer::Render(HDC hdc)
 	}
 
 	//라스트 업데이트에서 해야하는데 흑흑 젠장
-	m_MoverInfo.eAniAttackState = ANI_STATE::IDLE;
-	m_MoverInfo.eAniMoveState = ANI_STATE::IDLEBody;
-	m_PlayerInfo.bAttackON = false;
+	if (m_PlayerInfo.ePlayerState != PLAYER_STATE::HUNT)
+	{
+		m_MoverInfo.eAniAttackState = ANI_STATE::IDLE;
+		m_MoverInfo.eAniMoveState = ANI_STATE::IDLEBody;
+		m_PlayerInfo.bAttackON = false;
+	}
 }
 
 INT CPlayer::CheckCollisionState()
 {
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY)
+	{
+		m_PlayerInfo.ePlayerState = PLAYER_STATE::HUNT;
+		m_MoverInfo.eAniAttackState = ANI_STATE::HUNT;
+		m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;
+	}
+
 	m_collide->OffCollisionFlag();
 
 	return 0;
@@ -172,7 +237,7 @@ void CPlayer::Move()
 
 	if (m_MoverInfo.vecMoveDiretion.x != 0 || m_MoverInfo.vecMoveDiretion.y != 0)
 	{
-		m_PlayerInfo.ePlayerState = PLAYER_STATE::MOVE;
+		//m_PlayerInfo.ePlayerState = PLAYER_STATE::MOVE;
 
 		//가속도
 		if (m_PlayerInfo.fCurSpeed < m_MoverInfo.fSpeed)
@@ -186,7 +251,7 @@ void CPlayer::Move()
 	}
 	else
 	{
-		m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
+		//m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
 	}
 
 	//이동

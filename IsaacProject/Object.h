@@ -14,6 +14,7 @@ public:
 	virtual void Render(HDC hdc);
 	virtual void Release();
 	virtual INT CheckCollisionState() =  0;
+
 	BOOL AddComponent(CComponent* component);
 	BOOL const IsDead() const { return !m_bAllive; }
 

@@ -56,7 +56,9 @@ void CSceneMgr::Render(HDC hdc)
 {
 	if(m_currentScene != nullptr)
 		m_currentScene->Render(hdc);
+
 	CEffectMgr::GetInstance()->Update();
+
 	if (m_bIsChange)
 	{
 		

@@ -13,6 +13,7 @@ struct PlayerInfo
 	float fCurSpeed;
 	float fAcceleration;
 	PLAYER_STATE ePlayerState;
+	bool bHurtBlending;
 };
 
 class CPlayer : public CMover

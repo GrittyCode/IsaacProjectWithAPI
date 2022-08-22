@@ -36,11 +36,10 @@ void CObstacle::Render(HDC hdc)
 	CImageMgr::GetInstance()->GetGraphics()->DrawImage(
 		m_sprite->GetSprite(),
 		Rect((INT)m_ObjInfo.vecWorldPos.x - (INT)m_ObjInfo.vecSize.x,
-			 (INT)m_ObjInfo.vecWorldPos.y - (INT)m_ObjInfo.vecSize.y,
-			 (INT)m_ObjInfo.vecSize.x * 2,
-			 (INT)m_ObjInfo.vecSize.y * 2),
+			(INT)m_ObjInfo.vecWorldPos.y - (INT)m_ObjInfo.vecSize.y,
+			(INT)m_ObjInfo.vecSize.x * 2,
+			(INT)m_ObjInfo.vecSize.y * 2),
 		(INT)m_ObjInfo.vecStartPos.x, (INT)m_ObjInfo.vecStartPos.y, (INT)m_ObjInfo.vecEndPos.x, (INT)m_ObjInfo.vecEndPos.y, UnitPixel);
-
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
 	{
@@ -49,18 +48,9 @@ void CObstacle::Render(HDC hdc)
 		HPEN hOldPen;
 		HPEN CurPen;
 
-		if (m_isCollision)
-		{
-			CurPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
-			hOldPen = (HPEN)SelectObject(hdc, CurPen);
-			hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
-		}
-		else
-		{
-			CurPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
-			hOldPen = (HPEN)SelectObject(hdc, CurPen);
-			hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
-		}
+		CurPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+		hOldPen = (HPEN)SelectObject(hdc, CurPen);
+		hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
 
 		CObject::Render(hdc);
 
