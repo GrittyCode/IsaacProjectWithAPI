@@ -19,6 +19,7 @@ public:
 private:
 	void Excute(const tEvent& _eve);
 	vector<tEvent> m_vecEvent;
+	vector<CAnimation*> m_vecDeadAnimation;
 	vector<CObject*> m_vecDead;
 
 };

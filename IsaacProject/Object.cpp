@@ -42,7 +42,6 @@ void CObject::FixedUpdate()
 
 void CObject::LateUpdate()
 {
-
 }
 
 void CObject::Render(HDC hdc)

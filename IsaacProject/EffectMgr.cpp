@@ -35,12 +35,15 @@ void CEffectMgr::DeletEffect(CAnimation* ani)
 	}
 	m_iter = m_Effectlist.begin();
 	
-	for (; (*m_iter) != ani; ++m_iter)
+	for (; m_iter != m_Effectlist.end(); ++m_iter)
+	{
+		if (*m_iter == ani)
+		{
+			delete ani;
+			ani = nullptr;
+			m_iter = m_Effectlist.erase(m_iter);
+			break;
+		}
 
-	if (m_iter == m_Effectlist.end()) return;
-	
-	delete ani;
-	ani = nullptr;
-
-	m_iter = m_Effectlist.erase(m_iter);
+	}
 }
