@@ -27,7 +27,6 @@ private:
 	map<OBJECT_TYPE, list<CObject*>>* m_MapObjectList = nullptr;
 	map<OBJECT_TYPE, list<CObject*>>::iterator m_Objiter;
 	CPlayer* m_player = nullptr;
-
 	//TOOL
 	vector<CTile*> m_vecTile;
 };

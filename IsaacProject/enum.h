@@ -55,14 +55,15 @@ enum class COLLISION_FLAG
 {
 	BACKGROUND = 0,
 	OBSTACLE = 1,
-	PLAYER_TEAR = 2,
-	ENEMY_TEAR = 4,
-	BOMB = 8,
-	DOOR = 16,
-	ITEM = 32,
-	ENEMY = 64,
-	PLAYER = 128,
-	BOSS = 256,
+	BOMB = 2,
+	DOOR = 4,
+	ITEM = 8,
+	ENEMY = 16,
+	PLAYER = 32,
+	BOSS = 64,
+	ENEMY_TEAR = 128,
+	PLAYER_TEAR = 256,
+	EFFECT,
 	OBJECT_TYPE_END
 };
 
@@ -256,7 +257,8 @@ enum class DIRECTION
 	UP,
 	DOWN,
 	RIGHT,
-	LEFT
+	LEFT,
+	DIRECTION_END
 };
 
 enum class ANI_STATE

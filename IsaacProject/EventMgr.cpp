@@ -63,12 +63,14 @@ void CEventMgr::Excute(const tEvent& eve)
 	case EVENT_TYPE::SCENE_CHANGE:
 	{
 		wstring* name = (wstring*)(eve.lParam);
+		DIRECTION* dir = (DIRECTION*)(eve.wParam);
+
 		auto iter = CSceneMgr::GetInstance()->GetMapScene()->find(*name);
 
 		if (iter != CSceneMgr::GetInstance()->GetMapScene()->end())
 		{
 			//등록되어있는 씬으로 옮긴다.
-			CSceneMgr::GetInstance()->ChangeScene(*name);
+			CSceneMgr::GetInstance()->ChangeScene(*name, *dir);
 		}
 	}
 		break;

@@ -1,15 +1,18 @@
 #pragma once
 
+
 struct DoorInfo
 {
-	DoorInfo(wstring sceneName, Vector2 Pos)
+	DoorInfo(wstring sceneName, Vector2 Pos, DIRECTION adir)
 		:strSceneame(sceneName),
-		 vecPlayerPos(Pos)
+		 vecPlayerPos(Pos),
+		 dir(adir)
 	{
 
 	}
 	wstring strSceneame;
 	Vector2 vecPlayerPos;
+	DIRECTION dir;
 };
 
 
@@ -25,8 +28,8 @@ public:
 	virtual INT CheckCollisionState() override;
 	CDoor(ObjectInfo objInfo, DoorInfo doorInfo);
 	~CDoor();
+
 private:
 	DoorInfo m_doorInfo;
-
 };
 

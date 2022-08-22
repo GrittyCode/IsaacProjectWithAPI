@@ -279,9 +279,6 @@ INT_PTR CALLBACK ToolDlg(HWND g_hToolDlg, UINT message, WPARAM wParam, LPARAM lP
 			SetCurrentDirectory(OriginDirectory);
 			CScene* curScnee = CSceneMgr::GetInstance()->GetCurScene();
 			CreateObject(new CBackground(ObjectInfo(Directory,OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
-			int i = 0;
-
-
 		}
 		break;
 		case IDC_RETURN_BUTTON:

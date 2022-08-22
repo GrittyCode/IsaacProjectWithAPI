@@ -3,6 +3,8 @@
 class CObject;
 class CAnimation;
 class CScene;
+class CSceneMgr;
+
 
 Vector2 VectorSum(Vector2 movevec, Vector2 attackvec, float playerspeed, float tearsspeed);
 Vector2 IndexToPosition(POINT pt);
@@ -21,4 +23,4 @@ void DeleteObject(CObject* pObj);
 void CreateEffect(CAnimation* pObj);
 void DeleteEffect(CAnimation* pObj);
 void DeleteObject(CObject* pObj);
-void ChageScene(wstring* sceneName);
+void ChageScene(wstring* sceneName, DIRECTION* dir);

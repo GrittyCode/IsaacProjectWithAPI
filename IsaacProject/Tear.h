@@ -17,6 +17,7 @@ private:
 	float m_fDistance;
 
 	bool m_bGravity;
+	bool m_bSound;
 
 	int m_iCurPrame;
 	float m_fCurDeley;

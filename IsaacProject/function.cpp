@@ -94,7 +94,7 @@ Vector2 VectorSum(Vector2 movevec,Vector2 attackvec,float playerspeed, float tea
 float DistanceMeasure(Vector2 sourse, Vector2 taget)
 {
 	float tmep = sqrtf(powf(sourse.x - taget.x, 2) + powf(taget.y - sourse.y, 2));
-	cout << tmep << endl;
+	//cout << tmep << endl;
 
 	return tmep;
 }
@@ -117,6 +117,8 @@ void DeleteObject(CObject* pObj)
 	CEventMgr::GetInstance()->AddEvent(evn);
 }
 
+
+
 void CreateEffect(CAnimation* pObj)
 {
 	tEvent evn = {};
@@ -134,11 +136,14 @@ void DeleteEffect(CAnimation* pObj)
 
 	CEventMgr::GetInstance()->AddEvent(evn);
 }
-void ChageScene(wstring* sceneName)
+
+
+void ChageScene(wstring* sceneName, DIRECTION* dir)
 {
 	tEvent evn = {};
 	evn.eEven = EVENT_TYPE::SCENE_CHANGE;
 	evn.lParam = (DWORD_PTR)sceneName;
+	evn.wParam = (DWORD_PTR)dir;
 
 	CEventMgr::GetInstance()->AddEvent(evn);
 }

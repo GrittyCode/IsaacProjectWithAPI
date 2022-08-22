@@ -14,13 +14,16 @@
 #pragma region WINDOW RECT
 
 #define WINDOW_X 936
-#define WINDOW_Y 624
+#define WINDOW_Y 644
 
 #define WINDOW_START_X 250
 #define WINDOW_START_Y 150
 
 #define PADDING_X 100
 #define PADDING_Y 100
+
+
+#define PADDING_DOOR 96
 
 #pragma endregion
 

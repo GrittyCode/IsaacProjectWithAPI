@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Tear.h"
+#include "SoundMgr.h"
 
 CTear::CTear(Vector2 movediretiony,Vector2 worldpos, Vector2 attackdirection,float playerspeed, bool m_Left)
 {
@@ -22,7 +23,7 @@ CTear::CTear(Vector2 movediretiony,Vector2 worldpos, Vector2 attackdirection,flo
 	m_bGravity = false;
 	m_fCurDeley = 0;
 	m_iCurPrame = 0;
-
+	m_bSound = false;
 	m_ObjInfo.type = OBJECT_TYPE::PLAYER_TEAR;
 }
 
@@ -40,6 +41,8 @@ void CTear::Init()
 	GetTransform()->SetPosition(Vector2(m_ObjInfo.vecWorldPos.x + (m_MoverInfo.vecAttackDiretion.x * 25), m_ObjInfo.vecWorldPos.y + (m_MoverInfo.vecAttackDiretion.y * 25)));
 	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() - 22, m_Transform->GetSizeY() - 21);
 	AddComponent(m_collide);
+
+	CSoundMgr::GetInstance()->MyPlaySound(L"Tear.wav", CSoundMgr::CHANNELID::TEAR_FIRE);
 }
 
 void CTear::Update()
@@ -50,6 +53,13 @@ void CTear::Update()
 		//일정거리시 소멸
 		if (DistanceMeasure(m_ObjInfo.vecWorldPos, GetTransform()->GetPosition()) > m_fDistance)
 		{
+			if (!m_bSound)
+			{
+				//splatter 0
+				//Tear_Dead_Time
+				CSoundMgr::GetInstance()->MyPlaySound(L"splatter0.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
+				m_bSound = true;
+			}
 			m_bGravity = true;
 			m_sprite->SetPath(L"../Resources/Sprites/tear.png");
 			m_sprite->Init();
@@ -133,6 +143,11 @@ INT CTear::CheckCollisionState()
 {
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE)
 	{
+		if (!m_bSound)
+		{
+			m_bSound = true;
+			CSoundMgr::GetInstance()->MyPlaySound(L"Tear_Dead_Time.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
+		}
 		m_bGravity = true;
 		m_sprite->SetPath(L"../Resources/Sprites/tear.png");
 		m_sprite->Init();
@@ -140,6 +155,11 @@ INT CTear::CheckCollisionState()
 
 	if (m_collide->GetFlag() & (INT)COLLISION_FLAG::ENEMY)
 	{
+		if (!m_bSound)
+		{
+			m_bSound = true;
+			CSoundMgr::GetInstance()->MyPlaySound(L"Tear_Dead_Time 0.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
+		}
 		m_bGravity = true;
 		m_sprite->SetPath(L"../Resources/Sprites/tear.png");
 		m_sprite->Init();

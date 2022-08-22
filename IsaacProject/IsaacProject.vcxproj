@@ -150,10 +150,12 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="EffectMgr.h" />
+    <ClInclude Include="Eqiup.h" />
     <ClInclude Include="Huntstate.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="TraceState.h" />
     <ClInclude Include="Fly.h" />
     <ClInclude Include="EventMgr.h" />
@@ -199,10 +201,12 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
+    <ClCompile Include="Eqiup.cpp" />
     <ClCompile Include="Huntstate.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="TraceState.cpp" />
     <ClCompile Include="Fly.cpp" />
     <ClCompile Include="EventMgr.cpp" />
