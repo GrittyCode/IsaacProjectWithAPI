@@ -12,11 +12,13 @@ CTear::CTear(Vector2 movediretiony,Vector2 worldpos, Vector2 attackdirection,flo
 	m_MoverInfo.vecAttackDiretion = VectorSum(movediretiony, attackdirection,playerspeed, m_MoverInfo.fSpeed);
 	m_MoverInfo.vecAttackDiretion.Normalize();
 	m_fDistance = 300.0f;
+
 	if ((movediretiony.x == attackdirection.x) && (movediretiony.y == attackdirection.y))
 	{
 		m_MoverInfo.fSpeed += playerspeed;
 		m_fDistance += playerspeed;
 	}
+
 	m_bGravity = false;
 	m_fCurDeley = 0;
 	m_iCurPrame = 0;
@@ -151,11 +153,11 @@ void CTear::FireEyeSet(bool left, Vector2 attackdirection)
 	{
 		if (left)
 		{
-			m_vecFireEye.y -= 4;
+			m_vecFireEye.y -= 6.0f;
 		}
 		else
 		{
-			m_vecFireEye.y += 4;
+			m_vecFireEye.y += 6.0f;
 		}
 	}
 
@@ -163,11 +165,11 @@ void CTear::FireEyeSet(bool left, Vector2 attackdirection)
 	{
 		if (left)
 		{
-			m_vecFireEye.x -= 4;
+			m_vecFireEye.x -= 6.0f;
 		}
 		else
 		{
-			m_vecFireEye.x += 4;
+			m_vecFireEye.x += 6.0f;
 		}
 	}
 }

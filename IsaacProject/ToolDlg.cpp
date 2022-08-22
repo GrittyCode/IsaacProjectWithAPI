@@ -124,6 +124,7 @@ void CToolDlg::ObjectDraw(HDC hdc)
 	else if (m_iButton == 2)
 	{
 		//문 이미지
+		image = Image::FromFile(L"../Resources/Sprites/Object/Object_door.png");
 	}
 	else
 	{
