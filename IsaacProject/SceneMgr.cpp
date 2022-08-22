@@ -6,7 +6,7 @@ CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 void CSceneMgr::Init()
 {
 	//씬 전환 이미지 생성
-	m_fadeImg = Image::FromFile(L"../Resources/Sprites/fadeinout.png");
+	m_pFadeImg = new Image(L"../Resources/Sprites/fadeinout.png");
 	//플레이어 임시 생성
 	LoadMap(L"test.map");
 
@@ -38,34 +38,6 @@ void CSceneMgr::Init()
 		Vector2(1, 1),
 		OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(8, 1, 0, 50.f, 0.f)));
 
-	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(0,0),
-		Vector2(0,0),
-		Vector2(30, 630),
-		Vector2(60, 0),
-		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
-
-	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(0, 0),
-		Vector2(0, 0),
-		Vector2(936, 30),
-		Vector2(0, 10),
-		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
-
-	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(0, 0),
-		Vector2(0, 0),
-		Vector2(30, 624),
-		Vector2(876, 0),
-		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
-
-	CreateObject(new CObstacle(ObjectInfo(L"",
-		Vector2(0,0),
-		Vector2(0,0),
-		Vector2(936, 30),
-		Vector2(0, 544),
-		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
-
 }
 
 void CSceneMgr::Update()
@@ -85,13 +57,48 @@ void CSceneMgr::Render(HDC hdc)
 	if(m_currentScene != nullptr)
 		m_currentScene->Render(hdc);
 	CEffectMgr::GetInstance()->Update();
+	if (m_bIsChange)
+	{
+		
+		static float fadeIn = 0.6f;
+		
+		if (fadeIn <= 1.0f)
+		{
+			FadeInOut(fadeIn);
+			fadeIn += .05f;
+		}
+
+		if (fadeIn >= 1.0f)
+		{
+			static float fadeOut = 1.0f;
+			fadeOut -= .05f;
+			FadeInOut(fadeOut);
+			
+			if (fadeOut <= 0.0f)
+			{
+				fadeIn = 0.6f;
+				fadeOut = 1.0f;
+				m_bIsChange = false;
+			}
+			
+		}
+	}
 	//CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_fadeImg, 0,0, m_fadeImg->GetWidth(), m_fadeImg->GetHeight());
 }
 
 void CSceneMgr::Release()
 {
+	auto iter = m_MapScene.begin();
+
+	for (;iter != m_MapScene.end(); ++iter)
+	{
+		(*iter).second->Release();
+	}
 	if (m_currentScene != nullptr)
 		m_currentScene->Release();
+
+	delete m_pFadeImg;
+	m_pFadeImg = nullptr;
 }
 
 
@@ -99,6 +106,9 @@ void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 {
 
 	auto iter = m_MapScene.find(scenePath);
+
+	m_bIsChange = true;
+
 
 	if (iter != m_MapScene.end())
 	{
@@ -125,6 +135,7 @@ void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 			break;
 		}
 	}
+
 }
 
 void CSceneMgr::ChangeMode(GAME_MODE mode)
@@ -300,4 +311,25 @@ void CSceneMgr::CreateStageFromTool()
 			CObjectMgr::GetInstance()->AddTile(new CTile(TileInfo(), TilePos(j, i)));
 		}
 	}
+}
+
+void CSceneMgr::FadeInOut(float blending)
+{
+	const float alphaPercent = blending;
+
+	ColorMatrix colorMatrix = 
+	{
+		  1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		  0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+		  0.0f, 0.0f, 0.0f, alphaPercent, 0.0f,
+		  0.0f, 0.0f, 0.0f, 0.0f, 1.0f
+	};
+
+	ImageAttributes imageAttributes;
+	imageAttributes.SetColorMatrix(&colorMatrix, ColorMatrixFlagsDefault, ColorAdjustTypeDefault);
+
+
+	CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_pFadeImg, Rect(0, 0, m_pFadeImg->GetWidth(), m_pFadeImg->GetHeight()),
+		0,0,m_pFadeImg->GetWidth(), m_pFadeImg->GetHeight(), UnitPixel, &imageAttributes);
 }

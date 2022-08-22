@@ -95,14 +95,15 @@ void CAnimation::Render()
 	if (!m_tSpriteinfo.bFilp)
 	{
 		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_image,
-			Rect((UINT)m_vecWorldpos.x - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.x,
-				(UINT)m_vecWorldpos.y - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.y,
-				(UINT)m_vecScreenSize.x * Scale,
-				(UINT)m_vecScreenSize.y * Scale),
-				(UINT)m_tSpriteinfo.vecStartPos.x + (m_iCurFrame * m_tSpriteinfo.vecSpriteSize.x),
+			Rect((UINT)(m_vecWorldpos.x - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.x),
+				(UINT)(m_vecWorldpos.y - m_vecScreenSize.y + m_tSpriteinfo.vecOffset.y),
+				(UINT)(m_vecScreenSize.x * Scale),
+				(UINT)(m_vecScreenSize.y * Scale)),
+				(UINT)(m_tSpriteinfo.vecStartPos.x + (m_iCurFrame * m_tSpriteinfo.vecSpriteSize.x)),
 				(UINT)m_tSpriteinfo.vecStartPos.y,
 				(UINT)m_tSpriteinfo.vecSpriteSize.x,
-				(UINT)m_tSpriteinfo.vecSpriteSize.y, UnitPixel);
+				(UINT)m_tSpriteinfo.vecSpriteSize.y, 
+				UnitPixel);
 	}
 	else
 	{
@@ -114,7 +115,8 @@ void CAnimation::Render()
 				(UINT)(m_tSpriteinfo.vecStartPos.x - (m_iCurFrame * m_tSpriteinfo.vecSpriteSize.x)),
 				(UINT)m_tSpriteinfo.vecStartPos.y,
 				(UINT)m_tSpriteinfo.vecSpriteSize.x,
-				(UINT)m_tSpriteinfo.vecSpriteSize.y, UnitPixel);
+				(UINT)m_tSpriteinfo.vecSpriteSize.y, 
+				UnitPixel);
 	}
 }
 

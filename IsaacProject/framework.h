@@ -19,7 +19,11 @@
 
 // C++ 런타임 헤더 파일입니다.
 
+
+#ifdef DEBUG
 #include <iostream>
+#endif // DEBUG
+
 #include <cmath>
 #include <vector>
 #include <unordered_map>

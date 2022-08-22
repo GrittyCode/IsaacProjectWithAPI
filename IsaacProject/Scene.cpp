@@ -25,6 +25,35 @@ void CScene::Init()
 	//오브젝트 매니저와 연결한다.
 	CObjectMgr::GetInstance()->Init();
 	CObjectMgr::GetInstance()->ConnectScene(&m_MapObjectList);
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(30, 630),
+		Vector2(60, 0),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(936, 30),
+		Vector2(0, 10),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(30, 624),
+		Vector2(876, 0),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
+
+	CreateObject(new CObstacle(ObjectInfo(L"",
+		Vector2(0, 0),
+		Vector2(0, 0),
+		Vector2(936, 30),
+		Vector2(0, 544),
+		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
+
 }
 
 void CScene::Update()
@@ -78,7 +107,13 @@ void CScene::Release()
 
 	for (; iter != m_MapObjectList.end(); ++iter)
 	{
-
+		auto listiter = (*iter).second.begin();
+		for (;listiter != (*iter).second.end(); ++listiter)
+		{
+			(*listiter)->Release();
+			delete *listiter;
+			*listiter = nullptr;
+		}
 	}
 
 	CObjectMgr::GetInstance()->Release();
