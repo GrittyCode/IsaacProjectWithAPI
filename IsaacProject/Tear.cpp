@@ -28,6 +28,7 @@ CTear::CTear(Vector2 movediretiony,Vector2 worldpos, Vector2 attackdirection,flo
 
 CTear::~CTear()
 {
+
 }
 
 void CTear::Init()

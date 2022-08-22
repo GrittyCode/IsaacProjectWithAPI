@@ -68,11 +68,6 @@ private:\
 static ClassName* m_pInstance;
 
 
-
-
-
-
-
 #pragma region DELTA_TIME
 
 #define DELTA CTimeMgr::GetInstance()->GetDeltaTime()

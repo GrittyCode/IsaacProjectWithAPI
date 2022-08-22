@@ -13,6 +13,7 @@ void CEventMgr::Update()
 	for (UINT i = 0; i < m_vecDead.size(); ++i)
 	{
 		m_vecDead[i]->Release();
+		delete m_vecDead[i];
 	}
 	m_vecDead.clear();
 
