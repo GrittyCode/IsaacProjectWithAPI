@@ -34,6 +34,10 @@ public:
 	virtual void Move();
 	virtual INT CheckCollisionState();
 
+	int GetHp() { return m_Eenmyinfo.iHp; };
+
+	void SetHp(int demage);
+
 	EnemyInfo GetEnemyInfo() { return m_Eenmyinfo; };
 
 protected:

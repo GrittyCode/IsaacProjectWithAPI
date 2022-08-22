@@ -29,10 +29,10 @@ void CFly::Init()
 		3, 0.03f, Vector2(32, 32), ANI_STATE::IDLE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)),
 		3, 0.03f, Vector2(32, 32), ANI_STATE::MOVE));
+	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)),
+		3, 0.03f, Vector2(32, 32), ANI_STATE::HUNT));
 	/*AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0,64), Vector2(64, 64), false, Vector2(0, 0)),
-		4, 0.3f, Vector2(32, 32), ANI_STATE::DEAD));
-	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 64), Vector2(64, 64), false, Vector2(0, 0)),
-		4, 0.03f, Vector2(32, 32), ANI_STATE::HUNT, false));*/
+		4, 0.3f, Vector2(32, 32), ANI_STATE::DEAD));*/
 
 	m_AniState = ANI_STATE::IDLE;
 	//m_vecAniState.push_back(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32, 32)));
@@ -41,13 +41,9 @@ void CFly::Init()
 void CFly::Update()
 {
 	//애니메이션 프레임조정
-
 	m_pAI->Update();
 }
 
-void CFly::FixedUpdate()
-{
-}
 
 void CFly::Render(HDC hdc)
 {
@@ -89,9 +85,5 @@ void CFly::Render(HDC hdc)
 
 void CFly::Release()
 {
-}
-
-INT CFly::CheckCollisionState()
-{
-	return 0;
+	CObject::Release();
 }

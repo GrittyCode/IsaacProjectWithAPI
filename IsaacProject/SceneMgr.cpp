@@ -36,7 +36,7 @@ void CSceneMgr::Init()
 		Vector2(32, 32),
 		Vector2(300, 300),
 		Vector2(1, 1),
-		OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+		OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(8, 1, 0, 50.f, 0.f)));
 
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0,0),

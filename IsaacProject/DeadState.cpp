@@ -15,9 +15,9 @@ void DeadState::Enter()
 {
 	Vector2 EnemyPos = GetAI()->GetHost()->GetTransform()->GetPosition();
 
-	CreateEffect(new CAnimation(SpriteInfoTag(GetAI()->GetHost()->GetInfo()->wpath, Vector2(0, 64), Vector2(64, 64),false,Vector2(0,0)),
-		4,
-		0.08f,
+	CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Enemy/fly_effect.png", Vector2(0, 0), Vector2(64, 64),false,Vector2(0,0)),
+	    11,
+		0.05f,
 		Vector2(32, 32),
 		ANI_STATE::DEAD,EnemyPos));
 

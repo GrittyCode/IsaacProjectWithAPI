@@ -22,6 +22,7 @@ void CEnemy::Update()
 
 void CEnemy::FixedUpdate()
 {
+	CheckCollisionState();
 }
 
 void CEnemy::Render(HDC hdc)
@@ -38,5 +39,16 @@ void CEnemy::Move()
 
 INT CEnemy::CheckCollisionState()
 {
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER_TEAR)
+	{
+		m_pAI->ChangeState(AI_STATE::HUNT);
+	}
+
+	m_collide->OffCollisionFlag();
 	return 0;
+}
+
+void CEnemy::SetHp(int demage)
+{
+	m_Eenmyinfo.iHp -= demage;
 }

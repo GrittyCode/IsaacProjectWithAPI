@@ -28,7 +28,7 @@ public:
 	CObject* GetOwnerObj() { return m_Owner; };
 	OBJECT_TYPE GetOwnerType();
 	COMPONENT_TYPE GetColliderType() { return m_type; };
-	const INT8 GetFlag() const { return m_Flag; }
+	const INT16 GetFlag() const { return m_Flag; }
 	const Vector2 GetOffset() const { return m_vecOffset; }
 	Vector2 GetCollisionSize() const { return Vector2((m_vecSize.x + m_vecOffset.x),(m_vecSize.y + m_vecOffset.y)); }
 
@@ -38,6 +38,6 @@ protected:
 	Vector2 m_vecSize;
 	Vector2 m_vecOffset;
 	//collsion flag에 따른 상태값이 바뀐다.
-	INT8 m_Flag = 0b00000000;
+	INT16 m_Flag = 0;
 
 };

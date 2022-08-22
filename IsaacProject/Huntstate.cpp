@@ -23,5 +23,14 @@ void CHuntstate::Exit()
 
 void CHuntstate::Update()
 {
-	//GetAI()->GetHost()->GetCollide()->GetTarget(OBJECT_TYPE::PLAYER_TEAR)->GetOwnerObj()
+	GetAI()->GetHost()->SetHp(2);
+
+	if (GetAI()->GetHost()->GetHp() > 0)
+	{
+		GetAI()->ChangeState(AI_STATE::TRACE);
+	}
+	else
+	{
+		GetAI()->ChangeState(AI_STATE::DEAD);
+	}
 }

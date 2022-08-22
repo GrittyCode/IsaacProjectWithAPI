@@ -58,6 +58,10 @@ void CEventMgr::Excute(const tEvent& eve)
 	case EVENT_TYPE::DELETE_EFFECT:
 	{
 		//»ç¶óÁü?
+		CAnimation* pObj = (CAnimation*)eve.lParam;
+
+		CEffectMgr::GetInstance()->DeletEffect(pObj);
+
 	}
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:

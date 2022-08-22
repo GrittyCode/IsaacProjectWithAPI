@@ -47,37 +47,25 @@ void CTear::Init()
 
 void CTear::Update()
 {
-	if (!m_bGravity)
+	Move();
+	//일정거리시 소멸
+	if (DistanceMeasure(m_ObjInfo.vecWorldPos, GetTransform()->GetPosition()) > m_fDistance)
 	{
-		Move();
-		//일정거리시 소멸
-		if (DistanceMeasure(m_ObjInfo.vecWorldPos, GetTransform()->GetPosition()) > m_fDistance)
+		if (!m_bSound)
 		{
-			if (!m_bSound)
-			{
-				//splatter 0
-				//Tear_Dead_Time
-				CSoundMgr::GetInstance()->MyPlaySound(L"splatter0.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
-				m_bSound = true;
-			}
-			m_bGravity = true;
-			m_sprite->SetPath(L"../Resources/Sprites/tear.png");
-			m_sprite->Init();
+			//splatter 0
+			//Tear_Dead_Time
+			CSoundMgr::GetInstance()->MyPlaySound(L"splatter0.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
+			m_bSound = true;
 		}
-	}
-	else
-	{
-		m_fCurDeley += DELTA;
 
-		if (m_fCurDeley > 0.02f)
-		{
-			++m_iCurPrame;
-			m_fCurDeley = 0;
-		}
-	}
+		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/tear.png", Vector2(0, 0), Vector2(64, 64), false, Vector2(0, 0)),
+			11,
+			0.05f,
+			Vector2(32, 32),
+			ANI_STATE::DEAD, 
+			GetTransform()->GetPosition()));
 
-	if (m_iCurPrame == 11)
-	{
 		if (!IsDead())
 		{
 			DeleteObject(this);
@@ -92,17 +80,8 @@ void CTear::FixedUpdate()
 
 void CTear::Render(HDC hdc)
 {
-
-	if (!m_bGravity)
-	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect((UINT)GetTransform()->GetPositionX() - 32, (UINT)GetTransform()->GetPositionY() - 32, 64, 64),
-			160, 0, 32, 32, UnitPixel);
-	}
-	else
-	{
-		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect((UINT)GetTransform()->GetPositionX() - 32, (UINT)GetTransform()->GetPositionY() - 32, 64, 64),
-			0 + (m_iCurPrame * 64), 0, 64, 64, UnitPixel);
-	}
+	CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect((UINT)GetTransform()->GetPositionX() - 32, (UINT)GetTransform()->GetPositionY() - 32, 64, 64),
+		160, 0, 32, 32, UnitPixel);
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
 	{
@@ -141,29 +120,26 @@ void CTear::Move()
 
 INT CTear::CheckCollisionState()
 {
-	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE)
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE || m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY)
 	{
 		if (!m_bSound)
 		{
 			m_bSound = true;
 			CSoundMgr::GetInstance()->MyPlaySound(L"Tear_Dead_Time.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
 		}
-		m_bGravity = true;
-		m_sprite->SetPath(L"../Resources/Sprites/tear.png");
-		m_sprite->Init();
+
+		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/tear.png", Vector2(0, 0), Vector2(64, 64), false, Vector2(0, 0)),
+			11,
+			0.05f,
+			Vector2(32, 32),
+			ANI_STATE::DEAD, GetTransform()->GetPosition()));
+
+		if (!IsDead())
+		{
+			DeleteObject(this);
+		}
 	}
 
-	if (m_collide->GetFlag() & (INT)COLLISION_FLAG::ENEMY)
-	{
-		if (!m_bSound)
-		{
-			m_bSound = true;
-			CSoundMgr::GetInstance()->MyPlaySound(L"Tear_Dead_Time 0.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
-		}
-		m_bGravity = true;
-		m_sprite->SetPath(L"../Resources/Sprites/tear.png");
-		m_sprite->Init();
-	}
     return 0;
 }
 
