@@ -151,11 +151,11 @@ void CTear::FireEyeSet(bool left, Vector2 attackdirection)
 	{
 		if (left)
 		{
-			m_vecFireEye.y -= 10;
+			m_vecFireEye.y -= 4;
 		}
 		else
 		{
-			m_vecFireEye.y += 10;
+			m_vecFireEye.y += 4;
 		}
 	}
 
@@ -163,11 +163,11 @@ void CTear::FireEyeSet(bool left, Vector2 attackdirection)
 	{
 		if (left)
 		{
-			m_vecFireEye.x -= 10;
+			m_vecFireEye.x -= 4;
 		}
 		else
 		{
-			m_vecFireEye.x += 10;
+			m_vecFireEye.x += 4;
 		}
 	}
 }
