@@ -10,7 +10,6 @@ CToolScene::CToolScene(wstring path)
 	:CScene(path),
 	 m_rcTool(RECT())
 {
-
 }
 
 CToolScene::CToolScene()

@@ -24,6 +24,11 @@ void CEventMgr::Update()
 	}
 	m_vecEvent.clear();
 
+	if (CSceneMgr::GetInstance()->GetCurScene()->AllEnemyDie())
+	{
+		int i = 0;
+	}
+
 }
 
 void CEventMgr::Excute(const tEvent& eve)

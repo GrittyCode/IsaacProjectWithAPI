@@ -75,8 +75,9 @@ void CScene::Init()
 		Vector2(0, 0),
 		Vector2(0, 0),
 		Vector2(5, 640),
-		Vector2(840, 80),
+		Vector2(200, 80),
 		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
+
 }
 
 void CScene::Update()
@@ -114,6 +115,7 @@ void CScene::FixedUpdate()
 	//map콜라이더
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::MAP_COLLIDER, OBJECT_TYPE::PLAYER);
 	CObjectMgr::GetInstance()->FixedUpdate();
+
 }
 
 
@@ -140,6 +142,18 @@ void CScene::Release()
 
 	CObjectMgr::GetInstance()->Release();
 	
+}
+
+BOOL CScene::AllEnemyDie()
+{
+	auto iter = m_MapObjectList.find(OBJECT_TYPE::ENEMY);
+
+	if ((*iter).second.empty())
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void CScene::AddObjectToScene(ObjectInfo objInfo)

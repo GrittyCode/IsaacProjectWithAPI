@@ -26,17 +26,10 @@ void CSceneMgr::Init()
 				Vector2(32, 32),
 				Vector2(WINDOW_X * 0.5f, WINDOW_Y * 0.5f),
 				Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
-			MoverInfo());
-	m_Player->Init();
-	CObjectMgr::GetInstance()->SetPlayer(m_Player);
+				MoverInfo());
+				m_Player->Init();
 
-	CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
-		Vector2(0, 0),
-		Vector2(32, 32),
-		Vector2(32, 32),
-		Vector2(300, 300),
-		Vector2(1, 1),
-		OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(8, 1, 0, 50.f, 0.f)));
+	CObjectMgr::GetInstance()->SetPlayer(m_Player);
 
 }
 
