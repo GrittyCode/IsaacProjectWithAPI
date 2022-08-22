@@ -9,8 +9,11 @@ CSprite::CSprite(wstring path, INT orderLayer)
 
 CSprite::~CSprite()
 {
-	delete m_sprite;
-	delete m_SpriteFileY;
+	m_sprite->operator delete;
+	m_SpriteFileY->~Image();
+
+	m_sprite = nullptr;
+	m_SpriteFileY = nullptr;
 }
 
 void CSprite::Init()
@@ -35,11 +38,6 @@ void CSprite::Render(HDC hdc)
 
 void CSprite::Release()
 {
-	delete m_sprite;
-	delete m_SpriteFileY;
-
-	m_sprite = nullptr;
-	m_SpriteFileY = nullptr;
 }
 
 void CSprite::SetPath(wstring path)
