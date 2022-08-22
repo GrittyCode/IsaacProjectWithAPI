@@ -7,7 +7,7 @@ CGameMgr* CGameMgr::m_pInstance = nullptr;
 
 void CGameMgr::Init()
 {
-	CSoundMgr::GetInstance()->PlayBGM(L"BackGround.ogg");
+	CSoundMgr::GetInstance()->PlayBGM(L"BGM.ogg");
 
 	RECT rt = { 0,0, WINDOW_X,WINDOW_Y };
 
