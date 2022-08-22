@@ -29,6 +29,7 @@ HWND g_ToolDig;
 HINSTANCE g_hInst;
 float Scale = 1;
 wchar_t OriginDirectory[256];
+int iMinMap = 0;
 //
 
 //GDI 설정

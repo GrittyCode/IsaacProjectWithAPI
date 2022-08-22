@@ -15,8 +15,17 @@ CDoor::~CDoor()
 void CDoor::Init()
 {
 	CObject::Init();
-	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX()), (m_Transform->GetSizeY()));
+	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 50), (m_Transform->GetSizeY() - 38));
 	AddComponent(m_collide);
+
+	if (m_doorInfo.dir == DIRECTION::LEFT)
+	{
+		m_sprite->GetSprite()->RotateFlip(Rotate270FlipY);
+	}
+	else if (m_doorInfo.dir == DIRECTION::RIGHT)
+	{
+		m_sprite->GetSprite()->RotateFlip(Rotate270FlipX);
+	}
 }
 
 void CDoor::Update()
