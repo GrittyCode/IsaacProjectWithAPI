@@ -12,6 +12,8 @@ public:
 	void ChangeScene(wstring scenePath, DIRECTION dir);
 	void ChangeMode(GAME_MODE mode);
 	void CreateStageFromTool();
+	void FadeInOut(float blending);
+
 	map<wstring, CScene*>* const GetMapScene() { return &m_MapScene; }
 	/*
 	bool CreateStageFromInfo(wstring path,int xIndex, int yIndex);
@@ -38,6 +40,7 @@ private:
 
 
 	//씬 전환 이미지
-	Image* m_fadeImg;
+	Image* m_pFadeImg;
+	BOOL m_bIsChange = false;
 };
 

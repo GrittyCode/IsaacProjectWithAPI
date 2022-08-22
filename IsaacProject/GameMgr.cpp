@@ -47,12 +47,6 @@ void CGameMgr::Update()
 {
 	CTimeMgr::GetInstance()->UpdateTime();
 
-	/*if (CKeyMgr::GetInstance()->GetKeyState((int)KEY::A) == KEY_STATE::TAP)
-	{
-		m_bWindowSizeChange = true;
-		Scale += 1;
-	}*/
-
 	//게임모드 설정
 	if (CKeyMgr::GetInstance()->GetKeyState((int)KEY::F1) == KEY_STATE::TAP)
 	{
@@ -89,17 +83,16 @@ void CGameMgr::LateUpdate()
 
 void CGameMgr::Render()
 {
+	BitBlt(m_hdc, 0, 0, WINDOW_X, WINDOW_Y, m_hMemDC, 0, 0, SRCCOPY);
 	CSceneMgr::GetInstance()->Render(m_hMemDC);
+
 	//tset.Render(m_hMemDC);
 	//m_hMemDC, m_hBuffer,L"../Resources/Sprites/Map/test.bmp");
-	BitBlt(m_hdc, 0, 0, WINDOW_X, WINDOW_Y, m_hMemDC, 0, 0, SRCCOPY);
 }
 
 void CGameMgr::Release()
 {
 	CSceneMgr::GetInstance()->Release();
-	//CObjectMgr::GetInstance()->Release();
-
 	CSceneMgr::DestroyInst();
 	CObjectMgr::DestroyInst();
 	CCollisionMgr::DestroyInst();
