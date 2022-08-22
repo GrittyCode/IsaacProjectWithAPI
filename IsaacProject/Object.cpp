@@ -34,7 +34,10 @@ void CObject::Init()
 
 void CObject::FixedUpdate()
 {
-	CheckCollisionState();
+	if (!IsDead())
+	{
+		CheckCollisionState();
+	}
 }
 
 void CObject::LateUpdate()

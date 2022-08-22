@@ -5,20 +5,7 @@ CObjectMgr* CObjectMgr::m_pInstance = nullptr;
 
 void CObjectMgr::Init()
 {
-	if (m_player == nullptr)
-	{
-		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
-			Vector2(0, 32),
-			Vector2(32, 32),
-			Vector2(32, 32),
-			Vector2(200, 200),
-			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),
-			DoorInfo(L"test5.scene", Vector2(800, 500), DIRECTION::LEFT)));
-	}
-	else
-	{
 
-	}
 }
 
 void CObjectMgr::Update()

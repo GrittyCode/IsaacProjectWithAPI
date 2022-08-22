@@ -12,10 +12,16 @@ void CEventMgr::Update()
 	// 이전 프레임에서 등록해둔 Dead Object 들을 삭제한다.
 	for (UINT i = 0; i < m_vecDead.size(); ++i)
 	{
-		m_vecDead[i]->Release();
-		delete m_vecDead[i];
+		if (m_vecDead[i] != nullptr)
+		{
+			m_vecDead[i]->Release();
+			delete m_vecDead[i];
+			m_vecDead[i] = nullptr;
+		}
 	}
+
 	m_vecDead.clear();
+	vector<CObject*>().swap(m_vecDead);
 
 
 	for (UINT i = 0; i < m_vecEvent.size(); ++i)
@@ -23,11 +29,6 @@ void CEventMgr::Update()
 		Excute(m_vecEvent[i]);
 	}
 	m_vecEvent.clear();
-
-	if (CSceneMgr::GetInstance()->GetCurScene()->AllEnemyDie())
-	{
-		int i = 0;
-	}
 
 }
 
@@ -63,10 +64,11 @@ void CEventMgr::Excute(const tEvent& eve)
 	case EVENT_TYPE::DELETE_EFFECT:
 	{
 		//사라짐?
+		/*
 		CAnimation* pObj = (CAnimation*)eve.lParam;
 
 		CEffectMgr::GetInstance()->DeletEffect(pObj);
-
+		*/
 	}
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:
