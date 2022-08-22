@@ -1,18 +1,22 @@
 #include "stdafx.h"
 #include "GameMgr.h"
+#include "SoundMgr.h"
 
 CGameMgr* CGameMgr::m_pInstance = nullptr;
 
 
 void CGameMgr::Init()
 {
+	CSoundMgr::GetInstance()->PlayBGM(L"BackGround.ogg");
+
 	RECT rt = { 0,0, WINDOW_X,WINDOW_Y };
 
 	GetCurrentDirectory(256, OriginDirectory);
-
-	//클라이언트 크기 1280 896 고정
-	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, true);
-	SetWindowPos(g_hWnd, nullptr, WINDOW_START_X, WINDOW_START_Y, rt.right - rt.left, rt.bottom - rt.top, 0);
+	GetClientRect(g_hWnd, &rt);
+	//클라이언트 크기 936 624 고정
+	AdjustWindowRect(&rt, NULL, false);
+	SetWindowPos(g_hWnd, nullptr, 0,0,WINDOW_X,WINDOW_Y,FALSE);
+	GetWindowRect(g_hWnd, &rt);
 
 	Scale = floorf((rt.right - rt.left) / (TILE_SIZE * 18.f));
 

@@ -118,6 +118,12 @@
     <ClCompile Include="EffectMgr.cpp">
       <Filter>02.Manager\12.EffectMgr</Filter>
     </ClCompile>
+    <ClCompile Include="Eqiup.cpp">
+      <Filter>05.Object\08.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>02.Manager\13.SoundMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -260,6 +266,12 @@
     </ClInclude>
     <ClInclude Include="EffectMgr.h">
       <Filter>02.Manager\12.EffectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Eqiup.h">
+      <Filter>05.Object\08.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>02.Manager\13.SoundMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +426,9 @@
     </Filter>
     <Filter Include="02.Manager\12.EffectMgr">
       <UniqueIdentifier>{0cd59e9b-e5eb-4819-a2d4-e38b21db9387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\13.SoundMgr">
+      <UniqueIdentifier>{94792807-4113-4960-83f7-76d2eed28846}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

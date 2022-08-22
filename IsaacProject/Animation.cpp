@@ -53,7 +53,7 @@ void CAnimation::Update()
 		if (m_fCurDelay > m_fFrameDelay)
 		{
 			++m_iCurFrame;
-			cout << m_iCurFrame << endl;
+			//cout << m_iCurFrame << endl;
 			m_fCurDelay = 0;
 		}
 

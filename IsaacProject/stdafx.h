@@ -25,8 +25,6 @@
 #include "TraceState.h"
 #include "DeadState.h"
 #include "Huntstate.h"
-
-
 #include "Animation.h"
 
 //Objecct
@@ -61,6 +59,9 @@
 #include "FactoryMgr.h"
 #include "EffectMgr.h"
 
+
+#include "fmod.h"
+#pragma comment(lib, "fmodex_vc.lib")
 //Dig
 #include "ToolDlg.h"
 

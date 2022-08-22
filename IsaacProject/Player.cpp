@@ -154,7 +154,7 @@ void CPlayer::Move()
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::TAP 
 		|| CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::S) == KEY_STATE::HOLD)
 	{
-		m_MoverInfo.vecMoveDiretion.y = m_MoverInfo.vecMoveDiretion.y == -1.0 ? 0 :  1.0;
+		m_MoverInfo.vecMoveDiretion.y = m_MoverInfo.vecMoveDiretion.y == -1.0f ? 0 :  1.0f;
 		m_MoverInfo.eAniMoveState = ANI_STATE::DOWNMOVE;
 	}
 

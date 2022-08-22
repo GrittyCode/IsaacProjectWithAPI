@@ -9,8 +9,7 @@ public:
 	void FixedUpdate();
 	void Render(HDC hdc);
 	void Release();
-
-	void ChangeScene(wstring scenePath);
+	void ChangeScene(wstring scenePath, DIRECTION dir);
 	void ChangeMode(GAME_MODE mode);
 	void CreateStageFromTool();
 	map<wstring, CScene*>* const GetMapScene() { return &m_MapScene; }
@@ -36,5 +35,9 @@ private:
 	vector<POINT> m_createdMap;
 	map<wstring,CScene*> m_MapScene;
 	CScene* m_currentScene = nullptr;
+
+
+	//씬 전환 이미지
+	Image* m_fadeImg;
 };
 

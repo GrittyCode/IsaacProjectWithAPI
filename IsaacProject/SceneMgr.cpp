@@ -5,13 +5,15 @@ CSceneMgr* CSceneMgr::m_pInstance = nullptr;
 
 void CSceneMgr::Init()
 {
+	//씬 전환 이미지 생성
+	m_fadeImg = Image::FromFile(L"../Resources/Sprites/fadeinout.png");
 	//플레이어 임시 생성
 	LoadMap(L"test.map");
 
 	m_MapScene.insert({ L"Tool.scene", new CToolScene(L"Tool.scene")});
 	
 	//첫번째 씬을 시작 씬으로 지정
-	m_currentScene = (*m_MapScene.find(L"Test1.scene")).second;
+	m_currentScene = (*m_MapScene.find(L"start.scene")).second;
 
 	if (m_currentScene != nullptr)
 		m_currentScene->Init();
@@ -22,7 +24,7 @@ void CSceneMgr::Init()
 				Vector2(0, 0),
 				Vector2(32, 32),
 				Vector2(32, 32),
-				Vector2(100, 100),
+				Vector2(WINDOW_X * 0.5f, WINDOW_Y * 0.5f),
 				Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
 			MoverInfo());
 	m_Player->Init();
@@ -75,6 +77,7 @@ void CSceneMgr::Render(HDC hdc)
 	if(m_currentScene != nullptr)
 		m_currentScene->Render(hdc);
 	CEffectMgr::GetInstance()->Update();
+	//CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_fadeImg, 0,0, m_fadeImg->GetWidth(), m_fadeImg->GetHeight());
 }
 
 void CSceneMgr::Release()
@@ -84,8 +87,9 @@ void CSceneMgr::Release()
 }
 
 
-void CSceneMgr::ChangeScene(wstring scenePath)
+void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 {
+
 	auto iter = m_MapScene.find(scenePath);
 
 	if (iter != m_MapScene.end())
@@ -93,6 +97,25 @@ void CSceneMgr::ChangeScene(wstring scenePath)
 		//등록되어있는 씬으로 옮긴다.
 		m_currentScene = (*iter).second;
 		m_currentScene->Init();
+
+		//플레이어 이동 
+		switch (dir)
+		{
+		case DIRECTION::UP:
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(WINDOW_X * 0.5f , (float)WINDOW_Y - PADDING_DOOR));
+			break;
+		case DIRECTION::DOWN:
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(WINDOW_X * 0.5f , 0.f + PADDING_DOOR));
+			break;
+		case DIRECTION::LEFT:
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2((float)WINDOW_X  - PADDING_DOOR, WINDOW_Y * 0.5f));
+			break;
+		case DIRECTION::RIGHT:
+			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(0.f + PADDING_DOOR, WINDOW_Y * 0.5f));
+			break;
+		case DIRECTION::DIRECTION_END:
+			break;
+		}
 	}
 }
 
@@ -100,7 +123,7 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 {
 	if (mode == GAME_MODE::GAME)
 	{
-		ChangeScene(L"start.scene");
+		ChangeScene(L"start.scene",DIRECTION::DIRECTION_END);
 
 		if (g_ToolDig != nullptr)
 		{
@@ -109,13 +132,14 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 	}
 	else if (mode == GAME_MODE::TOOL)
 	{
-		ChangeScene(L"Tool.scene");
+		ChangeScene(L"Tool.scene", DIRECTION::DIRECTION_END);
 	}
 	else//디버깅모드
 	{
 
 	}
 }
+
 
 BOOL CSceneMgr::LoadMap(wstring mapPath)
 {
@@ -144,6 +168,7 @@ BOOL CSceneMgr::LoadMap(wstring mapPath)
 	
 	return 0;
 }
+
 
 BOOL CSceneMgr::SetSceneFromSceneSave(CScene* desScene)
 {
@@ -268,39 +293,3 @@ void CSceneMgr::CreateStageFromTool()
 		}
 	}
 }
-
-
-
-
-
-/*
-	//백그라운드 임시 생성
-	CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/test.bmp", OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
-	//플레이어 등록하기 위한 꼼수
-	CreateObject(new CPlayer(
-		ObjectInfo(
-			L"../Resources/Sprites/character_001_isaac.png",
-			Vector2(0, 0),
-			Vector2(32, 32),
-			Vector2(32, 32),
-			Vector2(100, 100),
-			Vector2(1, 1), OBJECT_TYPE::PLAYER, OBJECT_STATE::IDLE),
-			MoverInfo()));
-
-	CreateObject(new CFly(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
-		Vector2(0, 32),
-		Vector2(32, 32),
-		Vector2(32, 32),
-		Vector2(200, 200),
-		Vector2(1, 1), OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE),
-		EnemyInfo(4,1,0,50.0f,0)));
-
-
-	CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Enemy/monster_010_fly.png",
-		Vector2(0, 32),
-		Vector2(32, 32),
-		Vector2(32, 32),
-		Vector2(200, 200),
-		Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),
-		DoorInfo(L"test1.scene", Vector2(500,500))));
-	*/

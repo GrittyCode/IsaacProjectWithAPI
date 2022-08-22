@@ -7,8 +7,8 @@
 #include <vld.h>
 #endif // DEBUG
 
-
 #include "IsaacProject.h"
+#include "SoundMgr.h"
 
 #define MAX_LOADSTRING 100
 
@@ -22,8 +22,6 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-
 
 //EXTERN 변수
 HWND g_hWnd;
@@ -70,11 +68,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
     msg.message = WM_NULL;
     
+    CSoundMgr::GetInstance();
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
     CGameMgr::GetInstance();
     CFrameMgr frame;
     frame.InitFrameMgr(65.0f);
     frame.InitFrameMgr(60.0f);
+
+
     // 기본 메시지 루프입니다:
     while (WM_QUIT != msg.message)
     {
@@ -101,6 +102,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     CTimeMgr::DestroyInst();
     CGameMgr::GetInstance()->Release();
     CGameMgr::DestroyInst();
+    CSoundMgr::DestroyInst();
 
     //GDI 동적할당 해제
     GdiplusShutdown(gdiplusToken);
@@ -127,7 +129,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ISAACPROJECT));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = nullptr;//MAKEINTRESOURCEW(IDC_ISAACPROJECT);
+    wcex.lpszMenuName   = NULL;//MAKEINTRESOURCEW(IDC_ISAACPROJECT);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -191,9 +193,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         RECT rt = {0,0,WINDOW_X ,WINDOW_Y };
         AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, true);
         ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = rt.right - rt.left;
-        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = rt.bottom - rt.top;
+        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = rt.bottom - rt.top - 20;
         ((MINMAXINFO*)lParam)->ptMinTrackSize.x = rt.right - rt.left;
-        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = rt.bottom - rt.top;
+        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = rt.bottom - rt.top - 20;
         return (INT_PTR)FALSE;
     }
     case WM_COMMAND:
@@ -202,14 +204,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // 메뉴 선택을 구문 분석합니다:
             switch (wmId)
             {
-            case IDM_ABOUT:
-                //DialogBox(hInst, MAKEINTRESOURCE(IDD_TOOL), hWnd, About);
-                break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
                 break;
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
+            }
+        }
+        break;
+    case WM_KEYDOWN:
+        {
+            switch (wParam)
+            {
+            case VK_ESCAPE:
+                PostQuitMessage(0);
+                break;
             }
         }
         break;
@@ -229,24 +238,4 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
-}
-
-// 정보 대화 상자의 메시지 처리기입니다.
-INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    UNREFERENCED_PARAMETER(lParam);
-    switch (message)
-    {
-    case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
-
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-        {
-            EndDialog(hDlg, LOWORD(wParam));
-            return (INT_PTR)TRUE;
-        }
-        break;
-    }
-    return (INT_PTR)FALSE;
 }

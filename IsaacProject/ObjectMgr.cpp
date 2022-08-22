@@ -13,7 +13,7 @@ void CObjectMgr::Init()
 			Vector2(32, 32),
 			Vector2(200, 200),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),
-			DoorInfo(L"test5.scene", Vector2(800, 500))));
+			DoorInfo(L"test5.scene", Vector2(800, 500), DIRECTION::LEFT)));
 	}
 	else
 	{

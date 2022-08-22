@@ -9,18 +9,23 @@ CSprite::CSprite(wstring path, INT orderLayer)
 
 CSprite::~CSprite()
 {
-	m_sprite->operator delete;
-	m_SpriteFileY->~Image();
-
+	delete m_sprite;
+	delete m_SpriteFileY;
 	m_sprite = nullptr;
 	m_SpriteFileY = nullptr;
+	CImageMgr::GetInstance()->GetGraphics()->ReleaseHDC(CGameMgr::GetInstance()->GetMemDC());
+
 }
 
 void CSprite::Init()
 {
+	delete m_sprite;
+	delete m_SpriteFileY;
+	m_sprite = nullptr;
+	m_SpriteFileY = nullptr;
 	m_type = COMPONENT_TYPE::SPRITE;
-	m_sprite = Image::FromFile(m_path.c_str());
-	m_SpriteFileY = Image::FromFile(m_path.c_str());
+	m_sprite = new Image(m_path.c_str());
+	m_SpriteFileY = new Image(m_path.c_str());
 	m_SpriteFileY->RotateFlip(Rotate180FlipY);
 }
 
