@@ -66,7 +66,7 @@ void CSceneMgr::Render(HDC hdc)
 		if (fadeIn >= 1.0f)
 		{
 			static float fadeOut = 1.0f;
-			fadeOut -= .05f;
+			fadeOut -= .02f;
 			FadeInOut(fadeOut);
 			
 			if (fadeOut <= 0.0f)
