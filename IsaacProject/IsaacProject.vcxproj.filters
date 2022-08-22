@@ -127,6 +127,9 @@
     <ClCompile Include="MapCollider.cpp">
       <Filter>05.Object\09.MapCollider</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>08.Module\02.Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -278,6 +281,9 @@
     </ClInclude>
     <ClInclude Include="MapCollider.h">
       <Filter>05.Object\09.MapCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>08.Module\02.Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -438,6 +444,9 @@
     </Filter>
     <Filter Include="05.Object\09.MapCollider">
       <UniqueIdentifier>{d5b8cb85-a713-450c-97d6-e6ba40195679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Module\02.Menu">
+      <UniqueIdentifier>{480a3f39-687b-4d3a-804b-695e5108e2c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -156,6 +156,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="MapCollider.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="TraceState.h" />
     <ClInclude Include="Fly.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="MapCollider.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="TraceState.cpp" />
     <ClCompile Include="Fly.cpp" />

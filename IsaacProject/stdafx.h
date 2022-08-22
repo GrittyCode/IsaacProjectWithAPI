@@ -26,6 +26,7 @@
 #include "DeadState.h"
 #include "Huntstate.h"
 #include "Animation.h"
+#include "Menu.h"
 
 //Objecct
 #include "Object.h"

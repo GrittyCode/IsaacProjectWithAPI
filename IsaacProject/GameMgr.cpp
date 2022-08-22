@@ -7,6 +7,16 @@ CGameMgr* CGameMgr::m_pInstance = nullptr;
 
 void CGameMgr::Init()
 {
+	//매니저 생성(init자동)
+	CKeyMgr::GetInstance();
+	CCollisionMgr::GetInstance();
+	CSceneMgr::GetInstance();
+	CTimeMgr::GetInstance();
+
+	CMenu menu;
+
+	menu.Update();
+
 	CSoundMgr::GetInstance()->PlayBGM(L"BGM.ogg");
 
 	RECT rt = { 0,0, WINDOW_X,WINDOW_Y };
@@ -35,12 +45,6 @@ void CGameMgr::Init()
 
 	//처음시작할 때는 게임 모드로 들어감
 	m_mode = GAME_MODE::GAME;
-
-	//매니저 생성(init자동)
-	CKeyMgr::GetInstance();
-	CTimeMgr::GetInstance();
-	CCollisionMgr::GetInstance();
-	CSceneMgr::GetInstance();
 }
 
 void CGameMgr::Update()

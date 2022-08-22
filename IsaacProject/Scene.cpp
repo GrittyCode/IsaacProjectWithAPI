@@ -116,7 +116,7 @@ void CScene::Init()
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 68),
+			Vector2(WINDOW_X * 0.5, 75),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",

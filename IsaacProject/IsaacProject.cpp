@@ -9,6 +9,7 @@
 
 #include "IsaacProject.h"
 #include "SoundMgr.h"
+#include "Menu.h"
 
 #define MAX_LOADSTRING 100
 
@@ -69,14 +70,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
     msg.message = WM_NULL;
     
-    CSoundMgr::GetInstance();
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+   // CSoundMgr::GetInstance();
     CGameMgr::GetInstance();
     CFrameMgr frame;
     frame.InitFrameMgr(65.0f);
     frame.InitFrameMgr(60.0f);
 
-
+ 
     // 기본 메시지 루프입니다:
     while (WM_QUIT != msg.message)
     {
