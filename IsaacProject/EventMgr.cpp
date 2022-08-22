@@ -12,10 +12,16 @@ void CEventMgr::Update()
 	// 이전 프레임에서 등록해둔 Dead Object 들을 삭제한다.
 	for (UINT i = 0; i < m_vecDead.size(); ++i)
 	{
-		m_vecDead[i]->Release();
-		delete m_vecDead[i];
+		if (m_vecDead[i] != nullptr)
+		{
+			m_vecDead[i]->Release();
+			delete m_vecDead[i];
+			m_vecDead[i] = nullptr;
+		}
 	}
+
 	m_vecDead.clear();
+	vector<CObject*>().swap(m_vecDead);
 
 
 	for (UINT i = 0; i < m_vecEvent.size(); ++i)
