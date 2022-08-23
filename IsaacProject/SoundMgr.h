@@ -5,7 +5,7 @@ class CSoundMgr
 	SINGLETONE(CSoundMgr)
 
 public:
-	enum CHANNELID { BGM , TITLE_BGM, PLAYER_WALK, TEAR_FIRE, TEAR_DEAD,PLAYER_HURT, MAXCHANNEL };
+	enum CHANNELID { BGM , TITLE_BGM, PLAYER_WALK, TEAR_FIRE, TEAR_DEAD,PLAYER_HURT, INTRO, MAXCHANNEL };
 	enum CHANNELSOUND {BGM_S, UI};
 
 public:
@@ -14,7 +14,7 @@ public:
 	void Release();
 public:
 	void MyPlaySound(const TCHAR* pSoundKey, CHANNELID eID);
-	void PlayBGM(const TCHAR* pSoundKey);
+	void PlayBGM(const TCHAR* pSoundKey, CHANNELID id);
 	void StopSound(CHANNELID eID);
 	void AllStop();
 	void LoadSoundFile();

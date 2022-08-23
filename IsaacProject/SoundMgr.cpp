@@ -44,7 +44,7 @@ void CSoundMgr::MyPlaySound(const TCHAR * pSoundKey, CHANNELID eID)
 	FMOD_System_Update(m_pSystem);
 }
 
-void CSoundMgr::PlayBGM(const TCHAR * pSoundKey)
+void CSoundMgr::PlayBGM(const TCHAR * pSoundKey, CHANNELID chnel)
 {
 	if (m_mapSound.empty())
 		return;
@@ -58,10 +58,10 @@ void CSoundMgr::PlayBGM(const TCHAR * pSoundKey)
 	if (m_mapSound.end() == iter)
 		return;
 
-	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[BGM]);
-	FMOD_Channel_SetMode(m_pChannelArr[BGM], FMOD_LOOP_NORMAL);
+	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[chnel]);
+	FMOD_Channel_SetMode(m_pChannelArr[chnel], FMOD_LOOP_NORMAL);
 	FMOD_System_Update(m_pSystem);
-	FMOD_Channel_SetVolume(m_pChannelArr[BGM], 0.1f);
+	FMOD_Channel_SetVolume(m_pChannelArr[chnel], 0.1f);
 }
 
 void CSoundMgr::StopSound(CHANNELID eID)

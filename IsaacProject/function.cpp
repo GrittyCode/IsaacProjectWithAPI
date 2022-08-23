@@ -99,6 +99,22 @@ float DistanceMeasure(Vector2 sourse, Vector2 taget)
 	return tmep;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/// 
+/// EVENTMANAGER
+/// 
+/// 
 void CreateObject(CObject* pObj)
 {
 	tEvent evn = {};
@@ -110,14 +126,15 @@ void CreateObject(CObject* pObj)
 
 void DeleteObject(CObject* pObj)
 {
+	if (pObj == nullptr)
+		return;
+
 	tEvent evn = {};
 	evn.eEven = EVENT_TYPE::DELETE_OBJECT;
 	evn.lParam = (DWORD_PTR)pObj;
 
 	CEventMgr::GetInstance()->AddEvent(evn);
 }
-
-
 
 void CreateEffect(CAnimation* pObj)
 {
@@ -136,7 +153,6 @@ void DeleteEffect(CAnimation* pObj)
 
 	CEventMgr::GetInstance()->AddEvent(evn);
 }
-
 
 void ChageScene(wstring* sceneName, DIRECTION* dir)
 {

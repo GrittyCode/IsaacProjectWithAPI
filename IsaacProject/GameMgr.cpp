@@ -17,7 +17,7 @@ void CGameMgr::Init()
 
 	menu.Update();
 
-	CSoundMgr::GetInstance()->PlayBGM(L"BGM.ogg");
+	CSoundMgr::GetInstance()->PlayBGM(L"BGM.ogg",CSoundMgr::CHANNELID::BGM);
 
 	RECT rt = { 0,0, WINDOW_X,WINDOW_Y };
 

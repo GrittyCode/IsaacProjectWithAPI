@@ -101,14 +101,14 @@ void CScene::Init()
 			Vector2(0, 128),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(64, WINDOW_Y * 0.5),
+			Vector2((float)64, WINDOW_Y * 0.5f),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::LEFT)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 256),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(872, WINDOW_Y * 0.5),
+			Vector2((float)872, WINDOW_Y * 0.5f),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::RIGHT)));
 
 
@@ -116,14 +116,14 @@ void CScene::Init()
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 75),
+			Vector2(WINDOW_X * 0.5f, (float)75),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 550),
+			Vector2(WINDOW_X * 0.5f, (float)550),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::DOWN)));
 
 		//파리생성

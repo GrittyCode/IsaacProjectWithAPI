@@ -41,6 +41,7 @@ private:
 
 	//씬 전환 이미지
 	Image* m_pFadeImg;
-	BOOL m_bIsChange = false;
+	BOOL m_bIsChange = true;
+	BOOL m_bIsFirst = true;
 };
 
