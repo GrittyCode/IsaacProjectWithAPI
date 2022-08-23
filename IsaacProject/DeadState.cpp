@@ -21,7 +21,8 @@ void DeadState::Enter()
 		Vector2(32, 32),
 		ANI_STATE::DEAD,EnemyPos));
 
-	DeleteObject(GetAI()->GetHost());
+	if(!GetAI()->GetHost()->IsDead())
+		DeleteObject(GetAI()->GetHost());
 }
 
 void DeadState::Exit()

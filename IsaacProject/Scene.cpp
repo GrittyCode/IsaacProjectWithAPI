@@ -27,6 +27,9 @@ void CScene::Init()
 	CObjectMgr::GetInstance()->ConnectScene(&m_MapObjectList);
 
 
+	if (m_Name == L"Tool.scene")
+		return;
+
 	//传拱 寒 面倒
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0, 0),
@@ -101,14 +104,14 @@ void CScene::Init()
 			Vector2(0, 128),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(64, WINDOW_Y * 0.5),
+			Vector2((float)80, WINDOW_Y * 0.5f),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::LEFT)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 256),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(872, WINDOW_Y * 0.5),
+			Vector2((float)872, WINDOW_Y * 0.5f),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::RIGHT)));
 
 
@@ -116,14 +119,14 @@ void CScene::Init()
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 80),
+			Vector2(WINDOW_X * 0.5f, (float)75),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 562),
+			Vector2(WINDOW_X * 0.5f, (float)562),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::DOWN)));
 
 		//颇府积己
@@ -174,6 +177,8 @@ void CScene::Init()
 			Vector2(500, 100),
 			Vector2(1, 1),
 			OBJECT_TYPE::ENEMY, OBJECT_STATE::IDLE), EnemyInfo(4, 1, 0, 50.f, 0.f)));
+
+		m_state = SCENE_STATE::CLOSE;
 	}
 }
 

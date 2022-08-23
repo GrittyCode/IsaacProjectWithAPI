@@ -22,5 +22,4 @@ void DeleteObject(CObject* pObj);
 
 void CreateEffect(CAnimation* pObj);
 void DeleteEffect(CAnimation* pObj);
-void DeleteObject(CObject* pObj);
 void ChageScene(wstring* sceneName, DIRECTION* dir);

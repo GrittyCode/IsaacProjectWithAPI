@@ -5,11 +5,15 @@
 CMenu::CMenu()
 {
 	m_MenuImage = new Image(L"../Resources/Play.png");
-	CSoundMgr::GetInstance()->PlayBGM(L"BGM.ogg");
+	CSoundMgr::GetInstance()->PlayBGM(L"title_screen_intro.ogg",CSoundMgr::CHANNELID::TITLE_BGM);
 }
 
 CMenu::~CMenu()
 {
+	CSoundMgr::GetInstance()->StopSound(CSoundMgr::CHANNELID::TITLE_BGM);
+	
+	CSoundMgr::GetInstance()->MyPlaySound(L"title_screen_jingle.ogg", CSoundMgr::CHANNELID::INTRO);
+
 }
 
 void CMenu::Update()

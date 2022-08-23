@@ -53,31 +53,35 @@ void CSceneMgr::Render(HDC hdc)
 	CEffectMgr::GetInstance()->Update();
 
 	if (m_bIsChange)
-	{
+	{	
+		static float fadeIn = 0.85f;
 		
-		static float fadeIn = 0.6f;
-		
-		if (fadeIn <= 1.0f)
+		if (fadeIn <= 1.f)
 		{
 			FadeInOut(fadeIn);
-			fadeIn += .05f;
+			fadeIn += .0085f;
 		}
 
 		if (fadeIn >= 1.0f)
 		{
 			static float fadeOut = 1.0f;
-			fadeOut -= .02f;
+			if (m_bIsFirst)
+				fadeOut -= .0085f;
+			else
+				fadeOut -= .02f;
+
 			FadeInOut(fadeOut);
 			
 			if (fadeOut <= 0.0f)
 			{
-				fadeIn = 0.6f;
+				fadeIn = 0.85f;
 				fadeOut = 1.0f;
 				m_bIsChange = false;
+				m_bIsFirst = false;
 			}
-			
 		}
 	}
+
 	//CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_fadeImg, 0,0, m_fadeImg->GetWidth(), m_fadeImg->GetHeight());
 }
 
@@ -140,8 +144,6 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 {
 	if (mode == GAME_MODE::GAME)
 	{
-		ChangeScene(L"start.scene",DIRECTION::DIRECTION_END);
-
 		if (g_ToolDig != nullptr)
 		{
 			DestroyWindow(g_ToolDig);
