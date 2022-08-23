@@ -27,6 +27,9 @@ void CScene::Init()
 	CObjectMgr::GetInstance()->ConnectScene(&m_MapObjectList);
 
 
+	if (m_Name == L"Tool.scene")
+		return;
+
 	//´«¹° º® Ãæµ¹
 	CreateObject(new CObstacle(ObjectInfo(L"",
 		Vector2(0, 0),

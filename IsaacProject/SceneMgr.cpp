@@ -144,8 +144,6 @@ void CSceneMgr::ChangeMode(GAME_MODE mode)
 {
 	if (mode == GAME_MODE::GAME)
 	{
-		ChangeScene(L"start.scene",DIRECTION::DIRECTION_END);
-
 		if (g_ToolDig != nullptr)
 		{
 			DestroyWindow(g_ToolDig);
