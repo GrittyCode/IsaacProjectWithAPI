@@ -53,7 +53,7 @@ void CScene::Init()
 		Vector2(0, 0),
 		Vector2(0, 0),
 		Vector2(936, 10),
-		Vector2(0, 525),
+		Vector2(0, 535),
 		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
 	//플레이어와 벽충돌
@@ -84,7 +84,7 @@ void CScene::Init()
 			Vector2(64, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(468, 68),
+			Vector2(468, 80),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE),DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
 
 		CreateObject(new CBackground(ObjectInfo(L"../Resources/BackGround/controls.png",
@@ -116,14 +116,14 @@ void CScene::Init()
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 75),
+			Vector2(WINDOW_X * 0.5, 80),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::UP)));
 
 		CreateObject(new CDoor(ObjectInfo(L"../Resources/Sprites/Object/Door.png",
 			Vector2(0, 0),
 			Vector2(0, 0),
 			Vector2(64, 64),
-			Vector2(WINDOW_X * 0.5, 550),
+			Vector2(WINDOW_X * 0.5, 562),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE), DoorInfo(L"test2.scene", Vector2(800, 500), DIRECTION::DOWN)));
 
 		//파리생성
