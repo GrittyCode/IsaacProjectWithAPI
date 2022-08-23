@@ -58,19 +58,6 @@ void CPlayer::Init()
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(64, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32), ANI_STATE::RIGHTATTACK));
 
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(128,192), Vector2(64, 64), false, Vector2(0, -20)), 0, 0, Vector2(64, 64), ANI_STATE::HUNT));
-
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32,32), ANI_STATE::IDLE));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(32, 32),ANI_STATE::DOWNMOVE));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 32), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1, Vector2(32, 32)));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32)));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 64), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32)));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 64), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32)));
-
-	////Attack AniMation
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(128, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(288, 0), Vector2(32, 32), true, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
-	//	(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(64, 0), Vector2(32, 32), false, Vector2(0, -20)), 2, 0.15f, Vector2(32, 32)));
 }
 
 void CPlayer::Update()
