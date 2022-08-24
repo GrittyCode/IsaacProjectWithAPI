@@ -85,7 +85,7 @@ void CEventMgr::Excute(const tEvent& eve)
 		if (iter != CSceneMgr::GetInstance()->GetMapScene()->end())
 		{
 			//등록되어있는 씬으로 옮긴다.
-			CSceneMgr::GetInstance()->ChangeScene(*name, *dir);
+			CSceneMgr::GetInstance()->ChangeScene(*name, *dir); 
 		}
 	}
 		break;
