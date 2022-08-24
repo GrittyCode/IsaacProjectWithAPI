@@ -3,7 +3,7 @@ class CTear : public CMover
 {
 public:
 	CTear(Vector2 playerdiretiony, Vector2 worldpos, Vector2 attackdirection, float playerspeed,bool m_Left);
-	~CTear();
+	virtual ~CTear() override;
 
 	virtual void Init();
 	virtual void Update();

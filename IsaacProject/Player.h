@@ -37,7 +37,6 @@ public:
 	virtual INT CheckCollisionState() override;
 	virtual void Move() override;
 	void Attack();
-
 private:
 	PlayerInfo m_PlayerInfo;
 };

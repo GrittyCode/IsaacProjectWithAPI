@@ -50,12 +50,15 @@ void CEventMgr::Excute(const tEvent& eve)
 		break;
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
-		//lParam OBJECT Address
 		//Object를 Dead상태로 변경
 		//삭제예정 오브젝트들을 모아둔다.
 		CObject* pDeadObj = (CObject*)eve.lParam;
 		pDeadObj->SetDead();
-		m_vecDead.push_back(pDeadObj);
+
+		if (find(m_vecDead.begin(), m_vecDead.end(), pDeadObj) == m_vecDead.end())
+		{
+			m_vecDead.push_back(pDeadObj);
+		}
 	}
 		break;
 	case EVENT_TYPE::CREATE_EFFECT:
@@ -69,9 +72,7 @@ void CEventMgr::Excute(const tEvent& eve)
 	case EVENT_TYPE::DELETE_EFFECT:
 	{
 		CAnimation* pObj = (CAnimation*)eve.lParam;
-
 		CEffectMgr::GetInstance()->DeletEffect(pObj);
-
 	}
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:

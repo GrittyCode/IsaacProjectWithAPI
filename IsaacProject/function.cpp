@@ -101,16 +101,6 @@ float DistanceMeasure(Vector2 sourse, Vector2 taget)
 
 
 
-
-
-
-
-
-
-
-
-
-
 /// 
 /// EVENTMANAGER
 /// 
@@ -126,6 +116,7 @@ void CreateObject(CObject* pObj)
 
 void DeleteObject(CObject* pObj)
 {
+
 	if (pObj == nullptr)
 		return;
 

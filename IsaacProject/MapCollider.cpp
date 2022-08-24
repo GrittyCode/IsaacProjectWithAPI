@@ -102,7 +102,7 @@ void CMapCollider::PushMover(CObject* obj)
 	}
 	else
 	{
-		float xDiff = intersectRect.right - intersectRect.left;
+		float xDiff = (float)(intersectRect.right - intersectRect.left);
 		//x축 리턴 위 대각선 이동
 
 		if (vecDir.x > 0)

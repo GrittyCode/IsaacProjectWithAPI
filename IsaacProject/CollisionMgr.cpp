@@ -30,8 +30,6 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 			m_iter = m_mapBoxlist.find(ades);
 			for (auto des : (*m_iter).second)
 			{
-				if (!target->GetOwnerObj()->IsDead() && !des->GetOwnerObj()->IsDead())
-				{
 				if (IsCollision(target, des))
 				{
 					target->SetCollisonFlag(pow(2,(UINT)ades - 1));
@@ -39,7 +37,6 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 				}									
 			}
 		}
-	}
 	}
 	else
 	{

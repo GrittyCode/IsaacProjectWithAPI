@@ -47,7 +47,6 @@ void CTear::Init()
 
 void CTear::Update()
 {
-
 		Move();
 		//일정거리시 소멸
 		if (DistanceMeasure(m_ObjInfo.vecWorldPos, GetTransform()->GetPosition()) > m_fDistance)
@@ -67,7 +66,7 @@ void CTear::Update()
 				ANI_STATE::DEAD,
 				GetTransform()->GetPosition()));
 
-			if (!(m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY || m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE))
+			if (!IsDead())
 			{
 				DeleteObject(this);
 			}
@@ -137,7 +136,7 @@ INT CTear::CheckCollisionState()
 			Vector2(32, 32),
 			ANI_STATE::DEAD, GetTransform()->GetPosition()));
 
-		if (!IsDead() && this != nullptr)
+		if (!IsDead())
 		{
 			DeleteObject(this);
 		}

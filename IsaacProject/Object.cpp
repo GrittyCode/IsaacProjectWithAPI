@@ -79,7 +79,6 @@ void CObject::Release()
 
 BOOL CObject::AddComponent(CComponent* component)
 {
-
 	//컴포넌트가 존재하지 않는다면
 	if (m_MapComponent.find(component->GetComponentType()) == m_MapComponent.end())
 	{
@@ -109,7 +108,6 @@ BOOL const CObject::HasComponent(COMPONENT_TYPE type)
 
 	return FALSE;
 }
-
 
 CComponent* const CObject::GetComponent(COMPONENT_TYPE type)
 {

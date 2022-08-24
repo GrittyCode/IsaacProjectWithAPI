@@ -195,9 +195,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         RECT rt = {0,0,WINDOW_X ,WINDOW_Y };
         AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, true);
         ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = rt.right - rt.left;
-        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = rt.bottom - rt.top - 20;
+        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = (WINDOW_Y) ;
         ((MINMAXINFO*)lParam)->ptMinTrackSize.x = rt.right - rt.left;
-        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = rt.bottom - rt.top - 20;
+        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = (WINDOW_Y);
         return (INT_PTR)FALSE;
     }
     case WM_COMMAND:
