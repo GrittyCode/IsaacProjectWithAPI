@@ -176,7 +176,7 @@ void CAnimation::Render(ImageAttributes* imageAttributes)
 			(UINT)m_tSpriteinfo.vecStartPos.y,
 			(UINT)m_tSpriteinfo.vecSpriteSize.x,
 			(UINT)m_tSpriteinfo.vecSpriteSize.y,
-			UnitPixel, m_imageAttributes);
+			UnitPixel, imageAttributes);
 	}
 	else
 	{
@@ -189,7 +189,7 @@ void CAnimation::Render(ImageAttributes* imageAttributes)
 			(UINT)m_tSpriteinfo.vecStartPos.y,
 			(UINT)m_tSpriteinfo.vecSpriteSize.x,
 			(UINT)m_tSpriteinfo.vecSpriteSize.y,
-			UnitPixel, m_imageAttributes);
+			UnitPixel, imageAttributes);
 	}
 }
 

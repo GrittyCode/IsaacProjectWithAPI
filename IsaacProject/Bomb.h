@@ -1,5 +1,5 @@
 #pragma once
-class CBomb : public CItem
+class CBomb : public CObject
 {
 public:
     CBomb(ObjectInfo obj);
@@ -10,7 +10,6 @@ public:
     void FixedUpdate();
     void LateUpdate();
     void Render(HDC hdc);
-    void Release();
     INT CheckCollisionState();
 
 private:

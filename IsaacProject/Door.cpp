@@ -18,11 +18,11 @@ void CDoor::Init()
 
 	if (m_doorInfo.dir == DIRECTION::LEFT || m_doorInfo.dir == DIRECTION::RIGHT)
 	{
-		m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 30), (m_Transform->GetSizeY() - 50));
+		m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 20), (m_Transform->GetSizeY() - 50));
 	}
 	else
 	{
-		m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 50), (m_Transform->GetSizeY() - 32));
+		m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 50), (m_Transform->GetSizeY() - 22));
 	}
 
 	AddComponent(m_collide);

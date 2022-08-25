@@ -203,6 +203,8 @@ enum class KEY
 	A,
 	S,
 	D,
+	//ÆøÅº»ç¿ë
+	E,
 	//Æ¯Á¤Å°
 	SPCAE,
 	ENTER,

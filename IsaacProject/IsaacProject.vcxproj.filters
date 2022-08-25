@@ -71,7 +71,7 @@
       <Filter>02.Manager\09.FrameMgr</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
-      <Filter>05.Object\02.Background</Filter>
+      <Filter>05.Object\01.Mover\02.Background</Filter>
     </ClCompile>
     <ClCompile Include="Obstacle.cpp">
       <Filter>05.Object\04.Obstacle</Filter>
@@ -136,6 +136,7 @@
     <ClCompile Include="Item.cpp">
       <Filter>05.Object\08.Item</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -232,7 +233,7 @@
       <Filter>03.Header</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
-      <Filter>05.Object\02.Background</Filter>
+      <Filter>05.Object\01.Mover\02.Background</Filter>
     </ClInclude>
     <ClInclude Include="Obstacle.h">
       <Filter>05.Object\04.Obstacle</Filter>
@@ -297,6 +298,7 @@
     <ClInclude Include="Item.h">
       <Filter>05.Object\08.Item</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="IsaacProject.ico">
@@ -382,9 +384,6 @@
     <Filter Include="02.Manager\09.FrameMgr">
       <UniqueIdentifier>{54be90aa-6ac0-48fb-897d-8d668a094789}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Object\02.Background">
-      <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08.Module">
       <UniqueIdentifier>{74f11c6c-c28b-411a-9175-a58329686424}</UniqueIdentifier>
     </Filter>
@@ -459,6 +458,9 @@
     </Filter>
     <Filter Include="05.Object\08.Item\06.Key">
       <UniqueIdentifier>{25a66c95-38ff-40fd-98f9-72e10e4480ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\01.Mover\02.Background">
+      <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

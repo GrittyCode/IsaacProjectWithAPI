@@ -71,6 +71,16 @@ void CPlayer::Update()
 {
 	Move();
 	Attack();
+	//ÆøÅº»ç¿ë
+	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::E) == KEY_STATE::TAP)
+	{
+		CreateObject(new CBomb(ObjectInfo(L"../Resources/Sprites/bomb.png",
+			Vector2(0, 0),
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(m_Transform->GetPosition().x, m_Transform->GetPosition().y),
+			Vector2(1, 1), OBJECT_TYPE::BOMB, OBJECT_STATE::IDLE)));
+	}
 }
 
 void CPlayer::FixedUpdate()

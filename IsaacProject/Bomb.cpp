@@ -2,17 +2,17 @@
 #include "Bomb.h"
 
 CBomb::CBomb(ObjectInfo obj)
-	:CItem(obj)
+	:CObject(obj)
 {
 	CObject::Init();
-	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 20.0f), (m_Transform->GetSizeY() - 20.0f));
+	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX(), m_Transform->GetSizeY());
 	AddComponent(m_collide);
 
 	m_fCurDelay = 0;
 	m_iCurFrame = 0;
 
 	m_iFramelimit = 16;
-	m_fAniDelay = 0.5f;
+	m_fAniDelay = 0.07f;
 }
 
 void CBomb::Init()
@@ -33,8 +33,17 @@ void CBomb::Update()
 	{
 		//½Ã°£ Áö³ª¸é¼­ »èÁ¦ÇÏ°í ÆøÆÈÀÌÆåÆ®
 		DeleteObject(this);
+
+		m_sprite->SetPath(L"../Resources/Sprites/Effect/effect_017_bombradius.png");
+		m_sprite->Init();
+
+		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
+			Rect(m_ObjInfo.vecWorldPos.x - 20.f,m_ObjInfo.vecWorldPos.y, 96, 32),
+				0, 0, 96, 32,
+				UnitPixel);
+		m_ObjInfo.vecWorldPos.y -= 40.f;
 		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Effect/effect_029_explosion.png", Vector2(0, 0), Vector2(96, 96), false, Vector2(0, 0)),
-			5, 5.0f, Vector2(64, 64), ANI_STATE::DEAD));
+			5, 0.07f, Vector2(64, 64), ANI_STATE::DEAD, m_ObjInfo.vecWorldPos));
 	}
 }
 
@@ -54,20 +63,17 @@ void CBomb::Render(HDC hdc)
 	imgAttr.SetColorKey(Color(245, 0, 245), Color(255, 10, 255));
 
 	CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
-		Rect((UINT)(vecTemp.x - 32),
-			(UINT)(vecTemp.y - 32),
-			(UINT)(64),
-			(UINT)(64)),
-			(UINT)(m_iCurFrame * 53),
-			(UINT)0,
-			(UINT)53,
-			(UINT)61,
+		Rect((UINT)(vecTemp.x - 25.f),
+			(UINT)(vecTemp.y - 30.f),
+			45,
+			45),
+			m_iCurFrame * 53,
+			0,
+			53,
+			61,
 			UnitPixel, &imgAttr);	
 }
 
-void CBomb::Release()
-{
-}
 
 INT CBomb::CheckCollisionState()
 {

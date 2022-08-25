@@ -13,6 +13,7 @@ int g_arrVK[(int)KEY::LAST] =//가상키값을 넣음
 	'A',
 	'S',
 	'D',
+	'E',
 	VK_SPACE,//SPCAE,
 	VK_RETURN,//ENTER,
 	VK_ESCAPE,//ESC,

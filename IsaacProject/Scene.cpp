@@ -56,7 +56,7 @@ void CScene::Init()
 		Vector2(0, 0),
 		Vector2(0, 0),
 		Vector2(936, 10),
-		Vector2(0, 535),
+		Vector2(0, 530),
 		Vector2(1, 1), OBJECT_TYPE::OBSTACLE, OBJECT_STATE::IDLE)));
 
 	//플레이어와 벽충돌
@@ -71,14 +71,14 @@ void CScene::Init()
 		Vector2(0, 0),
 		Vector2(0, 0),
 		Vector2(5, 640),
-		Vector2(95, 0),
+		Vector2(102, 0),
 		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
 
 	CreateObject(new CMapCollider(ObjectInfo(L"",
 		Vector2(0, 0),
 		Vector2(0, 0),
 		Vector2(5, 640),
-		Vector2(840, 80),
+		Vector2(833, 80),
 		Vector2(1, 1), OBJECT_TYPE::MAP_COLLIDER, OBJECT_STATE::IDLE)));
 
 	if (iMinMap == 0)
@@ -95,14 +95,7 @@ void CScene::Init()
 			Vector2(0, 0),
 			Vector2(325, 84),
 			Vector2(468, 322),
-			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE)));
-
-		CreateObject(new CBomb(ObjectInfo(L"../Resources/Sprites/bomb.png",
-			Vector2(0, 0),
-			Vector2(0, 0),
-			Vector2(32, 32),
-			Vector2(100, 100),
-			Vector2(1, 1), OBJECT_TYPE::BOMB, OBJECT_STATE::IDLE)));
+			Vector2(1, 1), OBJECT_TYPE::BACKGROUND, OBJECT_STATE::IDLE)));
 	}
 
 	if (iMinMap == 1)
