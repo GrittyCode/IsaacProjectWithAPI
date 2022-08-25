@@ -133,6 +133,7 @@
     <ClCompile Include="CKey.cpp">
       <Filter>05.Object\08.Item\06.Key</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -291,6 +292,7 @@
     <ClInclude Include="CKey.h">
       <Filter>05.Object\08.Item\06.Key</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="IsaacProject.ico">

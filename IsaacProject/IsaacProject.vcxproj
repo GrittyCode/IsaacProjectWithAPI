@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="AI.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="CKey.h" />
     <ClInclude Include="EffectMgr.h" />
@@ -202,6 +203,7 @@
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="CKey.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
