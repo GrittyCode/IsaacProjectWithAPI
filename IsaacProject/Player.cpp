@@ -39,6 +39,13 @@ void CPlayer::Init()
 	m_PlayerInfo.fAcceleration = m_MoverInfo.fSpeed / 0.1f;
 	m_PlayerInfo.bLeft = true;
 	
+	//PLAYER ITEM INVENTORY
+	for (int i = 0; i < (int)ITEM_TYPE::ITME_TYPE_END; ++i)
+	{
+		m_mapInventory.insert({ (ITEM_TYPE)i, 0 });
+	}
+
+
 	//Move Animation
 
 	//IDEL
@@ -301,6 +308,13 @@ void CPlayer::Attack()
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
 		m_PlayerInfo.bAttack = false;
 	}
+}
+
+void CPlayer::PickUpItem(ITEM_TYPE type)
+{
+	auto iter = m_mapInventory.find(type);
+	//°³¼ö ´Ã¸®±â
+	(*iter).second++;
 }
 
 

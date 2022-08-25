@@ -133,7 +133,13 @@
     <ClCompile Include="CKey.cpp">
       <Filter>05.Object\08.Item\06.Key</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Bomb.cpp" />
+=======
+    <ClCompile Include="Item.cpp">
+      <Filter>05.Object\08.Item</Filter>
+    </ClCompile>
+>>>>>>> 9008dcf48c0c678dda94dc60f944592fd93fab4b
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -292,7 +298,13 @@
     <ClInclude Include="CKey.h">
       <Filter>05.Object\08.Item\06.Key</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Bomb.h" />
+=======
+    <ClInclude Include="Item.h">
+      <Filter>05.Object\08.Item</Filter>
+    </ClInclude>
+>>>>>>> 9008dcf48c0c678dda94dc60f944592fd93fab4b
   </ItemGroup>
   <ItemGroup>
     <Image Include="IsaacProject.ico">
