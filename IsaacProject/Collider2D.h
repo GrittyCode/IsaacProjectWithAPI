@@ -26,6 +26,7 @@ public:
 	//GET
 	CCollider2D* GetTarget(OBJECT_TYPE type);
 	CObject* GetOwnerObj() { return m_Owner; };
+	CObject* GetTargetObjForType(OBJECT_TYPE type);
 	OBJECT_TYPE GetOwnerType();
 	COMPONENT_TYPE GetColliderType() { return m_type; };
 	const INT16 GetFlag() const { return m_Flag; }

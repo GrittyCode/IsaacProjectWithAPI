@@ -42,6 +42,12 @@
 #include "Door.h"
 #include "MapCollider.h"
 
+
+//Item
+#include "Item.h"
+#include "CKey.h"
+
+
 //Scene
 #include "Scene.h"
 #include "ToolScene.h"

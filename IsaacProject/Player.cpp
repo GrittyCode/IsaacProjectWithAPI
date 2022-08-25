@@ -20,6 +20,14 @@ void CPlayer::Init()
 	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() * 0.4f, m_Transform->GetSizeY() - 15.0f);
 	AddComponent(m_collide);
 
+	//IVENTORY INFO ADD
+	for (UINT i = 0; i < (UINT)ITEM_TYPE::ITEM_TYPE_END; ++i)
+	{
+		//0으로 생성
+		m_mapInventory.insert({ (ITEM_TYPE)i, 0 });
+	}
+
+
 	//MOVER INFO ADD
 	m_MoverInfo.vecAttackDiretion = Vector2(0, 0);
 	m_MoverInfo.vecMoveDiretion = Vector2(0, 0);
@@ -74,6 +82,9 @@ void CPlayer::FixedUpdate()
 void CPlayer::Render(HDC hdc)
 {
 	Vector2 PlayerPos = GetTransform()->GetPosition();
+	
+	ObjectType eType;
+
 
 	ImageAttributes imageAttributes;
 
@@ -156,7 +167,7 @@ void CPlayer::Render(HDC hdc)
 		DeleteObject(CurPen);
 	}
 
-	//라스트 업데이트에서 해야하는데 흑흑 젠장
+	//라스트 업데이트에서 해야하는데 흑흑 젠장 ;;; 그럼 그렇게 해 이 쉐리야
 	if (m_PlayerInfo.ePlayerState != PLAYER_STATE::HUNT)
 	{
 		m_MoverInfo.eAniAttackState = ANI_STATE::IDLE;
@@ -165,19 +176,6 @@ void CPlayer::Render(HDC hdc)
 	}
 }
 
-INT CPlayer::CheckCollisionState()
-{
-	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY)
-	{
-		m_PlayerInfo.ePlayerState = PLAYER_STATE::HUNT;
-		m_MoverInfo.eAniAttackState = ANI_STATE::HUNT;
-		m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;
-	}
-
-	m_collide->OffCollisionFlag();
-
-	return 0;
-}
 
 void CPlayer::Move()
 {
@@ -311,4 +309,36 @@ void CPlayer::Attack()
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
 		m_PlayerInfo.bAttack = false;
 	}
+}
+
+void CPlayer::PickItem(ITEM_TYPE type)
+{
+	auto iter = m_mapInventory.find(type);
+
+	switch (type)
+	{
+	case ITEM_TYPE::COIN:
+		break;
+	case ITEM_TYPE::KEY:
+		(*iter).second++;
+		break;
+	case ITEM_TYPE::BOMB:
+		break;
+	}
+}
+
+
+
+INT CPlayer::CheckCollisionState()
+{
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY)
+	{
+		m_PlayerInfo.ePlayerState = PLAYER_STATE::HUNT;
+		m_MoverInfo.eAniAttackState = ANI_STATE::HUNT;
+		m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;
+	}
+
+	m_collide->OffCollisionFlag();
+
+	return 0;
 }

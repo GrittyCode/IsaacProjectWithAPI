@@ -43,6 +43,18 @@ CCollider2D* CCollider2D::GetTarget(OBJECT_TYPE type)
 	return nullptr;
 }
 
+CObject* CCollider2D::GetTargetObjForType(OBJECT_TYPE type)
+{
+	auto iter = m_mapTarget.find(type);
+
+	if (iter != m_mapTarget.end())
+	{
+		return (*iter).second->GetOwnerObj();
+	}
+
+	return nullptr;
+}
+
 OBJECT_TYPE CCollider2D::GetOwnerType()
 {
 	return m_Owner->GetObjType();

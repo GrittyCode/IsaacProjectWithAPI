@@ -37,6 +37,8 @@ public:
 	virtual INT CheckCollisionState() override;
 	virtual void Move() override;
 	void Attack();
+	void PickItem(ITEM_TYPE type);
 private:
 	PlayerInfo m_PlayerInfo;
+	map<ITEM_TYPE, int> m_mapInventory;
 };
