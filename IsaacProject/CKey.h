@@ -1,5 +1,4 @@
 #pragma once
-
 class CItem;
 
 class CKey
