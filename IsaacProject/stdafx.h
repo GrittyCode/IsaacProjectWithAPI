@@ -38,7 +38,9 @@
 #include "Mover.h"
 #include "Tear.h"
 //Item
+#include "Item.h"
 #include "CKey.h"
+#include "Bomb.h"
 
 #include "Player.h"
 #include "Obstacle.h"

@@ -96,6 +96,13 @@ void CScene::Init()
 			Vector2(325, 84),
 			Vector2(468, 322),
 			Vector2(1, 1), OBJECT_TYPE::DOOR, OBJECT_STATE::IDLE)));
+
+		CreateObject(new CBomb(ObjectInfo(L"../Resources/Sprites/bomb.png",
+			Vector2(0, 0),
+			Vector2(0, 0),
+			Vector2(32, 32),
+			Vector2(100, 100),
+			Vector2(1, 1), OBJECT_TYPE::BOMB, OBJECT_STATE::IDLE)));
 	}
 
 	if (iMinMap == 1)
