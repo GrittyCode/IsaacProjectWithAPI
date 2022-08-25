@@ -1,5 +1,6 @@
 #pragma once
 
+class CItem;
 
 class CKey :
 	public CItem

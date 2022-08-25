@@ -16,7 +16,6 @@ public:
 	virtual void Release();
 	virtual INT CheckCollisionState() =  0;
 
-
 	void AddAniState(CAnimation* anistate);
 	BOOL AddComponent(CComponent* component);
 	BOOL const HasComponent(COMPONENT_TYPE type);
@@ -26,7 +25,6 @@ public:
 	void const SetObjState(OBJECT_STATE state) { m_ObjInfo.state = state; }
 	void  SetName(const wstring& strName) { m_strName = strName; }
 	void SetAniState(const ANI_STATE anistate) { m_AniState = anistate; }
-
 
 	//GET
 	OBJECT_TYPE const GetObjType() { return m_ObjInfo.type; }
