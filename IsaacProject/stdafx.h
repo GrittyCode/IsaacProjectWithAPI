@@ -38,6 +38,7 @@
 #include "Mover.h"
 #include "Tear.h"
 //Item
+#include "Item.h"
 #include "CKey.h"
 
 #include "Player.h"

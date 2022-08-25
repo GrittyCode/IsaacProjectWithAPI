@@ -1,9 +1,13 @@
 #include "stdafx.h"
 #include "CKey.h"
 
-CKey::CKey(ObjectInfo obj)
+CKey::CKey(ObjectInfo obj):
+	CItem(obj)
 {
-	
+}
+
+CKey::~CKey()
+{
 }
 
 void CKey::Init()
@@ -18,9 +22,6 @@ void CKey::FixedUpdate()
 {
 }
 
-void CKey::LateUpdate()
-{
-}
 
 void CKey::Render(HDC hdc)
 {
