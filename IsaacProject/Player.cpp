@@ -20,14 +20,6 @@ void CPlayer::Init()
 	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() * 0.4f, m_Transform->GetSizeY() - 15.0f);
 	AddComponent(m_collide);
 
-	//IVENTORY INFO ADD
-	for (UINT i = 0; i < (UINT)ITEM_TYPE::ITEM_TYPE_END; ++i)
-	{
-		//0으로 생성
-		m_mapInventory.insert({ (ITEM_TYPE)i, 0 });
-	}
-
-
 	//MOVER INFO ADD
 	m_MoverInfo.vecAttackDiretion = Vector2(0, 0);
 	m_MoverInfo.vecMoveDiretion = Vector2(0, 0);
@@ -308,22 +300,6 @@ void CPlayer::Attack()
 
 		m_PlayerInfo.bLeft = !m_PlayerInfo.bLeft;
 		m_PlayerInfo.bAttack = false;
-	}
-}
-
-void CPlayer::PickItem(ITEM_TYPE type)
-{
-	auto iter = m_mapInventory.find(type);
-
-	switch (type)
-	{
-	case ITEM_TYPE::COIN:
-		break;
-	case ITEM_TYPE::KEY:
-		(*iter).second++;
-		break;
-	case ITEM_TYPE::BOMB:
-		break;
 	}
 }
 

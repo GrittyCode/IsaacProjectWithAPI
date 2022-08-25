@@ -28,6 +28,8 @@
 #include "Animation.h"
 #include "Menu.h"
 
+
+
 //Objecct
 #include "Object.h"
 #include "Background.h"
@@ -35,6 +37,9 @@
 #include "Scene.h"
 #include "Mover.h"
 #include "Tear.h"
+//Item
+#include "CKey.h"
+
 #include "Player.h"
 #include "Obstacle.h"
 #include "Enemy.h"
@@ -43,9 +48,6 @@
 #include "MapCollider.h"
 
 
-//Item
-#include "Item.h"
-#include "CKey.h"
 
 
 //Scene

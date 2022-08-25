@@ -1,17 +1,19 @@
 #pragma once
-class CKey :
-    public CItem
+
+class CItem;
+
+class CKey
 {
 public:
     CKey(ObjectInfo obj);
     virtual ~CKey() {};
 public:
-    virtual void Init() override;
-    virtual void Update() override;
-    virtual void FixedUpdate() override;
-    virtual void LateUpdate() override;
-    virtual void Render(HDC hdc) override;
-    virtual void Release() override;
-    virtual INT CheckCollisionState() override;
+     void Init() ;
+     void Update() ;
+     void FixedUpdate() ;
+     void LateUpdate() ;
+     void Render(HDC hdc) ;
+     void Release() ;
+     INT CheckCollisionState() ;
 };
 
