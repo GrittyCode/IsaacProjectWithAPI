@@ -15,6 +15,6 @@ public:
 	virtual void Release() override;
 	virtual INT CheckCollisionState() override;
 private:
-
+	//
 };
 

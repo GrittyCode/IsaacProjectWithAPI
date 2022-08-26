@@ -279,6 +279,18 @@ typedef struct ObjectInfoTag
 		vecSize = Vec2(0.0f, 0.0f);
 	}
 
+	//Item의 경우에
+	ObjectInfoTag(wstring path, Vector2 start, Vector2 end, Vector2 size,
+		Vector2 WorldPos):
+		wpath(path),
+		vecStartPos(start),
+		vecEndPos(end),
+		vecSize(size),
+		vecWorldPos(WorldPos)
+	{
+	
+	}
+
 	ObjectInfoTag(wstring path, OBJECT_TYPE atype, OBJECT_STATE astate)
 	:
 		type(atype),
