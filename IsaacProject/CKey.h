@@ -6,7 +6,7 @@ class CKey :
 	public CItem
 {
 public:
-	CKey(ObjectInfo obj);
+	CKey(ObjectInfo obj, ITEM_TYPE type);
 	virtual ~CKey();
 	void Init();
 	virtual void Update() override;
@@ -14,5 +14,7 @@ public:
 	virtual void Render(HDC hdc) override;
 	virtual void Release() override;
 	virtual INT CheckCollisionState() override;
+private:
+
 };
 

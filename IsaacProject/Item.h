@@ -13,12 +13,12 @@ class CItem
 	: public CObject
 {
 public:
-	CItem(ObjectInfo obj);
+	CItem(ObjectInfo obj, ITEM_TYPE type);
 	virtual ~CItem();
 	virtual void Update() = 0;
 	virtual INT CheckCollisionState() = 0;
-	ITEM_TYPE GetItemType() { return m_type; }
+	ITEM_TYPE GetItemType() { return m_Itemtype; }
 protected:
-	ITEM_TYPE m_type;
+	ITEM_TYPE m_Itemtype;
 };
 
