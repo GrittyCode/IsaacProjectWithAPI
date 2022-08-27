@@ -1,7 +1,7 @@
 #pragma once
 class CCameraMgr
 {
-	SINGLETONE(CCameraMgr)
+	SINGLETON(CCameraMgr)
 public:
 	void Init() {};
 	void Update();

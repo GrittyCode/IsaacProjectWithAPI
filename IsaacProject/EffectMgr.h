@@ -2,7 +2,7 @@
 
 class CEffectMgr
 {
-	SINGLETONE(CEffectMgr);
+	SINGLETON(CEffectMgr);
 
 public:
 	void Init();

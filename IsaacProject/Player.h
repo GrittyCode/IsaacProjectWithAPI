@@ -6,15 +6,23 @@ struct PlayerInfo
 	bool bAttack;
 	bool bAttackON;
 	bool bLeft;
-	float fAttackSpeed;
+	bool bHurtBlending;
+	PLAYER_STATE ePlayerState;
 	float fFrameStay;
-	float fAttackDelay;
 	float fCurDelay;
 	float fCurSpeed;
 	float fAcceleration;
-	PLAYER_STATE ePlayerState;
-	bool bHurtBlending;
+	
+	
+	//stat
+	int iHP;
+	float fDmg;
+	float fAttackSpeed;
+	float fAttackDelay;
 };
+
+
+
 
 class CPlayer : public CMover
 {
@@ -24,7 +32,6 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
-	virtual void FixedUpdate() override;
 	//Render
 	virtual void Render(HDC hdc) override;
 	//Get

@@ -2,7 +2,7 @@
 
 class CSceneMgr
 {
-	SINGLETONE(CSceneMgr)
+	SINGLETON(CSceneMgr)
 public:
 	void Init();
 	void Update();

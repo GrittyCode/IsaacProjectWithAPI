@@ -1,7 +1,7 @@
 #pragma once
 class CImageMgr
 {
-	SINGLETONE(CImageMgr)
+	SINGLETON(CImageMgr)
 
 public:
 	void Init();

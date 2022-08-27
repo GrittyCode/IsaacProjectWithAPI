@@ -1,7 +1,7 @@
 #pragma once
 class CObjectMgr
 {
-	SINGLETONE(CObjectMgr)
+	SINGLETON(CObjectMgr)
 
 public:
 	BOOL SetObjectFromFile(ObjectInfo info);

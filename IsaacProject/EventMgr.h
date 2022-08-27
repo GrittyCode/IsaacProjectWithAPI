@@ -10,7 +10,7 @@ struct tEvent
 
 class CEventMgr
 {
-	SINGLETONE(CEventMgr)
+	SINGLETON(CEventMgr)
 public:
 	void Init();
 	void Update();

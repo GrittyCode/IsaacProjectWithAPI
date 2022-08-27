@@ -1,7 +1,7 @@
 #pragma once
 class CGameMgr
 {
-	SINGLETONE(CGameMgr)
+	SINGLETON(CGameMgr)
 public:
 	void Init();
 	void Update();

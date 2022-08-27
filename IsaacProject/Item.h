@@ -16,7 +16,8 @@ public:
 	CItem(ObjectInfo obj, ITEM_TYPE type);
 	virtual void Init() override;
 	virtual ~CItem();
-	virtual INT CheckCollisionState() = 0;
+	virtual void Render(HDC hdc) override;
+	virtual INT CheckCollisionState();
 	ITEM_TYPE GetItemType() { return m_Itemtype; }
 protected:
 	ITEM_TYPE m_Itemtype;

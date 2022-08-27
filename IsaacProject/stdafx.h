@@ -37,10 +37,13 @@
 #include "Scene.h"
 #include "Mover.h"
 #include "Tear.h"
-//Item
+
+//Item && Special Obj
 #include "Item.h"
-#include "CKey.h"
 #include "Bomb.h"
+
+
+
 
 #include "Player.h"
 #include "Obstacle.h"

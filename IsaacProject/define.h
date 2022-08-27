@@ -47,7 +47,7 @@
 							{return nullptr;}
 
 //ΩÃ±€≈Ê ∆–≈œ
-#define SINGLETONE(ClassName)	\
+#define SINGLETON(ClassName)	\
 private:	\
 NO_COPY(ClassName);\
 ClassName(){}\

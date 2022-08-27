@@ -142,22 +142,33 @@ void CObjectMgr::CreateRandomItem()
 {
 	int random = rand() % 100;
 
-	//35퍼센트 확률로 보상이 나오지 않는다.
-	if (random < 35)
+	//10퍼센트 확률로 보상이 나오지 않는다.
+	if (random < 10)
 	{
 		return;
 	}
 	//키 생성 코드
-	else if (random < 100)
+	else if (random < 40)
 	{
-		CreateObject(new CKey(
-			ObjectInfo(L"../Resources/Sprites/item/pickup_03_key.png",
-				Vector2(0, 0),
-				Vector2(16, 32),
-				Vector2(16, 32),
-				Vector2(WINDOW_X * 0.7f, WINDOW_Y * 0.8f),
-				OBJECT_TYPE::ITEM),
+		CreateObject(new CItem(
+				ObjectInfo(L"../Resources/Sprites/item/pickup_03_key.png",
+				Vector2(0, 0),Vector2(16, 32),
+				Vector2(16, 32),Vector2(WINDOW_X * 0.7f, WINDOW_Y * 0.8f),OBJECT_TYPE::ITEM),
 				ITEM_TYPE::KEY));
+	}
+	//폭탄 생성 코드
+	else if (random < 70)
+	{
+		CreateObject(new CItem(
+			ObjectInfo(L"../Resources/Sprites/item/pickup_02_bomb.png",
+				Vector2(0, 0), Vector2(32, 32),
+				Vector2(32, 32), Vector2(WINDOW_X * 0.7f, WINDOW_Y * 0.8f), OBJECT_TYPE::ITEM),
+			ITEM_TYPE::BOMB));
+	}
+	//코인 생성 코드
+	else
+	{
+
 	}
 
 }

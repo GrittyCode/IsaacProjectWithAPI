@@ -2,7 +2,7 @@
 
 class CTimeMgr
 {
-	SINGLETONE(CTimeMgr)
+	SINGLETON(CTimeMgr)
 
 public:
 	const float& GetDeltaTime() const;

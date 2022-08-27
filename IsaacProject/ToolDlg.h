@@ -2,7 +2,7 @@
 
 class CToolDlg
 {
-	SINGLETONE(CToolDlg)
+	SINGLETON(CToolDlg)
 public:
 	void Init();
 	void Update();

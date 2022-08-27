@@ -6,7 +6,7 @@
 //LATEUPDATE -> 모든 일이 처리 된 이후에, 카메라 등을 랜더함(현재 RENDER)
 class CCollisionMgr
 {
-	SINGLETONE(CCollisionMgr)
+	SINGLETON(CCollisionMgr)
 public:
 	void Init();
 	void CheckCollision(OBJECT_TYPE target, OBJECT_TYPE des);

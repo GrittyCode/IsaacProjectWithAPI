@@ -33,7 +33,7 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 					{
 						if (IsCollision(target, des))
 						{
-							target->SetCollisonFlag(pow(2, (UINT)ades - 1));
+							target->SetCollisonFlag((UINT)pow(2, (UINT)ades - 1));
 							target->PushTargetCollision(des);
 						}
 					}
@@ -58,7 +58,7 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 							continue;
 
 						if (IsCollision(target, des))
-							target->SetCollisonFlag((int)ades);
+							target->SetCollisonFlag((UINT)pow(2, (UINT)ades - 1));
 
 						target->CollisionCheck();
 					}

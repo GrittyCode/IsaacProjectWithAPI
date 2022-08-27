@@ -2,7 +2,7 @@
 
 class CKeyMgr
 {
-	SINGLETONE(CKeyMgr)
+	SINGLETON(CKeyMgr)
 public:
 	void Init();
 	void Update();

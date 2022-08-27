@@ -118,9 +118,6 @@
     <ClCompile Include="EffectMgr.cpp">
       <Filter>02.Manager\12.EffectMgr</Filter>
     </ClCompile>
-    <ClCompile Include="Eqiup.cpp">
-      <Filter>05.Object\08.Item</Filter>
-    </ClCompile>
     <ClCompile Include="SoundMgr.cpp">
       <Filter>02.Manager\13.SoundMgr</Filter>
     </ClCompile>
@@ -130,14 +127,17 @@
     <ClCompile Include="Menu.cpp">
       <Filter>08.Module\02.Menu</Filter>
     </ClCompile>
-    <ClCompile Include="CKey.cpp">
-      <Filter>05.Object\08.Item\06.Key</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>05.Object\08.Item</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>05.Object\10.Bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="UiMgr.cpp">
+      <Filter>02.Manager\14.UiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Eqiup.cpp">
+      <Filter>05.Object\11.Equip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,9 +282,6 @@
     <ClInclude Include="EffectMgr.h">
       <Filter>02.Manager\12.EffectMgr</Filter>
     </ClInclude>
-    <ClInclude Include="Eqiup.h">
-      <Filter>05.Object\08.Item</Filter>
-    </ClInclude>
     <ClInclude Include="SoundMgr.h">
       <Filter>02.Manager\13.SoundMgr</Filter>
     </ClInclude>
@@ -294,14 +291,17 @@
     <ClInclude Include="Menu.h">
       <Filter>08.Module\02.Menu</Filter>
     </ClInclude>
-    <ClInclude Include="CKey.h">
-      <Filter>05.Object\08.Item\06.Key</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>05.Object\08.Item</Filter>
     </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>05.Object\10.Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="UiMgr.h">
+      <Filter>02.Manager\14.UiMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Eqiup.h">
+      <Filter>05.Object\11.Equip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -457,17 +457,17 @@
     <Filter Include="08.Module\02.Menu">
       <UniqueIdentifier>{480a3f39-687b-4d3a-804b-695e5108e2c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Object\08.Item\07.Bomb">
-      <UniqueIdentifier>{1cd24620-f031-4f93-909b-48f44347996f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05.Object\08.Item\06.Key">
-      <UniqueIdentifier>{25a66c95-38ff-40fd-98f9-72e10e4480ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Object\01.Mover\02.Background">
       <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
     </Filter>
     <Filter Include="05.Object\10.Bomb">
       <UniqueIdentifier>{86dd2bd7-0d4e-4473-9678-b1ee20233db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager\14.UiMgr">
+      <UniqueIdentifier>{a916cbdb-55b0-4e24-8bee-dba74166aaee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\11.Equip">
+      <UniqueIdentifier>{6e5b291d-3d21-41ef-8237-42fa970fce1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

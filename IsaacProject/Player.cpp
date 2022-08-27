@@ -69,22 +69,26 @@ void CPlayer::Update()
 {
 	Move();
 	Attack();
+
 	//∆¯≈∫ªÁøÎ
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::E) == KEY_STATE::TAP)
 	{
-		CreateObject(new CBomb(ObjectInfo(L"../Resources/Sprites/bomb.png",
-			Vector2(0, 0),
-			Vector2(0, 0),
-			Vector2(32, 32),
-			Vector2(m_Transform->GetPosition().x, m_Transform->GetPosition().y),
-			Vector2(1, 1), OBJECT_TYPE::BOMB, OBJECT_STATE::IDLE)));
+		auto iter = m_mapInventory.find(ITEM_TYPE::BOMB);
+		if ((*iter).second > 0)
+		{
+			CreateObject(new CBomb(ObjectInfo(L"../Resources/Sprites/bomb.png",
+				Vector2(0, 0),
+				Vector2(0, 0),
+				Vector2(32, 32),
+				Vector2(m_Transform->GetPosition().x, m_Transform->GetPosition().y),
+				Vector2(1, 1), OBJECT_TYPE::BOMB, OBJECT_STATE::IDLE)));
+
+			//∆¯≈∫ ªÁøÎ -> ∞≥ºˆ ¡Ÿ¿Ã±‚
+			(*iter).second--;
+		}
 	}
 }
 
-void CPlayer::FixedUpdate()
-{
-	CObject::FixedUpdate();
-}
 
 void CPlayer::Render(HDC hdc)
 {
