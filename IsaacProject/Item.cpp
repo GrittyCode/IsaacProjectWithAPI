@@ -13,3 +13,11 @@ CItem::~CItem()
 {
 }
 
+void CItem::Init()
+{
+	CObject::Init();
+
+	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX()), (m_Transform->GetSizeY()));
+
+	AddComponent(m_collide);
+}

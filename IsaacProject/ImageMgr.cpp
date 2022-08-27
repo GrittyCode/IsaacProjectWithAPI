@@ -23,7 +23,6 @@ Image* CImageMgr::GetImage(wstring path)
 	return (*m_iter).second;
 }
 
-
 void CImageMgr::Release()
 {
 	m_iter = m_mapImage.begin();

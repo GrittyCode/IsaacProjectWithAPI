@@ -38,6 +38,7 @@ public:
 	virtual void Move() override;
 	void Attack();
 	void PickUpItem(ITEM_TYPE);
+
 private:
 	PlayerInfo m_PlayerInfo;
 	map<ITEM_TYPE, int> m_mapInventory;

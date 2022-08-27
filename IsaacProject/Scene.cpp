@@ -214,10 +214,14 @@ void CScene::FixedUpdate()
 	//문 충돌 처리
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::DOOR, OBJECT_TYPE::PLAYER);
 
-	//map콜라이더
+	//map 콜라이더
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::MAP_COLLIDER, OBJECT_TYPE::PLAYER);
-	CObjectMgr::GetInstance()->FixedUpdate();
 
+	//Item 콜라이더
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::ITEM, OBJECT_TYPE::PLAYER);
+
+
+	CObjectMgr::GetInstance()->FixedUpdate();
 }
 
 
@@ -252,6 +256,11 @@ BOOL CScene::AllEnemyDie()
 
 	if ((*iter).second.empty())
 	{
+		if (m_state == SCENE_STATE::CLOSE)
+		{
+			CObjectMgr::GetInstance()->CreateRandomItem();
+		}
+
 		return true;
 	}
 

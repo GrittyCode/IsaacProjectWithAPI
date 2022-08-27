@@ -281,12 +281,13 @@ typedef struct ObjectInfoTag
 
 	//Item의 경우에
 	ObjectInfoTag(wstring path, Vector2 start, Vector2 end, Vector2 size,
-		Vector2 WorldPos):
+		Vector2 WorldPos, OBJECT_TYPE objtype):
 		wpath(path),
 		vecStartPos(start),
 		vecEndPos(end),
 		vecSize(size),
-		vecWorldPos(WorldPos)
+		vecWorldPos(WorldPos),
+		type(objtype)
 	{
 	
 	}

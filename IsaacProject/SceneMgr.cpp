@@ -115,9 +115,11 @@ void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 
 	if (iter != m_MapScene.end())
 	{
+
 		//등록되어있는 씬으로 옮긴다.
 		m_currentScene = (*iter).second;
 		m_currentScene->Init();
+
 
 		//플레이어 이동 
 		switch (dir)
@@ -133,8 +135,6 @@ void CSceneMgr::ChangeScene(wstring scenePath, DIRECTION dir)
 			break;
 		case DIRECTION::RIGHT:
 			CObjectMgr::GetInstance()->GetPlayer()->GetTransform()->SetPosition(Vector2(0.f + 130.0f, WINDOW_Y * 0.5f));
-			break;
-		case DIRECTION::DIRECTION_END:
 			break;
 		}
 	}

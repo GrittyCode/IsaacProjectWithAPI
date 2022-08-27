@@ -63,7 +63,7 @@ void CEventMgr::Excute(const tEvent& eve)
 		break;
 	case EVENT_TYPE::CREATE_EFFECT:
 	{
-		//lparam : OBJECT Address
+		//Lparam : OBJECT Address
 		CAnimation* pObj = (CAnimation*)eve.lParam;
 
 		CEffectMgr::GetInstance()->AddEffecter(pObj);

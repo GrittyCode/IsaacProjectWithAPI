@@ -4,35 +4,26 @@
 CKey::CKey(ObjectInfo obj, ITEM_TYPE type):
 	CItem(obj,type)
 {
+
 }
 
 CKey::~CKey()
 {
 }
 
-void CKey::Init()
-{
-}
-
-void CKey::Update()
-{
-}
-
-void CKey::FixedUpdate()
-{
-	CheckCollisionState();
-}
-
-
 void CKey::Render(HDC hdc)
 {
+
 	CImageMgr::GetInstance()->GetGraphics()->DrawImage(
 		m_sprite->GetSprite(),
 		Rect((INT)m_ObjInfo.vecWorldPos.x - (INT)m_ObjInfo.vecSize.x,
 			(INT)m_ObjInfo.vecWorldPos.y - (INT)m_ObjInfo.vecSize.y,
 			(INT)m_ObjInfo.vecSize.x * 2,
 			(INT)m_ObjInfo.vecSize.y * 2),
-		(INT)m_ObjInfo.vecStartPos.x, (INT)m_ObjInfo.vecStartPos.y, (INT)m_ObjInfo.vecEndPos.x, (INT)m_ObjInfo.vecEndPos.y, UnitPixel);
+			(INT)m_ObjInfo.vecStartPos.x, 
+			(INT)m_ObjInfo.vecStartPos.y, 
+			(INT)m_ObjInfo.vecEndPos.x, 
+			(INT)m_ObjInfo.vecEndPos.y, UnitPixel);
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
 	{
@@ -68,7 +59,9 @@ INT CKey::CheckCollisionState()
 		{
 			//key Inventory »ý¼º
 			player->PickUpItem(m_Itemtype);
+			DeleteObject(this);
 		}
 	}
 	return TRUE;
+
 }

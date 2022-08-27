@@ -38,7 +38,7 @@ void CBomb::Update()
 		m_sprite->Init();
 
 		CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(),
-			Rect(m_ObjInfo.vecWorldPos.x - 20.f,m_ObjInfo.vecWorldPos.y, 96, 32),
+			Rect((INT)m_ObjInfo.vecWorldPos.x - 20.f,(INT)m_ObjInfo.vecWorldPos.y, 96, 32),
 				0, 0, 96, 32,
 				UnitPixel);
 		m_ObjInfo.vecWorldPos.y -= 40.f;

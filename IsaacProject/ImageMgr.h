@@ -1,16 +1,4 @@
 #pragma once
-
-enum class IMAGE_TYPE
-{
-	PLAYER,
-	BOSS,
-	TEAR,
-	FLY,
-	HUMAN,
-	MOSQUITO,
-	IMAGE_TYPE_END
-};
-
 class CImageMgr
 {
 	SINGLETONE(CImageMgr)

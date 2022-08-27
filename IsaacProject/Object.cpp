@@ -32,6 +32,10 @@ void CObject::Init()
 
 }
 
+void CObject::Update()
+{
+}
+
 void CObject::FixedUpdate()
 {
 	if (!IsDead())
@@ -66,7 +70,7 @@ void CObject::Release()
 		{
 			if ((COMPONENT_TYPE)i == COMPONENT_TYPE::BOXCOLLIDE2D)
 			{
-				CCollisionMgr::GetInstance()->DeleateCollider(dynamic_cast<CBoxCollider2D*>((*m_iter).second));
+				CCollisionMgr::GetInstance()->DeleteCollider(dynamic_cast<CBoxCollider2D*>((*m_iter).second));
 			}
 
 			(*m_iter).second->Release();

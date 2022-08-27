@@ -136,7 +136,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>05.Object\08.Item</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Bomb.cpp">
+      <Filter>05.Object\10.Bomb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IsaacProject.h">
@@ -298,7 +300,9 @@
     <ClInclude Include="Item.h">
       <Filter>05.Object\08.Item</Filter>
     </ClInclude>
-    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Bomb.h">
+      <Filter>05.Object\10.Bomb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="IsaacProject.ico">
@@ -461,6 +465,9 @@
     </Filter>
     <Filter Include="05.Object\01.Mover\02.Background">
       <UniqueIdentifier>{0621273b-7354-46c2-8f8b-308a2f269046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Object\10.Bomb">
+      <UniqueIdentifier>{86dd2bd7-0d4e-4473-9678-b1ee20233db3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

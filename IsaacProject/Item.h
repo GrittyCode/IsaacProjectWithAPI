@@ -14,8 +14,8 @@ class CItem
 {
 public:
 	CItem(ObjectInfo obj, ITEM_TYPE type);
+	virtual void Init() override;
 	virtual ~CItem();
-	virtual void Update() = 0;
 	virtual INT CheckCollisionState() = 0;
 	ITEM_TYPE GetItemType() { return m_Itemtype; }
 protected:

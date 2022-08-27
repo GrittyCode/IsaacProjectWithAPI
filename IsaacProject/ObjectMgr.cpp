@@ -138,6 +138,30 @@ void CObjectMgr::Release()
 	}
 }
 
+void CObjectMgr::CreateRandomItem()
+{
+	int random = rand() % 100;
+
+	//35퍼센트 확률로 보상이 나오지 않는다.
+	if (random < 35)
+	{
+		return;
+	}
+	//키 생성 코드
+	else if (random < 100)
+	{
+		CreateObject(new CKey(
+			ObjectInfo(L"../Resources/Sprites/item/pickup_03_key.png",
+				Vector2(0, 0),
+				Vector2(16, 32),
+				Vector2(16, 32),
+				Vector2(WINDOW_X * 0.7f, WINDOW_Y * 0.8f),
+				OBJECT_TYPE::ITEM),
+				ITEM_TYPE::KEY));
+	}
+
+}
+
 
 
 void CObjectMgr::ErasePlayer()
@@ -171,6 +195,7 @@ void CObjectMgr::SetPlayer(CPlayer* player)
 
 void CObjectMgr::ConnectScene(map<OBJECT_TYPE, list<CObject*>>* temp)
 {
+	//과거 씬에 있던 기존 플레이어를 지우고 현재 씬에 연결을 하고 CollisionMgr에 그 씬의 충돌 정보를 모두 등록해놓는다. 
 	ErasePlayer();
 	m_MapObjectList = temp;
 	SetPlayer(m_player);

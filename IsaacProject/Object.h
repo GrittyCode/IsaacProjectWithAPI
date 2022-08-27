@@ -9,10 +9,10 @@ public:
 public:
 	//LIFE CYCLE
 	virtual void Init();
-	virtual void Update() = 0;
+	virtual void Update();
 	virtual void FixedUpdate();
 	virtual void LateUpdate();
-	virtual void Render(HDC hdc);
+	virtual void Render(HDC hdc) = 0;
 	virtual void Release();
 	virtual INT CheckCollisionState() =  0;
 
@@ -48,14 +48,12 @@ protected:
 
 	wstring m_strName;
 
-
 	ObjectInfo m_ObjInfo;
 	ANI_STATE m_AniState;
 	map<ANI_STATE, CAnimation*> m_mapAniState;
 	map<ANI_STATE, CAnimation*>::iterator m_Aniiter;
 	unordered_map<COMPONENT_TYPE, CComponent*> m_MapComponent;
 	unordered_map<COMPONENT_TYPE, CComponent*>::iterator m_iter;
-
 private:
 	BOOL m_bAllive = TRUE;
 	void SetDead() { m_bAllive = FALSE; }

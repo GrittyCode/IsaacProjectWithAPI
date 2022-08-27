@@ -45,9 +45,7 @@ void CPlayer::Init()
 		m_mapInventory.insert({ (ITEM_TYPE)i, 0 });
 	}
 
-
 	//Move Animation
-
 	//IDEL
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 0), Vector2(32, 32), false, Vector2(0, -20)), 0, 0, Vector2(32, 32), ANI_STATE::IDLE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(32, 32), ANI_STATE::IDLEBody));
@@ -90,6 +88,7 @@ void CPlayer::FixedUpdate()
 
 void CPlayer::Render(HDC hdc)
 {
+
 	Vector2 PlayerPos = GetTransform()->GetPosition();
 	
 	ObjectType eType;
@@ -323,10 +322,9 @@ void CPlayer::Attack()
 void CPlayer::PickUpItem(ITEM_TYPE type)
 {
 	auto iter = m_mapInventory.find(type);
-	//개수 늘리기
+	//아이템 타입에 따라 개수 늘리기
 	(*iter).second++;
 }
-
 
 
 INT CPlayer::CheckCollisionState()
@@ -338,6 +336,8 @@ INT CPlayer::CheckCollisionState()
 		m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;
 	}
 
+
+	//Off State
 	m_collide->OffCollisionFlag();
 
 	return 0;

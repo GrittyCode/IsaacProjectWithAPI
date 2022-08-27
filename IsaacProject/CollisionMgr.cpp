@@ -10,13 +10,9 @@ void CCollisionMgr::Init()
 	//맵 리스트 메모리 등록
 	for (UINT i = 0; i < (UINT)OBJECT_TYPE::OBJECT_TYPE_END; ++i)
 	{
-		m_iter = m_mapBoxlist.find((OBJECT_TYPE)i);
-
-		if (m_iter == m_mapBoxlist.end())
-		{
-			m_mapBoxlist.insert({ (OBJECT_TYPE)i, list<CBoxCollider2D*>() });
-		}
+		m_mapBoxlist.insert({ (OBJECT_TYPE)i, list<CBoxCollider2D*>() });
 	}
+
 }
 
 void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
@@ -25,45 +21,57 @@ void CCollisionMgr::CheckCollision(OBJECT_TYPE sour, OBJECT_TYPE ades)
 	
 	if (sour != ades)
 	{
+	
 		for (auto target : (*m_iter).second)
 		{
-			m_iter = m_mapBoxlist.find(ades);
-			for (auto des : (*m_iter).second)
+			if (!target->GetOwnerObj()->IsDead())
 			{
-				if (IsCollision(target, des))
+				m_iter = m_mapBoxlist.find(ades);
+				for (auto des : (*m_iter).second)
 				{
-					target->SetCollisonFlag(pow(2,(UINT)ades - 1));
-					target->PushTargetCollision(des);
-				}									
+					if (!des->GetOwnerObj()->IsDead())
+					{
+						if (IsCollision(target, des))
+						{
+							target->SetCollisonFlag(pow(2, (UINT)ades - 1));
+							target->PushTargetCollision(des);
+						}
+					}
+				}
 			}
 		}
+
 	}
 	else
 	{
 		for (auto target : (*m_iter).second)
 		{
 			m_iter = m_mapBoxlist.find(ades);
-
-			for (auto des : (*m_iter).second)
+			if (!target->GetOwnerObj()->IsDead())
 			{
-				//자기 자신일때는 바로 넘어간다.
-				if (target == des)
-					continue;
+				for (auto des : (*m_iter).second)
+				{
+					if (!des->GetOwnerObj()->IsDead())
+					{
+						//자기 자신일때는 바로 넘어간다.
+						if (target == des)
+							continue;
 
-				if (IsCollision(target, des))
-					target->SetCollisonFlag((int)ades);
+						if (IsCollision(target, des))
+							target->SetCollisonFlag((int)ades);
 
-				target->CollisionCheck();
-
+						target->CollisionCheck();
+					}
+				}
 			}
 		}
 	}
-
 }
+
+
 
 void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 {
-
 	m_iter = m_mapBoxlist.find(type);
 	if (m_iter != m_mapBoxlist.end())
 	{
@@ -71,7 +79,9 @@ void CCollisionMgr::AddCollider(OBJECT_TYPE type, CBoxCollider2D* box)
 	}
 }
 
-void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
+
+
+void CCollisionMgr::DeleteCollider(CBoxCollider2D* target)
 {
 	m_iter = m_mapBoxlist.find(target->GetOwnerType());
 
@@ -91,6 +101,7 @@ void CCollisionMgr::DeleateCollider(CBoxCollider2D* target)
 		}
 	}
 }
+
 
 void CCollisionMgr::ChanageScene(map<OBJECT_TYPE, list<CObject*>>* mapObjList)
 {
@@ -112,6 +123,7 @@ void CCollisionMgr::ChanageScene(map<OBJECT_TYPE, list<CObject*>>* mapObjList)
 		}
 	}
 }
+
 
 //사각형 AABB충돌
 BOOL CCollisionMgr::IsCollision(CBoxCollider2D* source, CBoxCollider2D* dest)
