@@ -341,11 +341,10 @@ INT CPlayer::CheckCollisionState()
 
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::BOMB)
 	{
-		CBomb* Temp = dynamic_cast<CBomb*>(m_collide->GetTargetObjForType(OBJECT_TYPE::BOMB));
+		CBomb* Temp = dynamic_cast<CBomb*>(m_collide->GetTargetObj(OBJECT_TYPE::BOMB));
 
 		if (Temp->GetExplosion() == true)
 		{
-			cout << "¾È³çÇÏ¼¼¿ä";
 			m_PlayerInfo.ePlayerState = PLAYER_STATE::HUNT;
 			m_MoverInfo.eAniAttackState = ANI_STATE::HUNT;
 			m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;

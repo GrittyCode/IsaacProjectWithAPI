@@ -49,7 +49,7 @@ INT CItem::CheckCollisionState()
 
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
 	{
-		CPlayer* player = dynamic_cast<CPlayer*>(m_collide->GetTargetObjForType(OBJECT_TYPE::PLAYER));
+		CPlayer* player = dynamic_cast<CPlayer*>(m_collide->GetTargetObj(OBJECT_TYPE::PLAYER));
 
 		if (player != NULL)
 		{

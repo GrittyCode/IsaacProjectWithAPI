@@ -42,8 +42,8 @@ void CBomb::Update()
 				UnitPixel);
 		m_Transform->SetPosition(Vector2(m_Transform->GetPosition().x, m_Transform->GetPosition().y - 40.0f));
 
-		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Effect/effect_explosion.png", Vector2(0, 0), Vector2(94, 94), false, Vector2(0, 0)),
-			12, 0.035f, Vector2(64, 64), ANI_STATE::DEAD, m_Transform->GetPosition()));
+		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Effect/effect_explosion.png", Vector2(0, 0), Vector2(96,96), false, Vector2(0, 0)),
+			12, 0.05f, Vector2(64, 64), ANI_STATE::DEAD, m_Transform->GetPosition()));
 
 		m_bExplosion = true;
 		cout << "½Ã·¯";
@@ -104,13 +104,13 @@ INT CBomb::CheckCollisionState()
 {
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER_TEAR)
 	{
-		CTear* Temp = dynamic_cast<CTear*>(m_collide->GetTargetObjForType(OBJECT_TYPE::PLAYER_TEAR));
+		CTear* Temp = dynamic_cast<CTear*>(m_collide->GetTargetObj(OBJECT_TYPE::PLAYER_TEAR));
 		m_Transform->SetPosition(m_Transform->GetPosition() + (Temp->GetoAttackDir() * DELTA * Temp->GetSpeed() * 3));
 	}
 	else if(m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
-	{
-		CPlayer* Temp = dynamic_cast<CPlayer*>(m_collide->GetTargetObjForType(OBJECT_TYPE::PLAYER));
-		m_Transform->SetPosition(m_Transform->GetPosition() + (Temp->GetoMoveDir() * DELTA * Temp->GetSpeed() * 3));
+	{	
+			CPlayer* Temp = dynamic_cast<CPlayer*>(m_collide->GetTargetObj(OBJECT_TYPE::PLAYER));
+			m_Transform->SetPosition(m_Transform->GetPosition() + (Temp->GetoMoveDir() * DELTA * Temp->GetSpeed() * 3));
 	}
 
 	m_collide->OffCollisionFlag();

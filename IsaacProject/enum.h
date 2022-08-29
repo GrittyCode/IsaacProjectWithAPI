@@ -26,6 +26,16 @@ enum class COMPONENT_TYPE
 
 #pragma region  OBJECT 
 
+enum class ENEMY_TYPE
+{
+	FLY,
+	ATTACKFLY,
+	FATEISAAC,
+	FLYBOSS,
+	ENEMY_TYPE_END
+};
+
+
 enum class OBJECT_STATE
 {
 	NONE,

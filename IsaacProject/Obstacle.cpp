@@ -70,7 +70,7 @@ void CObstacle::Release()
 INT CObstacle::CheckCollisionState()
 {
 	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
-		PushMover(m_collide->GetTarget(OBJECT_TYPE::PLAYER)->GetOwnerObj());
+		PushMover(m_collide->GetTargetObj(OBJECT_TYPE::PLAYER));
 
 	m_collide->OffCollisionFlag();
 

@@ -22,5 +22,6 @@ private:
     int m_iFramelimit;
 
     bool m_bExplosion = false;
+    bool m_bPlayerPush = false;
 };
 

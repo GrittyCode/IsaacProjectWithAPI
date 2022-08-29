@@ -32,19 +32,8 @@ void CCollider2D::PushTargetCollision(CCollider2D* collide)
 	}
 }
 
-CCollider2D* CCollider2D::GetTarget(OBJECT_TYPE type)
-{
-	auto iter = m_mapTarget.find(type);
-	
-	if (iter != m_mapTarget.end())
-	{
-		return(*iter).second;
-	}
 
-	return nullptr;
-}
-
-CObject* CCollider2D::GetTargetObjForType(OBJECT_TYPE type)
+CObject* CCollider2D::GetTargetObj(OBJECT_TYPE type)
 {
 	auto iter = m_mapTarget.find(type);
 
@@ -56,11 +45,9 @@ CObject* CCollider2D::GetTargetObjForType(OBJECT_TYPE type)
 	return nullptr;
 }
 
+
 OBJECT_TYPE CCollider2D::GetOwnerType()
 {
 	return m_Owner->GetObjType();
 }
-
-
-
 

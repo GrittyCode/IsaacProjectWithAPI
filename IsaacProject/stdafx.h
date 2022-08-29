@@ -42,9 +42,6 @@
 #include "Item.h"
 #include "Bomb.h"
 
-
-
-
 #include "Player.h"
 #include "Obstacle.h"
 #include "Enemy.h"
@@ -73,9 +70,10 @@
 #include "EventMgr.h"
 #include "EffectMgr.h"
 #include "EnemyFactory.h"
-
 #include "fmod.h"
 #pragma comment(lib, "fmodex_vc.lib")
+
+
 //Dig
 #include "ToolDlg.h"
 
