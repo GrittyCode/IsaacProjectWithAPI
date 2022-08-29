@@ -207,6 +207,7 @@ void CScene::FixedUpdate()
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::PLAYER_TEAR, OBJECT_TYPE::OBSTACLE);
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::ENEMY_TEAR, OBJECT_TYPE::OBSTACLE);
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::PLAYER_TEAR, OBJECT_TYPE::ENEMY);
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::PLAYER_TEAR, OBJECT_TYPE::BOMB);
 
 	//벽 충돌 처리
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::OBSTACLE, OBJECT_TYPE::PLAYER);
@@ -220,6 +221,9 @@ void CScene::FixedUpdate()
 	//Item 콜라이더
 	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::ITEM, OBJECT_TYPE::PLAYER);
 
+	//Bomb
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::BOMB, OBJECT_TYPE::PLAYER_TEAR);
+	CCollisionMgr::GetInstance()->CheckCollision(OBJECT_TYPE::BOMB, OBJECT_TYPE::PLAYER);
 
 	CObjectMgr::GetInstance()->FixedUpdate();
 }

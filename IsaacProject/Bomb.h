@@ -7,11 +7,12 @@ public:
 public:
     void Init();
     void Update();
-    void FixedUpdate();
     void LateUpdate();
     void Render(HDC hdc);
     void Explode();
     INT CheckCollisionState();
+
+    bool GetExplosion() { return m_bExplosion; };
 
 private:
     float m_fAniDelay;
@@ -19,5 +20,7 @@ private:
 
     int m_iCurFrame;
     int m_iFramelimit;
+
+    bool m_bExplosion = false;
 };
 

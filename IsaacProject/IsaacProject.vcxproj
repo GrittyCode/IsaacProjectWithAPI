@@ -151,6 +151,7 @@
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="EffectMgr.h" />
+    <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Eqiup.h" />
     <ClInclude Include="Huntstate.h" />
     <ClInclude Include="DeadState.h" />
@@ -163,7 +164,6 @@
     <ClInclude Include="TraceState.h" />
     <ClInclude Include="Fly.h" />
     <ClInclude Include="EventMgr.h" />
-    <ClInclude Include="FactoryMgr.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="IdleState.h" />
@@ -207,6 +207,7 @@
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
+    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Eqiup.cpp" />
     <ClCompile Include="Huntstate.cpp" />
     <ClCompile Include="DeadState.cpp" />
@@ -219,7 +220,6 @@
     <ClCompile Include="TraceState.cpp" />
     <ClCompile Include="Fly.cpp" />
     <ClCompile Include="EventMgr.cpp" />
-    <ClCompile Include="FactoryMgr.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="IdleState.cpp" />

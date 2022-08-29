@@ -74,8 +74,8 @@ void CPlayer::Update()
 	if (CKeyMgr::GetInstance()->GetKeyState((UINT)KEY::E) == KEY_STATE::TAP)
 	{
 		auto iter = m_mapInventory.find(ITEM_TYPE::BOMB);
-		if ((*iter).second > 0)
-		{
+		/*if ((*iter).second > 0)
+		{*/
 			CreateObject(new CBomb(ObjectInfo(L"../Resources/Sprites/bomb.png",
 				Vector2(0, 0),
 				Vector2(0, 0),
@@ -85,7 +85,7 @@ void CPlayer::Update()
 
 			//폭탄 사용 -> 개수 줄이기
 			(*iter).second--;
-		}
+		//}
 	}
 }
 
@@ -120,7 +120,7 @@ void CPlayer::Render(HDC hdc)
 
 		imageAttributes.SetColorMatrix(&colorMatrix, ColorMatrixFlagsDefault, ColorAdjustTypeDefault);
 
-		if (m_PlayerInfo.fFrameStay > 0.3f)
+		if (m_PlayerInfo.fFrameStay > 0.4f)
 		{
 			m_PlayerInfo.fFrameStay = 0;
 		}
@@ -142,9 +142,11 @@ void CPlayer::Render(HDC hdc)
 		m_mapAniState.find(m_MoverInfo.eAniAttackState)->second->Update(GetTransform()->GetPosition());
 		m_PlayerInfo.fFrameStay += DELTA;
 
-		if (m_PlayerInfo.fFrameStay > 0.2f)
+		if (m_PlayerInfo.fFrameStay > 0.4f)
 		{
+			cout << "라이다"<< endl;
 			m_PlayerInfo.ePlayerState = PLAYER_STATE::IDLE;
+			m_PlayerInfo.fFrameStay = 0;
 		}
 	}
 
@@ -340,7 +342,18 @@ INT CPlayer::CheckCollisionState()
 		m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;
 	}
 
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::BOMB)
+	{
+		CBomb* Temp = dynamic_cast<CBomb*>(m_collide->GetTargetObjForType(OBJECT_TYPE::BOMB));
 
+		if (Temp->GetExplosion() == true)
+		{
+			cout << "안녕하세요";
+			m_PlayerInfo.ePlayerState = PLAYER_STATE::HUNT;
+			m_MoverInfo.eAniAttackState = ANI_STATE::HUNT;
+			m_MoverInfo.eAniMoveState = ANI_STATE::HUNT;
+		}
+	}
 	//Off State
 	m_collide->OffCollisionFlag();
 

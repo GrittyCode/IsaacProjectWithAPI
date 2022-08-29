@@ -73,13 +73,6 @@ void CTear::Update()
 		}
 
 }
-
-void CTear::FixedUpdate()
-{
-
-	CObject::FixedUpdate();
-}
-
 void CTear::Render(HDC hdc)
 {
 	CImageMgr::GetInstance()->GetGraphics()->DrawImage(m_sprite->GetSprite(), Rect((UINT)GetTransform()->GetPositionX() - 32, (UINT)GetTransform()->GetPositionY() - 32, 64, 64),
@@ -122,7 +115,8 @@ void CTear::Move()
 
 INT CTear::CheckCollisionState()
 {
-	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE || m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY)
+	if ((m_collide->GetFlag() & (UINT)COLLISION_FLAG::OBSTACLE) || 
+		(m_collide->GetFlag() & (UINT)COLLISION_FLAG::ENEMY))
 	{
 		if (!m_bSound)
 		{
@@ -141,6 +135,28 @@ INT CTear::CheckCollisionState()
 			DeleteObject(this);
 		}
 	}
+
+	if ((m_collide->GetFlag() & (UINT)COLLISION_FLAG::BOMB))
+	{
+		if (!m_bSound)
+		{
+			m_bSound = true;
+			CSoundMgr::GetInstance()->MyPlaySound(L"Tear_Dead_Time.wav", CSoundMgr::CHANNELID::TEAR_DEAD);
+		}
+
+		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/tear.png", Vector2(0, 0), Vector2(64, 64), false, Vector2(0, 0)),
+			11,
+			0.05f,
+			Vector2(32, 32),
+			ANI_STATE::DEAD, GetTransform()->GetPosition()));
+
+		if (!IsDead())
+		{
+			DeleteObject(this);
+		}
+	}
+
+	m_collide->OffCollisionFlag();
 
     return 0;
 }

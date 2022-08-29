@@ -4,10 +4,6 @@
 CBomb::CBomb(ObjectInfo obj)
 	:CObject(obj)
 {
-	CObject::Init();
-	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX(), m_Transform->GetSizeY());
-	AddComponent(m_collide);
-
 	m_fCurDelay = 0;
 	m_iCurFrame = 0;
 
@@ -17,8 +13,11 @@ CBomb::CBomb(ObjectInfo obj)
 
 void CBomb::Init()
 {
+	CObject::Init();
+	m_collide = new CBoxCollider2D(this, m_Transform->GetSizeX() - 15, m_Transform->GetSizeY() - 15);
+	AddComponent(m_collide);
 }
-
+   
 void CBomb::Update()
 {
 	m_fCurDelay += DELTA;
@@ -33,7 +32,7 @@ void CBomb::Update()
 	{
 		//½Ã°£ Áö³ª¸é¼­ »èÁ¦ÇÏ°í ÆøÆÈÀÌÆåÆ®
 		DeleteObject(this);
-
+		
 		m_sprite->SetPath(L"../Resources/Sprites/Effect/effect_017_bombradius.png");
 		m_sprite->Init();
 
@@ -41,15 +40,16 @@ void CBomb::Update()
 			Rect((INT)m_ObjInfo.vecWorldPos.x - 20.f,(INT)m_ObjInfo.vecWorldPos.y, 96, 32),
 				0, 0, 96, 32,
 				UnitPixel);
-		m_ObjInfo.vecWorldPos.y -= 40.f;
+		m_Transform->SetPosition(Vector2(m_Transform->GetPosition().x, m_Transform->GetPosition().y - 40.0f));
+
 		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Effect/effect_explosion.png", Vector2(0, 0), Vector2(94, 94), false, Vector2(0, 0)),
-			12, 0.035f, Vector2(64, 64), ANI_STATE::DEAD, m_ObjInfo.vecWorldPos));
+			12, 0.035f, Vector2(64, 64), ANI_STATE::DEAD, m_Transform->GetPosition()));
+
+		m_bExplosion = true;
+		cout << "½Ã·¯";
 	}
 }
 
-void CBomb::FixedUpdate()
-{
-}
 
 void CBomb::LateUpdate()
 {
@@ -73,6 +73,24 @@ void CBomb::Render(HDC hdc)
 			53,
 			61,
 			UnitPixel, &imgAttr);	
+
+	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::DEBUG)
+	{
+		HBRUSH hOldBrush;
+		//Ææ¼³Á¤
+		HPEN hOldPen;
+		HPEN CurPen;
+
+		CurPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+		hOldPen = (HPEN)SelectObject(hdc, CurPen);
+		hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(NULL_BRUSH));
+
+		CObject::Render(hdc);
+
+		DeleteObject(hOldBrush);
+		SelectObject(hdc, hOldPen);
+		DeleteObject(CurPen);
+	}
 }
 
 void CBomb::Explode()
@@ -84,6 +102,19 @@ void CBomb::Explode()
 
 INT CBomb::CheckCollisionState()
 {
-	
+	if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER_TEAR)
+	{
+		CTear* Temp = dynamic_cast<CTear*>(m_collide->GetTargetObjForType(OBJECT_TYPE::PLAYER_TEAR));
+		m_Transform->SetPosition(m_Transform->GetPosition() + (Temp->GetoAttackDir() * DELTA * Temp->GetSpeed() * 3));
+	}
+	else if(m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
+	{
+		CPlayer* Temp = dynamic_cast<CPlayer*>(m_collide->GetTargetObjForType(OBJECT_TYPE::PLAYER));
+		m_Transform->SetPosition(m_Transform->GetPosition() + (Temp->GetoMoveDir() * DELTA * Temp->GetSpeed() * 3));
+	}
+
+	m_collide->OffCollisionFlag();
+
+
     return 0;
 }

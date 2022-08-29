@@ -7,7 +7,6 @@ public:
 
 	virtual void Init();
 	virtual void Update();
-	virtual void FixedUpdate();
 	virtual void Render(HDC hdc);
 	virtual void Move();
 	virtual INT CheckCollisionState();

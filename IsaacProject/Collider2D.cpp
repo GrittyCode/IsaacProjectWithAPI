@@ -40,6 +40,7 @@ CCollider2D* CCollider2D::GetTarget(OBJECT_TYPE type)
 	{
 		return(*iter).second;
 	}
+
 	return nullptr;
 }
 
