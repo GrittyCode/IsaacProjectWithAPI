@@ -103,9 +103,6 @@
     <ClCompile Include="EventMgr.cpp">
       <Filter>02.Manager\10.EventMgr</Filter>
     </ClCompile>
-    <ClCompile Include="FactoryMgr.cpp">
-      <Filter>02.Manager\11.FactoryMgr</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>08.Module\01.Animation</Filter>
     </ClCompile>
@@ -138,6 +135,9 @@
     </ClCompile>
     <ClCompile Include="Eqiup.cpp">
       <Filter>05.Object\11.Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
+      <Filter>02.Manager\11.FactoryMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,9 +267,6 @@
     <ClInclude Include="EventMgr.h">
       <Filter>02.Manager\10.EventMgr</Filter>
     </ClInclude>
-    <ClInclude Include="FactoryMgr.h">
-      <Filter>02.Manager\11.FactoryMgr</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>08.Module\01.Animation</Filter>
     </ClInclude>
@@ -302,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="Eqiup.h">
       <Filter>05.Object\11.Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
+      <Filter>02.Manager\11.FactoryMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

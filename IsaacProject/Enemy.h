@@ -3,20 +3,22 @@
 
 struct EnemyInfo
 {
-	EnemyInfo(INT _ihp,INT _idmg,INT _irange,float _fspeed,float _fattakSpeed)
+	EnemyInfo(INT _ihp,FLOAT _fdmg,INT _irange, FLOAT _fspeed, FLOAT _fattakSpeed, ENEMY_TYPE _type)
 		:iHp(_ihp),
-		iDmg(_idmg),
+		fDmg(_fdmg),
 		iRange(_irange),
 		fSpeed(_fspeed),
-		fAttakSpeed(_fattakSpeed)
+		fAttakSpeed(_fattakSpeed),
+		type(_type)
 	{
 	}
 
 	INT iHp;
-	INT iDmg;
+	FLOAT fDmg;
 	INT iRange;
-	float fSpeed;
-	float fAttakSpeed;
+	FLOAT fSpeed;
+	FLOAT fAttakSpeed;
+	ENEMY_TYPE type;
 };
 
 

@@ -93,7 +93,7 @@ void CMapCollider::PushMover(CObject* obj)
 
 	if (abs(vecRect.x) > abs(vecRect.y))
 	{
-		float yDiff = intersectRect.bottom - intersectRect.top;
+		float yDiff = (float)(intersectRect.bottom - intersectRect.top);
 
 		if (vecDir.y > 0)
 			obj->GetTransform()->SetPositionY(obj->GetTransform()->GetPositionY() - yDiff);

@@ -51,7 +51,7 @@ void CPlayer::Init()
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 0, 0, Vector2(32, 32), ANI_STATE::IDLEBody));
 
 	//MOVE(BODY)
-	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 32), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1, Vector2(32, 32), ANI_STATE::UPMOVE));
+	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 32), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::UPMOVE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 32), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::DOWNMOVE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(352, 64), Vector2(32, 32), true, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::LEFTMOVE));
 	AddAniState(new CAnimation(SpriteInfoTag(m_ObjInfo.wpath, Vector2(0, 64), Vector2(32, 32), false, Vector2(0, 0)), 9, 0.1f, Vector2(32, 32), ANI_STATE::RIGHTMOVE));
@@ -94,9 +94,6 @@ void CPlayer::Render(HDC hdc)
 {
 
 	Vector2 PlayerPos = GetTransform()->GetPosition();
-	
-	ObjectType eType;
-
 
 	ImageAttributes imageAttributes;
 
