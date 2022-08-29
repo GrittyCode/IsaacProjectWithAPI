@@ -39,7 +39,6 @@ void CMenu::Reder()
 
 	HBITMAP hBITMAP;
 	HBITMAP hBITMAP2;
-	HBITMAP hBITMAP3;
 
 	hBITMAP = CreateBitmap(WINDOW_X, WINDOW_Y, 1, 32, NULL);
 	hBITMAP2 = CreateCompatibleBitmap(hdc, WINDOW_X, WINDOW_Y);

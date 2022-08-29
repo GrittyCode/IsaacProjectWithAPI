@@ -16,8 +16,7 @@ void CFly::Init()
 	CObject::Init();
 	m_collide = new CBoxCollider2D(this, (m_Transform->GetSizeX() - 20.0f), (m_Transform->GetSizeY() - 20.0f));
 	AddComponent(m_collide);
-
-	//ai설정 팩토리 과정으로 넘어갈예정
+	//ai 설정 팩토리 과정으로 넘어갈예정
 	m_pAI = new AI(this);
 	m_pAI->AddState(new CIdleState);
 	m_pAI->AddState(new CTraceState);

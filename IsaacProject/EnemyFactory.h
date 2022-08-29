@@ -11,13 +11,22 @@ enum class ENEMY_TYPE
 
 
 
-
-class EnemyFactory
+class CEnemyFactory
 {
 public:
 	static void CreateEnemyForType(ENEMY_TYPE type, Vector2 vecPos);
-private:
 
 
+	/*
+	template<typename T>
+	static void Create(Vector2 vecPos)
+	{
+		switch (T.GetEnemyInfo().type)
+		{
+		default:
+			break;
+		}
+	}
+	*/
 };
 

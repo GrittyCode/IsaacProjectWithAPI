@@ -93,7 +93,7 @@ void CObstacle::PushMover(CObject* obj)
 
 		if (abs(vecRect.x) > abs(vecRect.y))
 		{
-			float yDiff = intersectRect.bottom - intersectRect.top;
+			float yDiff = (float)(intersectRect.bottom - intersectRect.top);
 
 			if (vecDir.y > 0)
 				obj->GetTransform()->SetPositionY(obj->GetTransform()->GetPositionY() - yDiff);
@@ -102,8 +102,8 @@ void CObstacle::PushMover(CObject* obj)
 		}
 		else
 		{
-			float xDiff = intersectRect.right - intersectRect.left;
-			//x축 리턴 위 대각선 이동
+			float xDiff = (float)(intersectRect.right - intersectRect.left);
+			//x 축 리턴 위 대각선 이동
 
 			if (vecDir.x > 0)
 				obj->GetTransform()->SetPositionX(obj->GetTransform()->GetPositionX() - xDiff);
