@@ -42,8 +42,8 @@ void CBomb::Update()
 				0, 0, 96, 32,
 				UnitPixel);
 		m_ObjInfo.vecWorldPos.y -= 40.f;
-		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Effect/effect_029_explosion.png", Vector2(0, 0), Vector2(96, 96), false, Vector2(0, 0)),
-			5, 0.07f, Vector2(64, 64), ANI_STATE::DEAD, m_ObjInfo.vecWorldPos));
+		CreateEffect(new CAnimation(SpriteInfoTag(L"../Resources/Sprites/Effect/effect_explosion.png", Vector2(0, 0), Vector2(94, 94), false, Vector2(0, 0)),
+			12, 0.035f, Vector2(64, 64), ANI_STATE::DEAD, m_ObjInfo.vecWorldPos));
 	}
 }
 
@@ -53,6 +53,7 @@ void CBomb::FixedUpdate()
 
 void CBomb::LateUpdate()
 {
+
 }
 
 void CBomb::Render(HDC hdc)
@@ -74,8 +75,15 @@ void CBomb::Render(HDC hdc)
 			UnitPixel, &imgAttr);	
 }
 
+void CBomb::Explode()
+{
+	//얘가 터질때 boxcollide를 생성해 충돌 처리를 만들고 
+	
+}
+
 
 INT CBomb::CheckCollisionState()
 {
+	
     return 0;
 }

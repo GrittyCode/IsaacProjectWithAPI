@@ -10,6 +10,7 @@ public:
     void FixedUpdate();
     void LateUpdate();
     void Render(HDC hdc);
+    void Explode();
     INT CheckCollisionState();
 
 private:

@@ -71,8 +71,8 @@
 #include "SceneMgr.h"
 #include "FrameMgr.h"
 #include "EventMgr.h"
-#include "FactoryMgr.h"
 #include "EffectMgr.h"
+#include "EnemyFactory.h"
 
 #include "fmod.h"
 #pragma comment(lib, "fmodex_vc.lib")
