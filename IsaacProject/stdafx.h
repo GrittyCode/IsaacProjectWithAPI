@@ -70,6 +70,7 @@
 #include "EventMgr.h"
 #include "EffectMgr.h"
 #include "EnemyFactory.h"
+#include "UiMgr.h"
 #include "fmod.h"
 #pragma comment(lib, "fmodex_vc.lib")
 

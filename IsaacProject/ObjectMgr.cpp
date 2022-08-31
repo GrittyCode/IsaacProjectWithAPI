@@ -92,6 +92,8 @@ void CObjectMgr::Render(HDC hdc)
 		}
 	}
 
+	CUiMgr::GetInstance()->Render(hdc);
+
 
 	if (CGameMgr::GetInstance()->GetGameMode() == GAME_MODE::TOOL)
 	{

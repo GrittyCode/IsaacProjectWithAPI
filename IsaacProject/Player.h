@@ -36,7 +36,7 @@ public:
 	virtual void Render(HDC hdc) override;
 	//Get
 	PLAYER_STATE GetPlayerState() { return m_PlayerInfo.ePlayerState; }
-
+	map<ITEM_TYPE, int>* const GetInventory() { return &m_mapInventory; }
 	//Set
 	void SetPlayerState(PLAYER_STATE state) { m_PlayerInfo.ePlayerState = state; }
 
@@ -45,6 +45,9 @@ public:
 	virtual void Move() override;
 	void Attack();
 	void PickUpItem(ITEM_TYPE);
+
+
+
 
 private:
 	PlayerInfo m_PlayerInfo;
