@@ -6,9 +6,9 @@ public:
 	virtual ~CComponent() {};
 public:
 	virtual void Init() = 0;
-	virtual void Update() = 0;
-	virtual void FixedUpdate() = 0;
-	virtual void Render(HDC hdc) = 0;
+	virtual void Update() {};
+	virtual void FixedUpdate() {};
+	virtual void Render(HDC hdc) {};
 	virtual void Release() = 0;
 	COMPONENT_TYPE GetComponentType() { return m_type; }
 protected:

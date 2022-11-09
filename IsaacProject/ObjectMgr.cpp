@@ -140,6 +140,7 @@ void CObjectMgr::Release()
 	}
 }
 
+
 void CObjectMgr::CreateRandomItem()
 {
 	int random = rand() % 100;

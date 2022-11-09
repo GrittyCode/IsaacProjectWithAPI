@@ -1,13 +1,6 @@
 #include "stdafx.h"
 #include "BoxCollider2D.h"
 
-CBoxCollider2D::CBoxCollider2D()
-{
-}
-
-CBoxCollider2D::~CBoxCollider2D()
-{
-}
 
 CBoxCollider2D::CBoxCollider2D(CObject* target, float sizeX, float sizeY)
 {
@@ -28,14 +21,6 @@ void CBoxCollider2D::Init()
 {
 	CCollider2D::Init();
 	m_type = COMPONENT_TYPE::BOXCOLLIDE2D;
-}
-
-void CBoxCollider2D::Update()
-{
-}
-
-void CBoxCollider2D::FixedUpdate()
-{
 }
 
 void CBoxCollider2D::Render(HDC hdc)

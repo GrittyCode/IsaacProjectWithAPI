@@ -29,21 +29,6 @@ void CSprite::Init()
 	m_SpriteFileY->RotateFlip(Rotate180FlipY);
 }
 
-void CSprite::Update()
-{
-}
-
-void CSprite::FixedUpdate()
-{
-}
-
-void CSprite::Render(HDC hdc)
-{
-}
-
-void CSprite::Release()
-{
-}
 
 void CSprite::SetPath(wstring path)
 {

@@ -34,9 +34,6 @@ public:
 	void SetSizeY(float y) {  m_vecSize.y = y; }
 	//추가 예정	
 	virtual void Init() override;
-	virtual void Update() override;
-	virtual void FixedUpdate() override;
-	virtual void Render(HDC hdc) override;
 
 private:
 	Vector2 m_vecSize;

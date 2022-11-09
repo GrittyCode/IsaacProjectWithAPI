@@ -150,6 +150,7 @@ INT CDoor::CheckCollisionState()
 	{
 		if (m_collide->GetFlag() & (UINT)COLLISION_FLAG::PLAYER)
 		{
+			int i = 0;
 			m_collide->OffCollisionFlag();
 			ChangeSceneFromDoor();
 		}
